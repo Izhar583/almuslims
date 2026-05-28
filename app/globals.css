@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
+/* Agar aapke custom colors ya themes hain, to v4 me unhe @theme rule ke andar aise likhte hain: */
 @theme {
-  --color-primary: #0A3A2F;
-  --color-primary-hover: #145C47;
-  --color-secondary: #D48C46;
   --color-bg: #FBF9F4;
+  --color-primary: #0A3A2F;
+  --color-primary-hover: #072921;
+  --color-secondary: #D97706;
 }
