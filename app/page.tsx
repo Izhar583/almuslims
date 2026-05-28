@@ -1,18 +1,21 @@
-'use client'; // Next.js ke liye zaroori hai agar hooks use kar rahe hain
+import React from "react";
+import HeroSection from "@/components/modules/home/HeroSection"; // Hero Section import kiya
+import PrayerCard from "@/components/modules/home/PrayerCard";
+import DuaCard from "@/components/modules/home/DuaCard";
+import QiblaCard from "@/components/modules/home/QiblaCard";
+import WordOfTheDayCard from "@/components/modules/home/WordOfTheDay";  
 
-import React from 'react';
-
-const QiblaCard = () => {
-  // Filhal logic nahi hai, isliye state khali hai. 
-  // Jab aap logic likhein, to useState/useEffect ka sahi se use karein.
-  
+export default function Home() {
   return (
-    <div className="p-4 border rounded-lg shadow-sm">
-      <h2 className="text-xl font-bold">Qibla Direction</h2>
-      <p>Yahan Qibla ki direction dikhegi.</p>
-      {/* Yahan aapka baki UI code aayega */}
-    </div>
+    // Body ka color background humne already layout me diya hua ha
+    <>
+      {/* Hero Section Live Here */}
+      <HeroSection />
+      <PrayerCard />
+      <DuaCard />
+      <QiblaCard />
+      <WordOfTheDayCard />
+      {/* Agle steps ke Cards aur baki sections iske neeche aayenge */}
+    </>
   );
-};
-
-export default QiblaCard;
+}
