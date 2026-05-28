@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Day of Arafah",
+    "date": "2025-06-05",
+    "hijriDate": "9 Dhul Hijjah 1446",
+    "description": "Fasting on the Day of Arafah expiates the sins of the past year and the coming year.",
+    "icon": "mosque"
+  },
+  {
+    "name": "Eid al-Adha",
+    "date": "2025-06-06",
+    "hijriDate": "10 Dhul Hijjah 1446",
+    "description": "The festival of sacrifice and obedience.",
+    "icon": "moon"
+  },
+  {
+    "name": "Islamic New Year",
+    "date": "2025-06-26",
+    "hijriDate": "1 Muharram 1447",
+    "description": "Beginning of the new Hijri year (1447 AH).",
+    "icon": "moon"
+  },
+  {
+    "name": "Day of Ashura",
+    "date": "2025-07-05",
+    "hijriDate": "10 Muharram 1447",
+    "description": "Fasting on the day of Ashura expiates the sins of the past year.",
+    "icon": "mosque"
+  }
+]
