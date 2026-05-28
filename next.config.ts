@@ -1,21 +1,13 @@
 import type { NextConfig } from "next";
 
-type NextConfigWithEslint = NextConfig & {
-  eslint?: {
-    ignoreDuringBuilds?: boolean;
-  };
-};
-
-const nextConfig: NextConfigWithEslint = {
+const nextConfig: NextConfig = {
   typescript: {
-    // !! WARNING !!
-    // TypeScript errors ko ignore karega taake production build successfully pass ho jaye
+    // TypeScript errors ko build ke waqt bypass karne ke liye
     ignoreBuildErrors: true,
   },
-  // Agar eslint errors bhi ignore karne hon to:
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  // Next.js 16 me agar eslint configurations handle karni hon 
+  // to unhe root par maujood `eslint.config.mjs` ya flat config se control kiya jata hai.
+  // Isliye yahan se 'eslint' block ko humne remove kar diya hai taake crash na ho.
 };
 
 export default nextConfig;
