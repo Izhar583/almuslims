@@ -130,69 +130,55 @@ export default function DuaCard() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto my-12 p-6 sm:p-8 bg-white border border-primary/10 rounded-2xl shadow-xl text-primary font-body relative overflow-hidden">
+    <div className="h-full flex flex-col justify-between p-6 sm:p-8 bg-white border border-primary/5 rounded-[1.5rem] shadow-sm hover:shadow-lg transition-all duration-300 group font-body relative">
       
       {/* Top Header Row */}
-      <div className="flex justify-between items-center mb-6 border-b border-primary/5 pb-4">
+      <div className="flex justify-between items-center mb-6">
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
-          <h3 className="text-lg sm:text-xl font-bold font-heading">Dua of the Day</h3>
+          <span className="text-[11px] font-bold text-primary/50 tracking-widest uppercase">
+            Dua of the Day
+          </span>
         </div>
-        <span className="text-[10px] sm:text-xs bg-primary/5 text-primary/80 px-3 py-1 rounded-md font-medium uppercase tracking-wider">
-          {todaysDua.category}
-        </span>
+        <button 
+          onClick={handlePlayAudio}
+          title="Listen Dua & Translation"
+          className="p-1.5 rounded-full hover:bg-primary/5 text-primary/40 hover:text-secondary transition-colors"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
+          </svg>
+        </button>
       </div>
 
       {/* Main Content Layout */}
-      <div className="space-y-6 text-center sm:text-left">
-        
+      <div className="flex-1 flex flex-col justify-center text-center sm:text-left mb-6">
+        <p className="text-[10px] text-primary/40 font-medium tracking-wide uppercase mb-3 text-center sm:text-left">
+          {todaysDua.reference}
+        </p>
+
         {/* Arabic Text (Right-to-Left) */}
-        <p dir="rtl" className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-right leading-loose font-heading text-primary my-4 tracking-wide">
+        <p dir="rtl" className="text-3xl font-semibold text-center sm:text-right leading-loose font-heading text-primary mb-4">
           {todaysDua.text}
         </p>
 
         {/* Translation Box */}
-        <div className="space-y-3 border-l-4 border-secondary/40 pl-4 py-1 text-left">
-          <p className="text-sm sm:text-base italic text-primary/70 font-medium">
-            {"\""}{todaysDua.transliteration}{"\""}
+        <div className="space-y-2 text-center sm:text-left">
+          <p className="text-xs italic text-primary/60 font-medium">
+            {todaysDua.transliteration}
           </p>
-          <p className="text-base sm:text-lg font-medium text-primary/90 leading-relaxed">
+          <p className="text-sm font-medium text-primary/80 leading-relaxed line-clamp-4">
             {todaysDua.translation}
           </p>
         </div>
-
-        {/* Footer Actions */}
-        <div className="flex flex-col sm:flex-row items-center justify-between pt-4 border-t border-primary/5 gap-4">
-          
-          <div className="flex items-center gap-4 w-full sm:w-auto justify-center sm:justify-start">
-            <button 
-              onClick={handlePlayAudio}
-              title="Listen Dua & Translation"
-              className="p-2.5 rounded-full bg-primary/5 hover:bg-primary/10 text-primary transition-all border border-primary/10 group active:scale-95 shadow-sm"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 group-hover:scale-110 text-secondary transition-transform">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
-              </svg>
-            </button>
-            <span className="text-xs sm:text-sm font-medium text-primary/60">
-              Source: <span className="text-primary/80 font-semibold">{todaysDua.reference}</span>
-            </span>
-          </div>
-
-          <a 
-            href="/duas" 
-            className="text-sm font-semibold text-secondary hover:text-amber-700 transition-colors flex items-center gap-1 group w-full sm:w-auto justify-center"
-          >
-            Explore All {totalCount}+ Duas
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4 group-hover:translate-x-1 transition-transform">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-            </svg>
-          </a>
-
-        </div>
-
       </div>
 
+      {/* Footer Actions */}
+      <a 
+        href="/duas" 
+        className="w-full py-3 border border-primary/10 text-primary/80 font-semibold text-sm rounded-full hover:bg-primary hover:text-white transition-colors duration-300 text-center block"
+      >
+        View All Duas
+      </a>
     </div>
   );
 }

@@ -47,23 +47,21 @@ export default function HeroSection() {
         </motion.div>
 
         {/* Right Column: Optimized Kaaba Image */}
-       <motion.div 
-  initial={{ opacity: 0, scale: 0.95 }}
-  animate={{ opacity: 1, scale: 1 }}
-  transition={{ duration: 0.8, delay: 0.2 }}
-  // aspect-ratio aur fixed h- classes se layout 100% responsive aur stable ho jayega
-  className="relative w-full aspect-4/3 sm:aspect-16/11 lg:h-480px rounded-2xl overflow-hidden shadow-2xl border border-primary/10"
->
-  <Image 
-    src="/assets/kaaba.png" // Aapka exact folder path
-    alt="Beautiful view of Masjid al-Haram and Kaaba" 
-    fill 
-    priority={true} 
-    // object-center image ko har screen size par darmiyan me rakhega
-    className="object-cover object-center select-none" 
-    sizes="(max-w-1024px) 100vw, 50vw"
-  />
-</motion.div>
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="relative w-full aspect-[4/3] sm:aspect-[16/11] lg:aspect-auto lg:h-[480px] rounded-2xl overflow-hidden shadow-2xl border border-primary/10 flex items-center justify-center bg-primary/5"
+        >
+          <Image 
+            src="/assets/kaaba.png" 
+            alt="Beautiful view of Masjid al-Haram and Kaaba" 
+            fill
+            priority={true} 
+            className="object-cover object-bottom select-none" 
+            sizes="(max-w-1024px) 100vw, 50vw"
+          />
+        </motion.div>
 
       </div>
 

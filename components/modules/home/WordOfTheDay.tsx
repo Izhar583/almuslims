@@ -66,23 +66,30 @@ const WordOfTheDayCard = () => {
   });
 
   return (
-    <div className="max-w-sm p-8 border border-gray-100 rounded-3xl shadow-lg bg-stone-50 text-center flex flex-col items-center">
-      <h2 className="text-xs font-bold text-gray-400 tracking-widest uppercase mb-2">
-        Name of the Day
-      </h2>
-      <p className="text-sm text-gray-500 mb-6">{today}</p>
-
-      <div className="text-6xl text-emerald-900 mb-2 font-serif">
-        {wordData.ar}
+    <div className="h-full flex flex-col justify-between p-6 sm:p-8 bg-white border border-primary/5 rounded-[1.5rem] shadow-sm hover:shadow-lg transition-all duration-300 group">
+      {/* Header */}
+      <div className="text-center mb-6">
+        <h2 className="text-[11px] font-bold text-primary/50 tracking-widest uppercase mb-1.5">
+          Word of the Day
+        </h2>
+        <p className="text-[10px] text-primary/40 font-medium tracking-wide uppercase">{today}</p>
       </div>
-      <p className="text-xl font-semibold text-gray-700 mb-6 tracking-wider">
-        ({wordData.en})
-      </p>
-      <p className="text-gray-600 mb-8 px-2 leading-relaxed">
-        {wordData.def}
-      </p>
 
-      <button className="px-8 py-3 border border-stone-300 rounded-full text-stone-700 hover:bg-stone-200 transition-colors">
+      {/* Content */}
+      <div className="flex-1 flex flex-col items-center justify-center text-center mb-8">
+        <div className="text-6xl text-primary mb-3 font-serif">
+          {wordData.ar}
+        </div>
+        <p className="text-sm font-bold text-primary/70 mb-5 tracking-widest uppercase">
+          ({wordData.en})
+        </p>
+        <p className="text-sm text-primary/60 leading-relaxed px-2">
+          {wordData.def}
+        </p>
+      </div>
+
+      {/* Footer Button */}
+      <button className="w-full py-3 border border-primary/10 text-primary/80 font-semibold text-sm rounded-full hover:bg-primary hover:text-white transition-colors duration-300">
         Learn More
       </button>
     </div>
