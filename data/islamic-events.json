@@ -1,30 +1,30 @@
 [
   {
-    "name": "Day of Arafah",
-    "date": "2025-06-05",
-    "hijriDate": "9 Dhul Hijjah 1446",
-    "description": "Fasting on the Day of Arafah expiates the sins of the past year and the coming year.",
+    "name": "Martyrdom of Hazrat Usman (RA)",
+    "date": "2026-06-04",
+    "hijriDate": "18 Dhul Hijjah 1447",
+    "description": "Observing the martyrdom of the third Caliph of Islam, Hazrat Usman ibn Affan (RA).",
     "icon": "mosque"
   },
   {
-    "name": "Eid al-Adha",
-    "date": "2025-06-06",
-    "hijriDate": "10 Dhul Hijjah 1446",
-    "description": "The festival of sacrifice and obedience.",
-    "icon": "moon"
-  },
-  {
     "name": "Islamic New Year",
-    "date": "2025-06-26",
-    "hijriDate": "1 Muharram 1447",
-    "description": "Beginning of the new Hijri year (1447 AH).",
+    "date": "2026-06-16",
+    "hijriDate": "1 Muharram 1448",
+    "description": "Beginning of the new Hijri year (1448 AH). A time for reflection and renewal of faith.",
     "icon": "moon"
   },
   {
     "name": "Day of Ashura",
-    "date": "2025-07-05",
-    "hijriDate": "10 Muharram 1447",
+    "date": "2026-06-25",
+    "hijriDate": "10 Muharram 1448",
     "description": "Fasting on the day of Ashura expiates the sins of the past year.",
     "icon": "mosque"
+  },
+  {
+    "name": "Eid Milad-un-Nabi",
+    "date": "2026-08-25",
+    "hijriDate": "12 Rabi al-Awwal 1448",
+    "description": "Observance of the birth of the Prophet Muhammad (PBUH).",
+    "icon": "moon"
   }
 ]
