@@ -1,14 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { format, isAfter, differenceInDays } from "date-fns";
-import { FaMoon, FaMosque, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { format, isAfter, differenceInDays, isSameDay, startOfDay } from "date-fns";
+import { TbMoon, TbBuildingMosque, TbChevronLeft, TbChevronRight } from "react-icons/tb";
 import eventsData from "@/data/islamic-events.json";
 
 export default function IslamicCalendar() {
   const [hijriDate, setHijriDate] = useState<{ day: string, month: string, year: string } | null>(null);
   
-  const today = new Date();
-  const [currentDate, setCurrentDate] = useState(today);
+  const today = startOfDay(new Date());
+  const [currentDate, setCurrentDate] = useState(new Date());
 
   useEffect(() => {
     const fetchHijri = async () => {
@@ -39,7 +39,6 @@ export default function IslamicCalendar() {
   const currentYear = currentDate.getFullYear();
   const currentMonth = currentDate.getMonth() + 1; // 1-12
   
-  // which column does the 1st fall on?
   const firstDay = new Date(currentYear, currentMonth - 1, 1).getDay(); // 0=Sun, 6=Sat
   const daysInMonth = new Date(currentYear, currentMonth, 0).getDate();
   
@@ -51,16 +50,18 @@ export default function IslamicCalendar() {
   const handleNextMonth = () => setCurrentDate(new Date(currentYear, currentMonth, 1));
 
   // --- Col 2: Upcoming Events Filtering ---
-  // isAfter() function se purane events filter ho jaate hain automatically.
   const upcomingEvents = eventsData
-    .filter(e => isAfter(new Date(e.date), new Date()))
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-    .slice(0, 4); // show max 4 events
+    .map(e => ({
+       ...e,
+       parsedDate: startOfDay(new Date(e.date))
+    }))
+    .filter(e => isAfter(e.parsedDate, today) || isSameDay(e.parsedDate, today))
+    .sort((a, b) => a.parsedDate.getTime() - b.parsedDate.getTime())
+    .slice(0, 4);
 
   // --- Col 3: Countdown Calculation ---
-  // Find the very next upcoming event
-  const nextEvent = upcomingEvents[0] || null;
-  const daysLeft = nextEvent ? differenceInDays(new Date(nextEvent.date), new Date()) : 0;
+  const nextEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : null;
+  const daysLeft = nextEvent ? differenceInDays(nextEvent.parsedDate, today) : 0;
 
   return (
     <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-20 z-20 relative font-body">
@@ -75,7 +76,7 @@ export default function IslamicCalendar() {
           
           <div className="bg-white rounded-[2rem] p-6 sm:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#F0EBE1] flex flex-col flex-1">
             <div className="flex items-center justify-between mb-4">
-              <button onClick={handlePrevMonth} className="p-2 text-[#1F2926] hover:bg-[#F0EBE1] rounded-full transition-colors"><FaChevronLeft size={12} /></button>
+              <button onClick={handlePrevMonth} className="p-2 text-[#1F2926] hover:bg-[#F0EBE1] rounded-full transition-colors"><TbChevronLeft size={16} /></button>
               <div className="text-center">
                  <h3 className="text-lg sm:text-xl font-bold font-serif text-[#1F2926]">
                    {hijriDate ? `${hijriDate.month} ${hijriDate.year} AH` : 'Loading...'}
@@ -84,7 +85,7 @@ export default function IslamicCalendar() {
                    {format(currentDate, "MMMM / yyyy")}
                  </p>
               </div>
-              <button onClick={handleNextMonth} className="p-2 text-[#1F2926] hover:bg-[#F0EBE1] rounded-full transition-colors"><FaChevronRight size={12} /></button>
+              <button onClick={handleNextMonth} className="p-2 text-[#1F2926] hover:bg-[#F0EBE1] rounded-full transition-colors"><TbChevronRight size={16} /></button>
             </div>
 
             <div className="grid grid-cols-7 gap-1 sm:gap-2 mb-3 mt-4">
@@ -100,7 +101,6 @@ export default function IslamicCalendar() {
                 if (!dayNum) return <div key={`empty-${idx}`} className="h-9 sm:h-10"></div>;
                 
                 const isToday = dayNum === today.getDate() && currentMonth === (today.getMonth() + 1) && currentYear === today.getFullYear();
-                // Highlight today: day === currentDay ? "bg-primary text-white rounded-full" : ""
                 return (
                   <div key={idx} className={`h-9 sm:h-10 flex items-center justify-center text-xs sm:text-sm font-semibold transition-all cursor-default ${isToday ? 'bg-[#0A3A2F] text-white rounded-full shadow-md scale-105' : 'text-[#1F2926]/80 hover:bg-[#F0EBE1] rounded-xl'}`}>
                     {dayNum}
@@ -115,7 +115,7 @@ export default function IslamicCalendar() {
           </div>
         </div>
 
-        {/* Middle Column: Title + Events List (No Card) */}
+        {/* Middle Column: Title + Events List */}
         <div className="flex-1 lg:w-1/3 flex flex-col">
           <h2 className="text-[11px] font-bold text-[#1F2926] tracking-[0.15em] uppercase mb-5">
             Today & Upcoming Events
@@ -125,7 +125,7 @@ export default function IslamicCalendar() {
             {/* Today Item */}
             <div className="flex gap-4 items-start group">
               <div className="w-12 h-12 rounded-full bg-[#0A3A2F] flex items-center justify-center text-white text-xl shrink-0 shadow-md group-hover:scale-105 transition-transform">
-                <FaMoon />
+                <TbMoon />
               </div>
               <div className="flex-1 pt-0.5">
                 <p className="text-[9px] text-[#D48C46] font-bold uppercase tracking-widest mb-1">Today</p>
@@ -143,13 +143,13 @@ export default function IslamicCalendar() {
             {upcomingEvents.map((event, idx) => (
               <div key={idx} className="flex gap-4 items-start group">
                 <div className="w-12 h-12 rounded-full bg-[#0A3A2F]/5 flex items-center justify-center text-[#0A3A2F] text-xl shrink-0 group-hover:bg-[#0A3A2F] group-hover:text-white transition-colors duration-300 shadow-sm">
-                  {event.icon === 'mosque' ? <FaMosque /> : <FaMoon />}
+                  {event.icon === 'mosque' ? <TbBuildingMosque /> : <TbMoon />}
                 </div>
                 <div className="flex-1 pt-0.5">
                   <p className="text-[9px] text-[#D48C46] font-bold uppercase tracking-widest mb-1">Upcoming</p>
                   <h4 className="font-bold text-[#1F2926] text-sm mb-0.5">{event.name}</h4>
                   <p className="text-[11px] text-[#1F2926]/50 font-medium">
-                    {event.hijriDate} &bull; {format(new Date(event.date), "MMM d, yyyy")}
+                    {event.hijriDate} &bull; {format(event.parsedDate, "MMM d, yyyy")}
                   </p>
                 </div>
                 <div className="w-1/3 text-[10px] text-[#1F2926]/50 leading-relaxed border-l-2 border-[#EBE3D5] pl-4 hidden sm:block h-full flex items-center">
@@ -202,7 +202,7 @@ export default function IslamicCalendar() {
                <div className="w-2 h-2 bg-[#D48C46] mx-auto rounded-b-sm"></div>
             </div>
             
-            {nextEvent && (
+            {nextEvent ? (
               <div className="z-10 w-full flex flex-col items-center mt-12">
                 <p className="text-[9px] text-[#1F2926]/50 font-bold tracking-[0.2em] uppercase mb-3">Days Until</p>
                 <h3 className="text-sm font-bold text-[#1F2926] tracking-[0.15em] uppercase mb-6">{nextEvent.name}</h3>
@@ -216,6 +216,10 @@ export default function IslamicCalendar() {
                   View All Events
                 </button>
               </div>
+            ) : (
+               <div className="z-10 w-full flex flex-col items-center mt-12 text-[#1F2926]/50 italic">
+                 Searching for upcoming events...
+               </div>
             )}
           </div>
         </div>

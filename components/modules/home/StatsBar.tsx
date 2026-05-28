@@ -1,34 +1,57 @@
 "use client";
-import React, { useRef, useEffect, useState } from "react";
-import { FaBookReader, FaCrown, FaLayerGroup, FaCertificate } from "react-icons/fa";
+import React, { useEffect, useState, useRef } from 'react';
+import { FiUsers, FiFileText, FiLayers, FiAward } from "react-icons/fi";
 
-function AnimatedCounter({ target, suffix = "+" }: { target: number, suffix?: string }) {
+const AnimatedCounter = ({ target, duration = 2000, suffix = '' }: { target: number, duration?: number, suffix?: string }) => {
   const [count, setCount] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const elementRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        let current = 0;
-        const interval = setInterval(() => {
-          current += Math.ceil(target / 100);
-          if (current >= target) { 
-             setCount(target); 
-             clearInterval(interval); 
-          } else {
-             setCount(current);
-          }
-        }, 20);
-        observer.disconnect();
-      }
-    }, { threshold: 0.3 });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
 
-    if (ref.current) observer.observe(ref.current);
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
     return () => observer.disconnect();
-  }, [target]);
+  }, []);
 
-  return <span ref={ref}>{count.toLocaleString()}{suffix}</span>;
-}
+  useEffect(() => {
+    if (!isVisible) return;
+
+    let startTime: number;
+    let animationFrame: number;
+
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = timestamp - startTime;
+      const percentage = Math.min(progress / duration, 1);
+      
+      // Easing function for smoother animation
+      const easeOutQuart = 1 - Math.pow(1 - percentage, 4);
+      
+      setCount(Math.floor(target * easeOutQuart));
+
+      if (percentage < 1) {
+        animationFrame = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(animationFrame);
+  }, [target, duration, isVisible]);
+
+  return <span ref={elementRef}>{count.toLocaleString()}{suffix}</span>;
+};
 
 export default function StatsBar() {
   return (
@@ -37,8 +60,8 @@ export default function StatsBar() {
         
         {/* Stat 1 */}
         <div className="flex items-center justify-center gap-4 sm:gap-5 w-full pt-4 md:pt-0 pb-4 md:pb-0 px-2 sm:px-6">
-          <div className="text-[#D48C46] text-4xl sm:text-[2.5rem] opacity-90 drop-shadow-sm">
-            <FaBookReader />
+          <div className="text-[#D48C46] text-4xl sm:text-[2.5rem] opacity-90 drop-shadow-sm stroke-[1.5]">
+            <FiUsers />
           </div>
           <div className="flex flex-col items-start text-left">
             <h3 className="text-2xl sm:text-3xl font-bold font-serif text-[#1F2926] mb-0.5 tracking-tight leading-none">
@@ -50,8 +73,8 @@ export default function StatsBar() {
 
         {/* Stat 2 */}
         <div className="flex items-center justify-center gap-4 sm:gap-5 w-full pt-4 md:pt-0 pb-4 md:pb-0 px-2 sm:px-6">
-          <div className="text-[#D48C46] text-4xl sm:text-[2.5rem] opacity-90 drop-shadow-sm">
-            <FaCrown />
+          <div className="text-[#D48C46] text-4xl sm:text-[2.5rem] opacity-90 drop-shadow-sm stroke-[1.5]">
+            <FiFileText />
           </div>
           <div className="flex flex-col items-start text-left">
             <h3 className="text-2xl sm:text-3xl font-bold font-serif text-[#1F2926] mb-0.5 tracking-tight leading-none">
@@ -63,8 +86,8 @@ export default function StatsBar() {
 
         {/* Stat 3 */}
         <div className="flex items-center justify-center gap-4 sm:gap-5 w-full pt-4 md:pt-0 pb-4 md:pb-0 px-2 sm:px-6">
-          <div className="text-[#D48C46] text-4xl sm:text-[2.5rem] opacity-90 drop-shadow-sm">
-            <FaLayerGroup />
+          <div className="text-[#D48C46] text-4xl sm:text-[2.5rem] opacity-90 drop-shadow-sm stroke-[1.5]">
+            <FiLayers />
           </div>
           <div className="flex flex-col items-start text-left">
             <h3 className="text-2xl sm:text-3xl font-bold font-serif text-[#1F2926] mb-0.5 tracking-tight leading-none">
@@ -76,8 +99,8 @@ export default function StatsBar() {
 
         {/* Stat 4 */}
         <div className="flex items-center justify-center gap-4 sm:gap-5 w-full pt-4 md:pt-0 pb-4 md:pb-0 px-2 sm:px-6">
-          <div className="text-[#D48C46] text-4xl sm:text-[2.5rem] opacity-90 drop-shadow-sm">
-            <FaCertificate />
+          <div className="text-[#D48C46] text-4xl sm:text-[2.5rem] opacity-90 drop-shadow-sm stroke-[1.5]">
+            <FiAward />
           </div>
           <div className="flex flex-col items-start text-left">
             <h3 className="text-2xl sm:text-3xl font-bold font-serif text-[#1F2926] mb-0.5 tracking-tight leading-none">

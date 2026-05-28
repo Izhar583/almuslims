@@ -130,7 +130,7 @@ export default function DuaCard() {
   };
 
   return (
-    <div className="h-full flex flex-col justify-between p-6 sm:p-8 bg-white border border-primary/5 rounded-[1.5rem] shadow-sm hover:shadow-lg transition-all duration-300 group font-body relative">
+    <div className="h-full flex flex-col justify-between p-6 sm:p-8 bg-white border border-primary/5 rounded-[1.5rem] shadow-sm transition-all duration-300 group font-body relative">
       
       {/* Top Header Row */}
       <div className="flex justify-between items-center mb-6">

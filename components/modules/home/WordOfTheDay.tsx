@@ -66,7 +66,7 @@ const WordOfTheDayCard = () => {
   });
 
   return (
-    <div className="h-full flex flex-col justify-between p-6 sm:p-8 bg-white border border-primary/5 rounded-[1.5rem] shadow-sm hover:shadow-lg transition-all duration-300 group">
+    <div className="h-full flex flex-col justify-between p-6 sm:p-8 bg-white border border-primary/5 rounded-[1.5rem] shadow-sm transition-all duration-300 group">
       {/* Header */}
       <div className="text-center mb-6">
         <h2 className="text-[11px] font-bold text-primary/50 tracking-widest uppercase mb-1.5">
