@@ -57,7 +57,7 @@ export default function Navbar() {
             </button>
             <Link 
               href="/login" 
-              className="ml-2 bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-hover transition-colors"
+              className="ml-2 bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primaryHover transition-colors"
             >
               Login
             </Link>
@@ -84,7 +84,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:bg-bg hover:text-primary"
+              className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:bg-background hover:text-primary"
             >
               {link.label}
             </Link>

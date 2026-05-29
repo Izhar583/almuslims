@@ -9,10 +9,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#0A3A2F",         // Deep Green
-        "primary-hover": "#145C47",  
-        secondary: "#D48C46",       // Gold / Orange
-        bg: "#FBF9F4",              // Light Background
+        primary: "#0A3A2F",
+        primaryHover: "#145047",
+        secondary: "#D48C46",
+        background: "#FBF9F4",
+        card: "#FFFFFF",
+      },
+      fontFamily: {
+        heading: ["Playfair Display", "serif"],
+        body: ["Plus Jakarta Sans", "sans-serif"],
+        arabic: ["Noto Naskh Arabic", "serif"],
+        urdu: ["Noto Nastaliq Urdu", "serif"],
       },
     },
   },

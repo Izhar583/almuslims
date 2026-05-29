@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="antialiased bg-bg text-primary min-h-screen flex flex-col m-0 p-0">
+      <body className="antialiased bg-background text-primary min-h-screen flex flex-col m-0 p-0">
         
         {/* Top Header Group */}
         <header className="w-full block z-50">
