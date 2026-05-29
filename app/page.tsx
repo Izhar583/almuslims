@@ -5,12 +5,12 @@ import IslamicCalendar from "@/components/modules/home/IslamicCalendar";
 import PrayerCard from "@/components/modules/home/PrayerCard";
 import DuaCard from "@/components/modules/home/DuaCard";
 import WordOfTheDayCard from "@/components/modules/home/WordOfTheDay";
+import VideoSection from "@/components/modules/home/VideoSection";
 
 export default function Home() {
   return (
     <>
       <HeroSection />
-      
       {/* Cards Section Container */}
       <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 mt-16 relative z-20 pb-10">
         <div className="bg-white/80 backdrop-blur-md rounded-[2rem] p-4 sm:p-6 lg:p-8 shadow-2xl border border-primary/5">
@@ -27,8 +27,9 @@ export default function Home() {
           </div>
         </div>
       </div>
-<StatsBar />
+      <StatsBar />
       <IslamicCalendar />
+      <VideoSection />
     </>
   );
 }
