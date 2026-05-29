@@ -1,26 +1,35 @@
 import { NextResponse } from 'next/server';
-// import { connectDB } from "@/lib/mongodb"; // DB connection setup
-// import Subscriber from "@/models/Subscriber"; // Subscriber model
+import { Resend } from 'resend';
+
+
+const resend = new Resend('re_8Mx7Y9dJ_HARYwmnCiYEjiyPmSq2JT3ZP');
 
 export async function POST(request: Request) {
-  const { email } = await request.json();
-
-  // Basic validation
-  if (!email || !email.includes('@')) {
-    return NextResponse.json({ error: "Invalid email" }, { status: 400 });
-  }
-
   try {
-    // await connectDB(); 
-    
-    // Yahan database logic aayega
-    // const exists = await Subscriber.findOne({ email });
-    // if (exists) return NextResponse.json({ error: "Already subscribed" }, { status: 409 });
-    // await new Subscriber({ email }).save();
+    const { email } = await request.json();
 
-    console.log("Subscribed email:", email); // Demo ke liye
-    return NextResponse.json({ success: true }, { status: 201 });
+    if (!email) {
+      return NextResponse.json({ error: "Email is required" }, { status: 400 });
+    }
+
+    const data = await resend.emails.send({
+      from: 'onboarding@resend.dev',
+      to: 'izharjoiya0@gmail.com', // Notification yahan aayega
+      subject: 'New Subscriber',
+      html: `
+        <div style="font-family: sans-serif;">
+          <h1>New Subscription!</h1>
+          <p>A new subscriber has joined:</p>
+          <p style="font-size: 18px; font-weight: bold;">${email}</p>
+        </div>
+      `
+    });
+
+    console.log("Email sent successfully:", data);
+    return NextResponse.json({ success: true, message: "Email sent!" }, { status: 200 });
+
   } catch (error) {
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    console.error("Error in newsletter API:", error);
+    return NextResponse.json({ error: "Failed to send email" }, { status: 500 });
   }
 }

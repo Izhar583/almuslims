@@ -6,6 +6,8 @@ import PrayerCard from "@/components/modules/home/PrayerCard";
 import DuaCard from "@/components/modules/home/DuaCard";
 import WordOfTheDayCard from "@/components/modules/home/WordOfTheDay";
 import VideoSection from "@/components/modules/home/VideoSection";
+import CategoriesGrid from "@/components/modules/home/CategoriesGrid";
+import Newsletter from "@/components/modules/home/Newsletter";
 
 export default function Home() {
   return (
@@ -30,6 +32,8 @@ export default function Home() {
       <StatsBar />
       <IslamicCalendar />
       <VideoSection />
+      <CategoriesGrid />
+      <Newsletter />
     </>
   );
 }
