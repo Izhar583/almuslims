@@ -6,17 +6,24 @@ import eventsData from "@/data/islamic-events.json";
 
 export default function IslamicCalendar() {
   const [hijriDate, setHijriDate] = useState<{ day: string, month: string, year: string } | null>(null);
-  
-  const today = startOfDay(new Date());
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const [today, setToday] = useState<Date | null>(null);
+  const [currentDate, setCurrentDate] = useState<Date | null>(null);
+
+  // Initialize dates only on client to avoid SSR/hydration mismatch
+  useEffect(() => {
+    const now = startOfDay(new Date());
+    setToday(now);
+    setCurrentDate(new Date());
+  }, []);
 
   useEffect(() => {
+    if (!today) return;
     const fetchHijri = async () => {
       try {
         const day = String(today.getDate()).padStart(2, '0');
         const month = String(today.getMonth() + 1).padStart(2, '0');
         const year = today.getFullYear();
-        const formatted = `${day}-${month}-${year}`; // e.g. "15-05-2025"
+        const formatted = `${day}-${month}-${year}`;
         
         const res = await fetch(`https://api.aladhan.com/v1/gToH?date=${formatted}`);
         const data = await res.json();
@@ -33,9 +40,20 @@ export default function IslamicCalendar() {
       }
     };
     fetchHijri();
-  }, []);
+  }, [today]);
 
   // --- Col 1: Build Calendar Grid ---
+  // Show skeleton while client date is not yet available
+  if (!currentDate || !today) {
+    return (
+      <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-20 z-20 relative font-body">
+        <div className="bg-[#FCFBF8] border border-[#F0EBE1] rounded-[2rem] p-6 sm:p-10 shadow-sm animate-pulse">
+          <div className="h-64 bg-[#F0EBE1] rounded-2xl" />
+        </div>
+      </div>
+    );
+  }
+
   const currentYear = currentDate.getFullYear();
   const currentMonth = currentDate.getMonth() + 1; // 1-12
   

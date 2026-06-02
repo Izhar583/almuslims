@@ -1,99 +1,116 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React, { useState, useEffect } from "react";
 
-// Aapki 50 names ki list
-const nameList = [
-  { ar: "علي", en: "ALI", def: "Noble or exalted, associated with the fourth Caliph." },
-  { ar: "أمير", en: "AMIR", def: "Prince or commander, a popular name with deep roots." },
-  { ar: "حمزة", en: "HAMZA", def: "Strong, steadfast; named after the brave uncle of the Prophet." },
-  { ar: "حسن", en: "HASSAN", def: "Handsome or good; named after the companion of the Prophet." },
-  { ar: "إدريس", en: "IDRIS", def: "Interpreter; name of a Prophet mentioned in tradition." },
-  { ar: "كريم", en: "KAREEM", def: "Generous or noble; one of the 99 names of Allah." },
-  { ar: "مالك", en: "MALIK", def: "King; another of the 99 names of Allah." },
-  { ar: "محمد", en: "MUHAMMAD", def: "Praised or commendable; the name of the founder of Islam." },
-  { ar: "ناصر", en: "NASIR", def: "Helper or protector; a name popular among Muslims." },
-  { ar: "عمر", en: "OMAR", def: "Flourishing and life; a name associated with the second Caliph." },
-  { ar: "سمير", en: "SAMIR", def: "A companion in evening talk; a friendly and social name." },
-  { ar: "زين", en: "ZAYN", def: "Beauty or grace; a name symbolizing elegance." },
-  { ar: "أكرم", en: "AKRAM", def: "Most generous; a superlative form of nobility." },
-  { ar: "بلال", en: "BILAL", def: "Refreshing, moistening; named after a companion of the Prophet." },
-  { ar: "دانيال", en: "DANIYAL", def: "God is my judge; a classic name across cultures." },
-  { ar: "فريد", en: "FARID", def: "Unique and precious; perfect for one-of-a-kind." },
-  { ar: "مروان", en: "MARWAN", def: "Fragrant plant; named after the sacred hills near Mecca." },
-  { ar: "نزيه", en: "NAZIH", def: "Honest and virtuous; a person of high integrity." },
-  { ar: "قاسم", en: "QASIM", def: "One who divides; a generous sharer of goods." },
-  { ar: "سهيل", en: "SUHAIL", def: "Canopus; the second brightest star in the sky." },
-  { ar: "أحمد", en: "AHMED", def: "Most commendable; a powerful and timeless name." },
-  { ar: "عزيز", en: "AZIZ", def: "Powerful, respected, and beloved; name of Allah." },
-  { ar: "فاروق", en: "FARUQ", def: "One who distinguishes right from wrong." },
-  { ar: "هشام", en: "HISHAM", def: "Generous; traditionally associated with sharing bread." },
-  { ar: "مكرم", en: "MAKRAM", def: "Noble traits and generosity; a gift to your child." },
-  { ar: "محمود", en: "MAHMUD", def: "Praised; borne by many great historical rulers." },
-  { ar: "محمد", en: "MEHMED", def: "A variant of Muhammad, meaning to praise." },
-  { ar: "نبيل", en: "NABIL", def: "Noble; one who possesses outstanding qualities." },
-  { ar: "رافع", en: "RAFI", def: "Elevated, sublime; a name indicating high status." },
-  { ar: "سلطان", en: "SULTAN", def: "Ruler; a regal title representing authority." },
-  { ar: "عادل", en: "ADIL", def: "Honest or fair; a symbol of righteousness." },
-  { ar: "أنس", en: "ANAS", def: "Friendly and companionable; name of a Prophet's companion." },
-  { ar: "بدر", en: "BADR", def: "Full moon; a beautiful celestial name." },
-  { ar: "حبيب", en: "HABIB", def: "Beloved; an endearing and warm name." },
-  { ar: "هادي", en: "HADI", def: "Guide; one who leads others to the right path." },
-  { ar: "جبريل", en: "JIBRIL", def: "Gabriel; the archangel and messenger of God." },
-  { ar: "ناجي", en: "NAJI", def: "Safe, secure, and a loyal friend." },
-  { ar: "نزار", en: "NIZAR", def: "Shine or little; a bright and adorable name." },
-  { ar: "طارق", en: "TARIQ", def: "Morning star; the star that shines before sunrise." },
-  { ar: "زكي", en: "ZAKI", def: "Pure; a name signifying clarity and goodness." },
-  { ar: "عبد الله", en: "ABDULLAH", def: "Servant of Allah; a name of profound devotion." },
-  { ar: "أحمد", en: "AHMAD", def: "Most commendable; highly praised." },
-  { ar: "هارون", en: "HARUN", def: "Exalted; high mountain, symbolizing strength." },
-  { ar: "جبار", en: "JABARI", def: "Almighty and powerful." },
-  { ar: "جلال", en: "JALAL", def: "Greatness; a goal of high achievement." },
-  { ar: "أنور", en: "ANWAR", def: "Brighter or more luminous." },
-  { ar: "غسان", en: "GHASSAN", def: "Youth; honoring the beauty of childhood." },
-  { ar: "حكيم", en: "HAKEEM", def: "Wise and intelligent; a seeker of knowledge." },
-  { ar: "حسين", en: "HUSSEIN", def: "Handsome; a heart-winning name." },
-  { ar: "جمال", en: "JAMAL", def: "Beauty; representing the grace in life." },
+const NAMES = [
+  { ar: "عَلِيّ",     en: "ALI",      meaning: "Noble, Exalted",       def: "Associated with Ali ibn Abi Talib, the fourth Caliph and cousin of the Prophet ﷺ." },
+  { ar: "أَمِير",    en: "AMIR",     meaning: "Commander, Prince",     def: "A title of leadership; one entrusted with authority and dignity." },
+  { ar: "حَمْزَة",   en: "HAMZA",    meaning: "Strong, Steadfast",     def: "Named after the brave uncle of the Prophet ﷺ, lion of Allah." },
+  { ar: "حَسَن",     en: "HASSAN",   meaning: "Handsome, Virtuous",    def: "Grandson of the Prophet ﷺ; embodies beauty and goodness." },
+  { ar: "إِدْرِيس",  en: "IDRIS",    meaning: "Interpreter, Learner",  def: "A Prophet mentioned in the Quran, known for his wisdom and devotion." },
+  { ar: "كَرِيم",    en: "KAREEM",   meaning: "Generous, Noble",       def: "One of the beautiful names of Allah, signifying boundless generosity." },
+  { ar: "مَالِك",    en: "MALIK",    meaning: "King, Sovereign",       def: "A divine attribute; the ultimate sovereignty belongs to Allah alone." },
+  { ar: "مُحَمَّد",  en: "MUHAMMAD", meaning: "Praised, Commended",    def: "The most honored name; the Seal of the Prophets ﷺ, praised in every era." },
+  { ar: "نَاصِر",    en: "NASIR",    meaning: "Helper, Supporter",     def: "One who stands firm in aid of others; a protector and loyal ally." },
+  { ar: "عُمَر",     en: "OMAR",     meaning: "Life, Flourishing",     def: "The second Caliph, renowned for his justice and strength of character." },
+  { ar: "زَيْن",     en: "ZAYN",     meaning: "Beauty, Grace",         def: "Elegance of character and appearance; a name of timeless charm." },
+  { ar: "أَحْمَد",   en: "AHMAD",    meaning: "Most Praiseworthy",     def: "A name of the Prophet ﷺ mentioned in the Quran, full of heavenly honor." },
+  { ar: "عَزِيز",    en: "AZIZ",     meaning: "Powerful, Beloved",     def: "One of Allah's attributes — the Almighty, cherished and invincible." },
+  { ar: "بِلَال",    en: "BILAL",    meaning: "Refreshing, Pure Water", def: "The beloved companion of the Prophet ﷺ; first caller to prayer in Islam." },
+  { ar: "طَارِق",    en: "TARIQ",    meaning: "Morning Star",          def: "The star that shines before dawn; a name of brightness and guidance." },
+  { ar: "هَادِي",    en: "HADI",     meaning: "Guide, Leader",         def: "One who leads others to truth and righteousness; a name of Allah." },
+  { ar: "جِبْرِيل",  en: "JIBRIL",   meaning: "Strength of Allah",     def: "Archangel Gabriel, the trusted messenger who conveyed revelation." },
+  { ar: "حَكِيم",    en: "HAKEEM",   meaning: "Wise, Judicious",       def: "One endowed with deep wisdom; a name of Allah the All-Wise." },
+  { ar: "حُسَيْن",   en: "HUSSEIN",  meaning: "Beautiful, Good",       def: "Grandson of the Prophet ﷺ; his sacrifice at Karbala is eternal." },
+  { ar: "جَمَال",    en: "JAMAL",    meaning: "Beauty, Perfection",    def: "Reflecting the divine attribute of beauty; grace in its purest form." },
 ];
 
-const WordOfTheDayCard = () => {
-  // Logic: Aaj ki date ke hisaab se array ka index choose karein (0-49)
-  const dayIndex = (new Date().getDate() - 1) % nameList.length;
-  const wordData = nameList[dayIndex];
-  
-  const today = new Date().toLocaleDateString('en-US', { 
-    month: 'long', day: 'numeric', year: 'numeric' 
-  });
+function getDailyName() {
+  const start = new Date(2025, 0, 1).getTime();
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  return NAMES[Math.floor((today.getTime() - start) / 86400000) % NAMES.length];
+}
+
+export default function WordOfTheDayCard() {
+  const [wordData, setWordData] = useState<typeof NAMES[0] | null>(null);
+  const [dateStr, setDateStr] = useState<string>("");
+
+  // Client-only to avoid SSR hydration mismatch
+  useEffect(() => {
+    setWordData(getDailyName());
+    setDateStr(new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }));
+  }, []);
+
+  if (!wordData) {
+    return (
+      <div className="h-full flex flex-col p-6 sm:p-8 rounded-[1.5rem] animate-pulse min-h-[300px]"
+        style={{ background: "linear-gradient(160deg, #FFFDF9, #FDF8F0)", border: "1px solid #F0E8D5" }}>
+        <div className="h-3 bg-[#042A1E]/10 rounded-full w-1/2 mx-auto mb-2" />
+        <div className="flex-1 flex items-center justify-center">
+          <div className="h-16 w-32 bg-[#042A1E]/5 rounded-2xl" />
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="h-full flex flex-col justify-between p-6 sm:p-8 bg-white border border-primary/5 rounded-[1.5rem] shadow-sm transition-all duration-300 group">
-      {/* Header */}
-      <div className="text-center mb-6">
-        <h2 className="text-[11px] font-bold text-primary/50 tracking-widest uppercase mb-1.5">
-          Word of the Day
-        </h2>
-        <p className="text-[10px] text-primary/40 font-medium tracking-wide uppercase">{today}</p>
+    <div className="h-full flex flex-col p-6 sm:p-8 rounded-[1.5rem] font-body relative overflow-hidden"
+      style={{ background: "linear-gradient(160deg, #FFFDF9 0%, #FDF8F0 100%)", border: "1px solid #F0E8D5" }}>
+
+      {/* Gold accent top line */}
+      <div className="absolute top-0 left-8 right-8 h-0.5 rounded-full"
+        style={{ background: "linear-gradient(90deg, transparent, #C8A96E, transparent)" }} />
+
+      {/* Watermark */}
+      <div className="absolute bottom-12 right-4 text-[80px] font-serif text-[#042A1E]/[0.03] pointer-events-none select-none leading-none">
+        ٩٩
       </div>
 
-      {/* Content */}
-      <div className="flex-1 flex flex-col items-center justify-center text-center mb-8">
-        <div className="text-6xl text-primary mb-3 font-serif">
-          {wordData.ar}
+      {/* Header */}
+      <div className="text-center mb-5 relative z-10">
+        <p className="text-[10px] font-bold text-[#042A1E]/40 tracking-[0.2em] uppercase mb-1">Word of the Day</p>
+        <p className="text-[9px] text-[#C8A96E] font-semibold tracking-wide">{dateStr}</p>
+      </div>
+
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col items-center justify-center relative z-10 text-center">
+        {/* Arabic Word */}
+        <div className="relative mb-2">
+          <div className="absolute inset-0 rounded-full blur-2xl opacity-20"
+            style={{ background: "radial-gradient(circle, #C8A96E, transparent)" }} />
+          <p className="relative text-6xl sm:text-7xl font-bold text-[#042A1E] leading-none"
+            style={{ fontFamily: "'Amiri', 'Traditional Arabic', serif" }}>
+            {wordData.ar}
+          </p>
         </div>
-        <p className="text-sm font-bold text-primary/70 mb-5 tracking-widest uppercase">
-          ({wordData.en})
+
+        {/* English name */}
+        <p className="text-xs font-black text-[#042A1E]/50 tracking-[0.25em] uppercase mb-1 mt-4">
+          {wordData.en}
         </p>
-        <p className="text-sm text-primary/60 leading-relaxed px-2">
+
+        {/* Meaning badge */}
+        <span className="inline-block text-[9px] font-bold text-[#C8A96E] border border-[#C8A96E]/30 px-3 py-1 rounded-full bg-[#C8A96E]/5 tracking-wider mb-4">
+          {wordData.meaning}
+        </span>
+
+        {/* Divider */}
+        <div className="w-10 h-px bg-[#042A1E]/10 mb-4" />
+
+        {/* Definition */}
+        <p className="text-xs text-[#042A1E]/55 leading-relaxed px-1 line-clamp-3">
           {wordData.def}
         </p>
       </div>
 
-      {/* Footer Button */}
-      <button className="w-full py-3 border border-primary/10 text-primary/80 font-semibold text-sm rounded-full hover:bg-primary hover:text-white transition-colors duration-300">
-        Learn More
-      </button>
+      {/* Footer */}
+      <a href="/names"
+        className="relative z-10 mt-6 w-full py-3.5 text-center text-sm font-semibold text-[#042A1E]/70 rounded-full transition-all duration-300 block hover:text-white"
+        style={{ border: "1px solid rgba(4,42,30,0.12)" }}
+        onMouseEnter={e => (e.currentTarget.style.background = "#042A1E")}
+        onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
+        Explore 99 Names
+      </a>
     </div>
   );
-};
-
-export default WordOfTheDayCard;
+}

@@ -15,162 +15,116 @@ interface LocationInfo {
   isLive: boolean;
 }
 
-// ✅ Environment detect karta hai
-const isDev = process.env.NODE_ENV === "development";
-
-const log = (...args: unknown[]) => {
-  if (isDev) console.log("[PrayerCard]", ...args);
-};
-
 const resolveLocationName = (address: Record<string, string>): string => {
   const subCity =
-    address.village ||
-    address.suburb ||
-    address.neighbourhood ||
-    address.hamlet ||
-    address.quarter ||
-    address.residential ||
-    "";
+    address.village || address.suburb || address.neighbourhood ||
+    address.hamlet || address.quarter || address.residential || "";
   const city =
-    address.city ||
-    address.town ||
-    address.municipality ||
-    address.city_district ||
-    address.district ||
-    address.county ||
-    address.state_district ||
-    "";
+    address.city || address.town || address.municipality ||
+    address.city_district || address.district || address.county ||
+    address.state_district || "";
   const country = address.country || "";
-
-  log("Address fields:", { subCity, city, country });
-
   if (subCity && city && country) return `${subCity}, ${city}, ${country}`;
   if (subCity && country) return `${subCity}, ${country}`;
   if (city && country) return `${city}, ${country}`;
-  if (country) return country;
-  return "Your Location";
+  return country || "Your Location";
 };
+
+/** Convert "HH:MM" (24h) string to total minutes from midnight */
+function timeToMinutes(t: string): number {
+  const [h, m] = t.replace(/\s.+/, "").split(":").map(Number);
+  return h * 60 + m;
+}
+
+/** Format total minutes to "hh:mm AM/PM" */
+function minutesToDisplay(mins: number): string {
+  const h = Math.floor(mins / 60) % 24;
+  const m = mins % 60;
+  const ampm = h >= 12 ? "PM" : "AM";
+  const hh = h % 12 === 0 ? 12 : h % 12;
+  return `${String(hh).padStart(2, "0")}:${String(m).padStart(2, "0")} ${ampm}`;
+}
+
+/** Determine which prayer is currently active (most recently started) */
+function getCurrentPrayer(prayers: { name: string; time: string }[], nowMins: number) {
+  const withMins = prayers.map((p) => ({ ...p, mins: timeToMinutes(p.time) }));
+  let current = withMins[withMins.length - 1];
+  for (let i = withMins.length - 1; i >= 0; i--) {
+    if (nowMins >= withMins[i].mins) { current = withMins[i]; break; }
+  }
+  return current;
+}
 
 export default function PrayerCard() {
   const [timings, setTimings] = useState<PrayerTimings | null>(null);
   const [loading, setLoading] = useState(true);
-  const [location, setLocation] = useState<LocationInfo>({
-    display: "Locating...",
-    isLive: false,
-  });
+  const [location, setLocation] = useState<LocationInfo>({ display: "Locating...", isLive: false });
+  const [nowMins, setNowMins] = useState<number>(0);
+
+  // Update current time every minute
+  useEffect(() => {
+    const update = () => {
+      const now = new Date();
+      setNowMins(now.getHours() * 60 + now.getMinutes());
+    };
+    update();
+    const timer = setInterval(update, 60_000);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
-    // ── Fallback: Lahore ──────────────────────────────────────
     const fetchFallbackTimes = async () => {
-      log("⚠️ Using fallback location: Lahore");
       try {
-        const res = await fetch(
-          "https://api.aladhan.com/v1/timings?latitude=31.5204&longitude=74.3587&method=1"
-        );
+        const res = await fetch("https://api.aladhan.com/v1/timings?latitude=31.5204&longitude=74.3587&method=1");
         const data = await res.json();
         if (data?.data?.timings) {
           setTimings(data.data.timings);
           setLocation({ display: "Lahore, Pakistan (Default)", isLive: false });
         }
-      } catch (err) {
-        log("❌ Fallback fetch failed:", err);
-      } finally {
-        setLoading(false);
-      }
+      } catch {} finally { setLoading(false); }
     };
 
-    // ── Nominatim reverse geocode ─────────────────────────────
     const fetchLocationName = async (lat: number, lon: number) => {
       try {
-        log("📡 Fetching location name for:", lat, lon);
-        const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=18&addressdetails=1`;
-        const res = await fetch(url, {
-          headers: { "Accept-Language": "en" },
-        });
+        const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=18&addressdetails=1`, { headers: { "Accept-Language": "en" } });
         const data = await res.json();
-        log("🗺️ Raw address object:", data.address);
-
-        if (data?.address) {
-          const display = resolveLocationName(data.address);
-          log("✅ Resolved location:", display);
-          setLocation({ display, isLive: true });
-        }
-      } catch (err) {
-        log("❌ Geocode failed:", err);
+        if (data?.address) setLocation({ display: resolveLocationName(data.address), isLive: true });
+      } catch {
         setLocation({ display: "Your Location", isLive: true });
       }
     };
 
-    // ── Prayer times fetch ────────────────────────────────────
     const fetchPrayerTimes = async (lat: number, lon: number) => {
       try {
-        const res = await fetch(
-          `https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=1`
-        );
+        const res = await fetch(`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=1`);
         const data = await res.json();
-        if (data?.data?.timings) {
-          setTimings(data.data.timings);
-          log("🕌 Prayer times loaded");
-        }
-      } catch (err) {
-        log("❌ Prayer times failed:", err);
-        await fetchFallbackTimes();
-      } finally {
-        setLoading(false);
-      }
+        if (data?.data?.timings) setTimings(data.data.timings);
+      } catch { await fetchFallbackTimes(); } finally { setLoading(false); }
     };
 
-    // ── Main: Geolocation ─────────────────────────────────────
-    if (typeof window === "undefined" || !navigator.geolocation) {
-      log("❌ Geolocation not available");
-      fetchFallbackTimes();
-      return;
+    if (typeof window === "undefined" || !navigator.geolocation || !window.isSecureContext) {
+      fetchFallbackTimes(); return;
     }
-
-    // ✅ isSecureContext check — localhost + HTTPS dono pass karta hai
-    if (!window.isSecureContext) {
-      log("❌ Not a secure context (needs HTTPS or localhost)");
-      fetchFallbackTimes();
-      return;
-    }
-
-    log("🔍 Requesting geolocation...");
 
     navigator.geolocation.getCurrentPosition(
       async ({ coords }) => {
-        const { latitude: lat, longitude: lon, accuracy } = coords;
-        log(`📍 GPS: ${lat}, ${lon} (±${Math.round(accuracy)}m)`);
-
-        // ✅ Parallel fetch — faster load
         await Promise.all([
-          fetchLocationName(lat, lon),
-          fetchPrayerTimes(lat, lon),
+          fetchLocationName(coords.latitude, coords.longitude),
+          fetchPrayerTimes(coords.latitude, coords.longitude),
         ]);
       },
-      (err) => {
-        const reasons: Record<number, string> = {
-          1: "Permission denied by user",
-          2: "Position unavailable",
-          3: "Timeout",
-        };
-        log(`❌ Geolocation error: ${reasons[err.code] ?? "Unknown"}`);
-        fetchFallbackTimes();
-      },
-      {
-        enableHighAccuracy: true,
-        timeout: 10_000,
-        maximumAge: 0, // ✅ Always fresh — VPN ya cached location issue fix
-      }
+      () => fetchFallbackTimes(),
+      { enableHighAccuracy: true, timeout: 10_000, maximumAge: 0 }
     );
   }, []);
 
   const prayersList = timings
     ? [
-        { name: "Fajr", time: timings.Fajr },
-        { name: "Dhuhr", time: timings.Dhuhr },
-        { name: "Asr", time: timings.Asr },
+        { name: "Fajr",    time: timings.Fajr },
+        { name: "Dhuhr",   time: timings.Dhuhr },
+        { name: "Asr",     time: timings.Asr },
         { name: "Maghrib", time: timings.Maghrib },
-        { name: "Isha", time: timings.Isha },
+        { name: "Isha",    time: timings.Isha },
       ]
     : [];
 
@@ -195,6 +149,10 @@ export default function PrayerCard() {
       </div>
     );
   }
+
+  // ── Determine active prayer dynamically ───────────────────
+  const currentPrayer = getCurrentPrayer(prayersList, nowMins);
+  const currentDisplayTime = minutesToDisplay(timeToMinutes(currentPrayer.time));
 
   // ── Card ──────────────────────────────────────────────────
   return (
@@ -222,39 +180,51 @@ export default function PrayerCard() {
             {location.display}
           </p>
         </div>
-        
-        {/* Next Prayer Highlight (Optional, just icon/badge for now) */}
         <div className="bg-white/10 px-2 py-1 rounded text-[9px] font-medium tracking-wide uppercase">
           Live
         </div>
       </div>
 
-      {/* Content */}
+      {/* Current Prayer Display */}
       <div className="flex-1 flex flex-col justify-center mb-6 z-10">
         <div className="mb-6">
-          <h3 className="text-4xl sm:text-5xl font-serif font-bold text-white mb-2 tracking-wide">Maghrib</h3>
+          <h3 className="text-4xl sm:text-5xl font-serif font-bold text-white mb-2 tracking-wide transition-all duration-500">
+            {currentPrayer.name}
+          </h3>
           <div className="flex items-end gap-3">
-            <p className="text-2xl text-secondary font-semibold tracking-wide">06:47 PM</p>
+            <p className="text-2xl text-secondary font-semibold tracking-wide">
+              {currentDisplayTime}
+            </p>
           </div>
         </div>
 
+        {/* Prayer Pills */}
         <div className="grid grid-cols-5 gap-1.5 sm:gap-2 w-full">
-          {prayersList.map((prayer) => (
-            <div
-              key={prayer.name}
-              className={`flex flex-col items-center justify-center py-2.5 px-1 rounded-xl border transition-all duration-200 ${
-                prayer.name === "Maghrib" 
-                  ? "bg-secondary/20 border-secondary/50 shadow-inner" 
-                  : "bg-white/5 border-white/5 hover:bg-white/10"
-              }`}
-            >
-              <p className={`text-[8px] sm:text-[9px] font-semibold tracking-wider uppercase mb-1 ${prayer.name === "Maghrib" ? "text-secondary" : "text-white/50"}`}>
-                {prayer.name}
-              </p>
-              <p className="text-xs sm:text-sm font-bold text-white tracking-tight leading-none mb-0.5">{prayer.time.split(' ')[0]}</p>
-              <p className="text-[7px] text-white/40 uppercase">{prayer.time.split(' ')[1] || "AM"}</p>
-            </div>
-          ))}
+          {prayersList.map((prayer) => {
+            const isActive = prayer.name === currentPrayer.name;
+            const display = minutesToDisplay(timeToMinutes(prayer.time));
+            const [hhmm, ampm] = display.split(" ");
+            return (
+              <div
+                key={prayer.name}
+                className={`flex flex-col items-center justify-center py-2.5 px-1 rounded-xl border transition-all duration-300 ${
+                  isActive
+                    ? "bg-secondary/20 border-secondary/50 shadow-inner scale-105"
+                    : "bg-white/5 border-white/5 hover:bg-white/10"
+                }`}
+              >
+                <p className={`text-[8px] sm:text-[9px] font-semibold tracking-wider uppercase mb-1 ${isActive ? "text-secondary" : "text-white/50"}`}>
+                  {prayer.name}
+                </p>
+                <p className="text-xs sm:text-sm font-bold text-white tracking-tight leading-none mb-0.5">
+                  {hhmm}
+                </p>
+                <p className={`text-[7px] uppercase ${isActive ? "text-secondary/70" : "text-white/40"}`}>
+                  {ampm}
+                </p>
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -271,13 +241,6 @@ export default function PrayerCard() {
           Change Location
         </button>
       </div>
-
-      {/* Dev mode debug badge */}
-      {isDev && (
-        <p className="text-[9px] text-white/20 text-center mt-2 font-mono absolute bottom-2 left-0 right-0">
-          dev mode
-        </p>
-      )}
     </div>
   );
 }

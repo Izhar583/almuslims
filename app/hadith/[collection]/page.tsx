@@ -24,12 +24,16 @@ async function getHadiths(collectionSlug: string) {
       }))
     };
   } catch (err) {
-    console.error("Failed to fetch hadiths", err);
+    console.error(`Exception in getHadiths for ${collectionSlug}:`, err);
     return null;
   }
 }
 
-export default async function HadithCollectionPage({ params, searchParams }: { params: { collection: string }, searchParams: { fiqh?: string } }) {
+export default async function HadithCollectionPage(
+  props: { params: Promise<{ collection: string }>, searchParams: Promise<{ fiqh?: string }> }
+) {
+  const params = await props.params;
+  const searchParams = await props.searchParams;
   const collectionSlug = params.collection;
   const data = await getHadiths(collectionSlug);
   

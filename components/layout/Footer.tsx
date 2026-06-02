@@ -1,5 +1,6 @@
 import React from "react";
-import Link from "next/link"; // Next.js ka Link component import kiya
+import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (

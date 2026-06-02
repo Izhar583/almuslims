@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { usePathname } from "next/navigation"; // Active link ko highlight karne ke liye
 import Link from "next/link";
+import Image from "next/image";
 import { FaSearch, FaMoon, FaBars, FaTimes } from "react-icons/fa";
 
 const navLinks = [
