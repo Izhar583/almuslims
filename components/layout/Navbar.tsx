@@ -8,8 +8,11 @@ import { FaSearch, FaMoon, FaBars, FaTimes } from "react-icons/fa";
 
 const navLinks = [
   { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
   { label: "Quran", href: "/quran" },
   { label: "Hadith", href: "/hadith" },
+  { label: "Duas & Azkar", href: "/duas" },
+  { label: "Articles", href: "/articles" }
 ]; // Tutorial ke mutabiq default links
 
 export default function Navbar() {
