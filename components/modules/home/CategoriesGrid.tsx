@@ -36,7 +36,7 @@ const categories = [
   },
   {
     name: "DUAS & AZKAR",
-    href: "/dua",
+    href: "/duas",
     desc: "Supplications for every moment",
     icon: (
       <svg className="w-14 h-14" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">

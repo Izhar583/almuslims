@@ -8,9 +8,10 @@ export interface HadithBook {
   author: string;
   description: string;
   totalHadiths: number;
-  apiSlug: string; // slug for hadithapi.com
-  color: string;   // accent color for the card
-  icon: string;    // emoji icon
+  apiSlug: string;
+  apiAvailable: boolean;
+  color: string;
+  icon: string;
 }
 
 export interface FiqhCategory {
@@ -46,6 +47,7 @@ export const fiqhCategories: FiqhCategory[] = [
           "The most authentic book after the Quran. Compiled by Imam Bukhari after selecting from 600,000 narrations over 16 years.",
         totalHadiths: 7563,
         apiSlug: "bukhari",
+        apiAvailable: true,
         color: "#C8A96E",
         icon: "📖",
       },
@@ -58,6 +60,7 @@ export const fiqhCategories: FiqhCategory[] = [
           "Second most authentic hadith collection. Known for its precise methodology and thematic organization of chapters.",
         totalHadiths: 7500,
         apiSlug: "muslim",
+        apiAvailable: true,
         color: "#8BAF7C",
         icon: "📚",
       },
@@ -70,6 +73,7 @@ export const fiqhCategories: FiqhCategory[] = [
           "One of the Kutub al-Sittah. Contains 5,274 hadiths selected from 500,000, focusing heavily on Islamic law and jurisprudence.",
         totalHadiths: 5274,
         apiSlug: "abudawud",
+        apiAvailable: true,
         color: "#7BA7BC",
         icon: "⚖️",
       },
@@ -82,6 +86,7 @@ export const fiqhCategories: FiqhCategory[] = [
           "Notable for grading hadiths and including opinions of jurists. A key reference for Hanafi fiqh rulings.",
         totalHadiths: 3956,
         apiSlug: "tirmidhi",
+        apiAvailable: true,
         color: "#A888C4",
         icon: "🌙",
       },
@@ -94,6 +99,7 @@ export const fiqhCategories: FiqhCategory[] = [
           "Sixth of the Kutub al-Sittah. Contains unique hadiths not found in other major collections, especially on commerce and transactions.",
         totalHadiths: 4341,
         apiSlug: "ibnmajah",
+        apiAvailable: true,
         color: "#BC7B7B",
         icon: "📜",
       },
@@ -106,6 +112,7 @@ export const fiqhCategories: FiqhCategory[] = [
           "Known for its strict criticism of narrators. Al-Nasa'i was highly selective — considered one of the most rigorous collectors.",
         totalHadiths: 5758,
         apiSlug: "nasai",
+        apiAvailable: true,
         color: "#6B8F71",
         icon: "🕌",
       },
@@ -131,6 +138,7 @@ export const fiqhCategories: FiqhCategory[] = [
           "The most important hadith collection in Shia Islam, compiled over 20 years. Contains 16,199 hadiths on theology, jurisprudence, and ethics.",
         totalHadiths: 16199,
         apiSlug: "al-kafi",
+        apiAvailable: false,
         color: "#6B9FBC",
         icon: "📖",
       },
@@ -143,6 +151,7 @@ export const fiqhCategories: FiqhCategory[] = [
           "One of the four canonical Shia hadith books. Focuses exclusively on practical jurisprudence with 9,044 hadiths.",
         totalHadiths: 9044,
         apiSlug: "man-la-yahduruhu",
+        apiAvailable: false,
         color: "#7BAF88",
         icon: "⚖️",
       },
@@ -155,6 +164,7 @@ export const fiqhCategories: FiqhCategory[] = [
           "A comprehensive Shia fiqh hadith collection with 13,590 hadiths. One of the four books (Kutub al-Arba'a) of Shia Islam.",
         totalHadiths: 13590,
         apiSlug: "tahdhib-al-ahkam",
+        apiAvailable: false,
         color: "#BC9A6B",
         icon: "📚",
       },
@@ -167,6 +177,7 @@ export const fiqhCategories: FiqhCategory[] = [
           "The fourth of the Kutub al-Arba'a. Focuses on reconciling apparently contradictory hadiths in Shia jurisprudence.",
         totalHadiths: 5511,
         apiSlug: "al-istibsar",
+        apiAvailable: false,
         color: "#A87BA8",
         icon: "🌙",
       },
@@ -179,6 +190,7 @@ export const fiqhCategories: FiqhCategory[] = [
           "A collection of sermons, letters, and sayings of Imam Ali ibn Abi Talib (AS). Considered a masterpiece of Arabic literature and Islamic wisdom.",
         totalHadiths: 489,
         apiSlug: "nahjul-balagha",
+        apiAvailable: false,
         color: "#BC7B7B",
         icon: "✨",
       },

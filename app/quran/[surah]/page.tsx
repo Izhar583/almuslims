@@ -1,5 +1,6 @@
 'use client';
 import { use, useEffect, useState } from 'react';
+import Link from 'next/link';
 
 interface Ayah {
   number: number;
@@ -86,6 +87,13 @@ export default function SurahDetail({ params }: { params: Promise<{ surah: strin
 
   return (
     <div className="max-w-3xl mx-auto py-10 px-4">
+      <Link
+        href="/quran"
+        className="inline-flex items-center gap-2 text-primary/60 hover:text-primary text-sm mb-8 transition-colors"
+      >
+        &larr; All Surahs
+      </Link>
+
       {/* Header */}
       <div className="text-center mb-10">
         <h1 className="text-4xl font-bold mb-1">{arabic.englishName}</h1>

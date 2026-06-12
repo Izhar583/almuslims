@@ -31,7 +31,7 @@ export default function HeroSection() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
             {/* Filled Green Button */}
             <a 
-              href="/resources" 
+              href="/about" 
               className="px-8 py-3.5 bg-primary text-white font-body font-semibold rounded-md shadow-md hover:bg-primaryHover transition-all text-center"
             >
               Explore Resources

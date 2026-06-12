@@ -33,7 +33,7 @@ export default function Footer() {
           <ul className="space-y-2 text-sm text-white/80">
             <li><Link href="/quran" className="hover:underline">Holy Quran</Link></li>
             <li><Link href="/hadith" className="hover:underline">Hadith Books</Link></li>
-            <li><Link href="/prayers" className="hover:underline">Prayer Timings</Link></li>
+            <li><Link href="/prayer-times" className="hover:underline">Prayer Timings</Link></li>
           </ul>
         </div>
 
