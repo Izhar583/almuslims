@@ -94,7 +94,7 @@ export default function NamesPageClient() {
           <button
             key={n.number}
             onClick={() => setSelected(n)}
-            className="p-4 bg-white rounded-xl border border-primary/5 hover:border-primary/20 hover:shadow-md transition-all text-left group"
+            className="p-4 bg-white rounded-xl border border-primary/5 hover:border-primary/20 transition-all text-left group"
           >
             <span className="text-[10px] text-gray-400 font-mono">{n.number}</span>
             <p className="text-xl font-arabic text-primary my-1" dir="rtl">

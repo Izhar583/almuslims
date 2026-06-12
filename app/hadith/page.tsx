@@ -13,15 +13,15 @@ export const metadata = {
 
 export default function HadithPage() {
   return (
-    <main className="min-h-screen bg-zinc-950 text-white">
+    <main className="min-h-screen bg-background text-zinc-800 dark:text-zinc-200 transition-colors">
       {/* ── Decorative background ── */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-150 h-150 rounded-full bg-amber-900/10 blur-[120px]" />
-        <div className="absolute bottom-0 right-1/4 w-125 h-125 rounded-full bg-blue-900/10 blur-[120px]" />
+        <div className="absolute top-0 left-1/4 w-150 h-150 rounded-full bg-primary/5 blur-[120px]" />
+        <div className="absolute bottom-0 right-1/4 w-125 h-125 rounded-full bg-secondary/5 blur-[120px]" />
         <div
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute inset-0 opacity-[0.015] dark:opacity-[0.03]"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230A3A2F' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }}
         />
       </div>
@@ -30,31 +30,28 @@ export default function HadithPage() {
 
         {/* ── Page Header ── */}
         <div className="text-center mb-20">
-          <p className="text-amber-400/70 text-sm font-mono tracking-[0.3em] uppercase mb-4">
+          <p className="text-secondary text-sm font-mono tracking-[0.3em] uppercase mb-4 font-bold">
             Sacred Knowledge
           </p>
           <h1
-            className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
+            className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-primary dark:text-zinc-100"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
-            Hadith
-            <span className="block text-transparent bg-clip-text bg-linear-to-r from-amber-300 via-yellow-200 to-amber-400">
-              Collections
-            </span>
+            Hadith Collections
           </h1>
-          <p className="text-zinc-400 text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-zinc-650 dark:text-zinc-400 text-lg max-w-2xl mx-auto leading-relaxed">
             Explore authentic narrations of the Prophet ﷺ and Islamic wisdom,
             organized by jurisprudential school
           </p>
 
           <p
-            className="mt-8 text-amber-300/50 text-3xl"
+            className="mt-8 text-primary/70 dark:text-secondary/70 text-3xl"
             dir="rtl"
             style={{ fontFamily: "'Noto Naskh Arabic', serif" }}
           >
             إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ
           </p>
-          <p className="text-zinc-600 text-xs mt-1">
+          <p className="text-zinc-550 dark:text-zinc-500 text-xs mt-1">
             &ldquo;Actions are but by intentions&rdquo; &mdash; Bukhari &amp; Muslim
           </p>
         </div>
@@ -95,7 +92,7 @@ export default function HadithPage() {
                   >
                     {fiqh.arabicName}
                   </p>
-                  <p className="text-zinc-400 max-w-2xl text-sm leading-relaxed">
+                  <p className="text-zinc-650 dark:text-zinc-400 max-w-2xl text-sm leading-relaxed">
                     {fiqh.description}
                   </p>
                 </div>
@@ -103,24 +100,24 @@ export default function HadithPage() {
                 {/* Stats */}
                 <div className="flex gap-4 shrink-0">
                   <div
-                    className="text-center px-5 py-3 rounded-2xl border"
-                    style={{ borderColor: `${fiqh.color}25`, backgroundColor: `${fiqh.color}08` }}
+                    className="text-center px-5 py-3 rounded-2xl border border-zinc-200/60 dark:border-zinc-800/80 bg-white dark:bg-card"
+                    style={{ borderColor: `${fiqh.color}25` }}
                   >
                     <p className="text-2xl font-bold" style={{ color: fiqh.color }}>
                       {fiqh.books.length}
                     </p>
-                    <p className="text-zinc-500 text-xs mt-0.5">Books</p>
+                    <p className="text-zinc-500 dark:text-zinc-400 text-xs mt-0.5">Books</p>
                   </div>
                   <div
-                    className="text-center px-5 py-3 rounded-2xl border"
-                    style={{ borderColor: `${fiqh.color}25`, backgroundColor: `${fiqh.color}08` }}
+                    className="text-center px-5 py-3 rounded-2xl border border-zinc-200/60 dark:border-zinc-800/80 bg-white dark:bg-card"
+                    style={{ borderColor: `${fiqh.color}25` }}
                   >
                     <p className="text-2xl font-bold" style={{ color: fiqh.color }}>
                       {fiqh.books
                         .reduce((a: number, b: HadithBook) => a + b.totalHadiths, 0)
                         .toLocaleString()}
                     </p>
-                    <p className="text-zinc-500 text-xs mt-0.5">Hadiths</p>
+                    <p className="text-zinc-500 dark:text-zinc-400 text-xs mt-0.5">Hadiths</p>
                   </div>
                 </div>
               </div>
@@ -151,13 +148,13 @@ export default function HadithPage() {
         {/* ── Bottom CTA ── */}
         <div className="mt-24 text-center">
           <p
-            className="text-5xl text-zinc-800 mb-4"
+            className="text-5xl text-primary/80 dark:text-zinc-200 mb-4"
             dir="rtl"
             style={{ fontFamily: "'Noto Naskh Arabic', serif" }}
           >
             بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
           </p>
-          <p className="text-zinc-600 text-sm">
+          <p className="text-zinc-550 dark:text-zinc-450 text-sm">
             May Allah grant us beneficial knowledge. Ameen.
           </p>
         </div>

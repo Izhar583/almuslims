@@ -21,7 +21,7 @@ function CardContent({ book, bookIndex }: { book: HadithBook; bookIndex: number 
 
       <div className="absolute top-4 right-4 flex items-center gap-2">
         {!book.apiAvailable && (
-          <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-400 border border-zinc-700">
+          <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700">
             Coming Soon
           </span>
         )}
@@ -46,20 +46,20 @@ function CardContent({ book, bookIndex }: { book: HadithBook; bookIndex: number 
       </p>
 
       <h3
-        className="text-lg font-semibold text-white mb-1 transition-colors duration-200"
+        className="text-lg font-semibold text-zinc-800 dark:text-zinc-100 mb-1 transition-colors duration-200"
         style={{ fontFamily: "'Playfair Display', serif" }}
       >
         {book.name}
       </h3>
 
-      <p className="text-zinc-500 text-xs mb-4">{book.author}</p>
+      <p className="text-zinc-500 dark:text-zinc-400 text-xs mb-4">{book.author}</p>
 
-      <p className="text-zinc-400 text-sm leading-relaxed flex-1 line-clamp-2">
+      <p className="text-zinc-600 dark:text-zinc-350 text-sm leading-relaxed flex-1 line-clamp-2">
         {book.description}
       </p>
 
-      <div className="flex items-center justify-between mt-5 pt-4 border-t border-zinc-800">
-        <span className="text-xs text-zinc-500">
+      <div className="flex items-center justify-between mt-5 pt-4 border-t border-zinc-200/60 dark:border-zinc-800/80">
+        <span className="text-xs text-zinc-500 dark:text-zinc-400">
           <span className="font-semibold" style={{ color: book.color }}>
             {book.totalHadiths.toLocaleString()}
           </span>{" "}
@@ -82,7 +82,7 @@ function CardContent({ book, bookIndex }: { book: HadithBook; bookIndex: number 
             </svg>
           </span>
         ) : (
-          <span className="text-xs text-zinc-600">API pending</span>
+          <span className="text-xs text-zinc-400 dark:text-zinc-650">API pending</span>
         )}
       </div>
     </>
@@ -91,9 +91,9 @@ function CardContent({ book, bookIndex }: { book: HadithBook; bookIndex: number 
 
 export default function BookCard({ book, bookIndex, fiqhId }: BookCardProps) {
   const className =
-    "group relative flex flex-col p-6 rounded-2xl border bg-zinc-900/60 backdrop-blur-sm transition-all duration-500 overflow-hidden " +
+    "group relative flex flex-col p-6 rounded-2xl border bg-white dark:bg-card border-zinc-200/50 dark:border-zinc-800/80 transition-all duration-500 overflow-hidden " +
     (book.apiAvailable
-      ? "hover:-translate-y-1 hover:shadow-2xl cursor-pointer"
+      ? "hover:-translate-y-1 cursor-pointer"
       : "opacity-70 cursor-not-allowed");
 
   const style = { borderColor: `${book.color}20` };
@@ -113,11 +113,9 @@ export default function BookCard({ book, bookIndex, fiqhId }: BookCardProps) {
       style={style}
       onMouseEnter={(e) => {
         (e.currentTarget as HTMLElement).style.borderColor = `${book.color}60`;
-        (e.currentTarget as HTMLElement).style.boxShadow = `0 20px 60px ${book.color}15`;
       }}
       onMouseLeave={(e) => {
         (e.currentTarget as HTMLElement).style.borderColor = `${book.color}20`;
-        (e.currentTarget as HTMLElement).style.boxShadow = "none";
       }}
     >
       <CardContent book={book} bookIndex={bookIndex} />

@@ -114,7 +114,7 @@ export default function CategoriesGrid() {
           <Link 
             key={cat.name} 
             href={cat.href} 
-            className="flex-shrink-0 w-[270px] xl:w-auto flex items-center gap-4 p-4 rounded-[1.25rem] bg-white border border-emerald-900/5 shadow-sm hover:shadow-md hover:border-emerald-900/10 hover:-translate-y-0.5 transition-all duration-300 group"
+            className="flex-shrink-0 w-[270px] xl:w-auto flex items-center gap-4 p-4 rounded-[1.25rem] bg-white border border-emerald-900/5 shadow-sm hover:border-emerald-900/10 hover:-translate-y-0.5 transition-all duration-300 group"
           >
             <div className="flex-shrink-0 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
               {cat.icon}

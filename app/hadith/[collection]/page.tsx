@@ -6,13 +6,15 @@ import {
   filterHadiths,
   HADITHS_PER_PAGE,
   type HadithEntry,
+  isShiaBook,
 } from "@/lib/api/hadith";
 import HadithSearch from "@/components/modules/hadith/HadithSearch";
 import PaginationControls from "@/components/modules/hadith/PaginationControls";
 
-async function getHadiths(collectionSlug: string) {
-  return fetchHadithCollection(collectionSlug);
+async function getHadiths(collectionSlug: string, page: number, search: string) {
+  return fetchHadithCollection(collectionSlug, page, search);
 }
+
 
 function HadithListItem({
   hadith,
@@ -23,15 +25,15 @@ function HadithListItem({
 }) {
   return (
     <div
-      className="p-8 rounded-2xl border bg-zinc-900/60 transition-colors hover:border-opacity-50"
+      className="p-8 rounded-2xl border bg-white dark:bg-card border-zinc-200/50 dark:border-zinc-800/80 transition-colors"
       style={{ borderColor: `${color}20` }}
     >
       <div className="flex items-center justify-between mb-6">
-        <span className="text-sm font-mono opacity-50" style={{ color }}>
+        <span className="text-sm font-mono opacity-60" style={{ color }}>
           Hadith {hadith.hadithnumber}
         </span>
         {hadith.grades && hadith.grades.length > 0 && (
-          <span className="px-3 py-1 rounded-full text-xs font-semibold bg-green-900/30 text-green-400 border border-green-800/50">
+          <span className="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/50">
             {hadith.grades[0].grade}
           </span>
         )}
@@ -39,17 +41,17 @@ function HadithListItem({
 
       {hadith.arabictext && (
         <p
-          className="text-2xl sm:text-3xl leading-relaxed mb-8 text-right opacity-90"
+          className="text-2xl sm:text-3xl leading-relaxed mb-8 text-right text-zinc-800 dark:text-zinc-100"
           dir="rtl"
-          style={{ fontFamily: "'Noto Naskh Arabic', serif", color: "#fefefe" }}
+          style={{ fontFamily: "'Noto Naskh Arabic', serif" }}
         >
           {hadith.arabictext}
         </p>
       )}
 
-      <p className="text-zinc-300 text-lg leading-relaxed">{hadith.text}</p>
+      <p className="text-zinc-700 dark:text-zinc-350 text-lg leading-relaxed">{hadith.text}</p>
 
-      <div className="mt-8 pt-4 border-t border-zinc-800/50 flex flex-wrap gap-4 text-sm text-zinc-500">
+      <div className="mt-8 pt-4 border-t border-zinc-200/60 dark:border-zinc-800/80 flex flex-wrap gap-4 text-sm text-zinc-550 dark:text-zinc-400">
         {hadith.reference?.book != null && (
           <span>Book: {hadith.reference.book}</span>
         )}
@@ -71,7 +73,7 @@ export default async function HadithCollectionPage(props: {
   const currentPage = Math.max(1, parseInt(searchParams.page || "1", 10) || 1);
   const searchTerm = searchParams.search || "";
 
-  const data = await getHadiths(collectionSlug);
+  const data = await getHadiths(collectionSlug, currentPage, searchTerm);
 
   let bookData = null;
   for (const fiqh of fiqhCategories) {
@@ -119,12 +121,32 @@ export default async function HadithCollectionPage(props: {
     );
   }
 
+  const isShia = isShiaBook(collectionSlug);
   const { metadata, hadiths } = data;
-  const filtered = filterHadiths(hadiths, searchTerm);
-  const totalPages = Math.max(1, Math.ceil(filtered.length / HADITHS_PER_PAGE));
-  const safePage = Math.min(currentPage, totalPages);
-  const start = (safePage - 1) * HADITHS_PER_PAGE;
-  const pageHadiths = filtered.slice(start, start + HADITHS_PER_PAGE);
+  const filtered = isShia && searchTerm ? hadiths : filterHadiths(hadiths, searchTerm);
+
+  let totalPages = 1;
+  let pageHadiths = [];
+  let safePage = currentPage;
+
+  if (isShia) {
+    if (searchTerm) {
+      totalPages = Math.max(1, Math.ceil(filtered.length / HADITHS_PER_PAGE));
+      safePage = Math.min(currentPage, totalPages);
+      const start = (safePage - 1) * HADITHS_PER_PAGE;
+      pageHadiths = filtered.slice(start, start + HADITHS_PER_PAGE);
+    } else {
+      const totalHadiths = bookData ? bookData.totalHadiths : 1000;
+      totalPages = Math.max(1, Math.ceil(totalHadiths / HADITHS_PER_PAGE));
+      safePage = Math.min(currentPage, totalPages);
+      pageHadiths = filtered; // Already paginated inside fetchHadithCollection
+    }
+  } else {
+    totalPages = Math.max(1, Math.ceil(filtered.length / HADITHS_PER_PAGE));
+    safePage = Math.min(currentPage, totalPages);
+    const start = (safePage - 1) * HADITHS_PER_PAGE;
+    pageHadiths = filtered.slice(start, start + HADITHS_PER_PAGE);
+  }
 
   return (
     <main className="min-h-screen bg-zinc-950 text-white pb-24">
