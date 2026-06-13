@@ -40,7 +40,7 @@ function CardContent({ book, bookIndex }: { book: HadithBook; bookIndex: number 
       <p
         className="text-base mb-1 opacity-50 transition-opacity group-hover:opacity-80"
         dir="rtl"
-        style={{ fontFamily: "'Noto Naskh Arabic', serif", color: book.color }}
+        style={{ fontFamily: "'Amiri', 'Traditional Arabic', serif", color: book.color }}
       >
         {book.arabicName}
       </p>

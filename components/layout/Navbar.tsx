@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { FaSearch, FaMoon, FaSun, FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
 import { useTheme } from "@/components/layout/ThemeProvider";
 
@@ -71,8 +72,23 @@ export default function Navbar() {
           
           {/* Left Side: Logo */}
           <div className="shrink-0">
-            <Link href="/" className="font-heading text-2xl font-bold text-primary dark:text-secondary tracking-wide transition-colors">
-              AlMuslims
+            <Link href="/" className="flex items-center gap-3 group transition-all">
+              <Image 
+                src="/logo.png" 
+                alt="AlMuslims Logo" 
+                width={100} 
+                height={100} 
+                className="h-[100px] w-[100px] sm:h-24 sm:w-24 object-contain transition-transform duration-300 group-hover:scale-105"
+                priority
+              />
+              <div className="flex flex-col justify-center">
+                <span className="font-logo text-[26px] sm:text-3xl font-bold leading-none text-primary dark:text-secondary tracking-wider">
+                  AlMuslims
+                </span>
+                <span className="text-[9px] sm:text-[10px] tracking-[0.2em] text-primary/60 dark:text-secondary/60 uppercase mt-1.5 font-bold">
+                  Authentic Islamic Knowledge
+                </span>
+              </div>
             </Link>
           </div>
 

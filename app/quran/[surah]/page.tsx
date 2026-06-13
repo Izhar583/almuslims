@@ -134,7 +134,7 @@ export default function SurahDetail({ params }: { params: Promise<{ surah: strin
 
           {/* Urdu */}
           {urdu?.ayahs[index]?.text && (
-            <p className="text-gray-500 text-sm mt-2 text-right leading-relaxed" dir="rtl">
+            <p className="text-gray-500 text-lg mt-2 text-right leading-relaxed font-urdu" dir="rtl">
               {urdu.ayahs[index].text}
             </p>
           )}

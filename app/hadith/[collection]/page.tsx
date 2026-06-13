@@ -43,7 +43,7 @@ function HadithListItem({
         <p
           className="text-2xl sm:text-3xl leading-relaxed mb-8 text-right text-zinc-800 dark:text-zinc-100"
           dir="rtl"
-          style={{ fontFamily: "'Noto Naskh Arabic', serif" }}
+          style={{ fontFamily: "'Amiri', 'Traditional Arabic', serif" }}
         >
           {hadith.arabictext}
         </p>

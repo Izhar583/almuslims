@@ -47,7 +47,7 @@ export default function HadithPage() {
           <p
             className="mt-8 text-primary/70 dark:text-secondary/70 text-3xl"
             dir="rtl"
-            style={{ fontFamily: "'Noto Naskh Arabic', serif" }}
+            style={{ fontFamily: "'Amiri', 'Traditional Arabic', serif" }}
           >
             إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ
           </p>
@@ -88,7 +88,7 @@ export default function HadithPage() {
                   <p
                     className="text-2xl mb-3 opacity-60"
                     dir="rtl"
-                    style={{ fontFamily: "'Noto Naskh Arabic', serif", color: fiqh.color }}
+                    style={{ fontFamily: "'Amiri', 'Traditional Arabic', serif", color: fiqh.color }}
                   >
                     {fiqh.arabicName}
                   </p>
@@ -150,7 +150,7 @@ export default function HadithPage() {
           <p
             className="text-5xl text-primary/80 dark:text-zinc-200 mb-4"
             dir="rtl"
-            style={{ fontFamily: "'Noto Naskh Arabic', serif" }}
+            style={{ fontFamily: "'Amiri', 'Traditional Arabic', serif" }}
           >
             بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
           </p>

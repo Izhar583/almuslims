@@ -18,8 +18,9 @@ const config: Config = {
       fontFamily: {
         heading: ["Playfair Display", "serif"],
         body: ["Plus Jakarta Sans", "sans-serif"],
-        arabic: ["Noto Naskh Arabic", "serif"],
-        urdu: ["Noto Nastaliq Urdu", "serif"],
+        logo: ["Cinzel", "Cormorant Garamond", "Playfair Display SC", "serif"],
+        arabic: ["Amiri", "Traditional Arabic", "serif"],
+        urdu: ["Jameel Noori Nastaleeq", "Jameel Noori Nastaleeq Regular", "Noto Nastaliq Urdu", "serif"],
       },
     },
   },

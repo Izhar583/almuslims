@@ -9,6 +9,10 @@
   --color-secondary: var(--color-secondary);
   --color-card: var(--color-card);
   --color-border: var(--color-border);
+
+  --font-logo: "Cinzel", "Cormorant Garamond", "Playfair Display SC", serif;
+  --font-arabic: "Amiri", "Traditional Arabic", serif;
+  --font-urdu: "Jameel Noori Nastaleeq", "Jameel Noori Nastaleeq Regular", "Noto Nastaliq Urdu", serif;
 }
 
 :root {
