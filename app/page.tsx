@@ -5,9 +5,9 @@ import IslamicCalendar from "@/components/modules/home/IslamicCalendar";
 import PrayerCard from "@/components/modules/home/PrayerCard";
 import DuaCard from "@/components/modules/home/DuaCard";
 import WordOfTheDayCard from "@/components/modules/home/WordOfTheDay";
-import VideoSection from "@/components/modules/home/VideoSection";
 import CategoriesGrid from "@/components/modules/home/CategoriesGrid";
-import Newsletter from "@/components/modules/home/Newsletter";
+import ArticlesPage from "./articles/page";
+
 
 export default function Home() {
   return (
@@ -31,9 +31,8 @@ export default function Home() {
       </div>
       <StatsBar />
       <IslamicCalendar />
-      <VideoSection />
       <CategoriesGrid />
-      <Newsletter />
+      <ArticlesPage />
     </>
   );
 }

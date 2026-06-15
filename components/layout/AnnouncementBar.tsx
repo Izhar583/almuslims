@@ -35,7 +35,6 @@ export default function AnnouncementBar() {
         {/* Navigation Links */}
         <div className="flex gap-4 font-semibold">
           <a href="#about" className="hover:underline">About Us</a>
-          <a href="#ask-scholar" className="hover:underline text-primary-hover">Ask a Scholar</a>
         </div>
 
         {/* Social Media Icons Divider Line */}

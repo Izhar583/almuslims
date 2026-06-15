@@ -1,6 +1,7 @@
 export interface Dua {
   id: number;
   category: string;
+  title: string;
   text: string;
   transliteration: string;
   translation: string;
@@ -11,6 +12,7 @@ export const DUAS: Dua[] = [
   {
     id: 1,
     category: "Knowledge",
+    title: "Dua for Knowledge",
     text: "رَبِّ زِدْنِي عِلْمًا",
     transliteration: "Rabbi zidni ilma",
     translation: "My Lord, increase me in knowledge.",
@@ -19,6 +21,7 @@ export const DUAS: Dua[] = [
   {
     id: 2,
     category: "Success",
+    title: "Dua for Success & Goodness",
     text: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
     transliteration:
       "Rabbana atina fid-dunya hasanatan wa fil-akhirati hasanatan wa qina 'adhaban-nar",
@@ -29,6 +32,7 @@ export const DUAS: Dua[] = [
   {
     id: 3,
     category: "Trust",
+    title: "Dua for Trust in Allah",
     text: "حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ",
     transliteration: "Hasbunallahu wa ni'mal wakeel",
     translation: "Sufficient for us is Allah, and He is the best Disposer of affairs.",
@@ -37,6 +41,7 @@ export const DUAS: Dua[] = [
   {
     id: 4,
     category: "Forgiveness",
+    title: "Dua for Forgiveness",
     text: "رَبِّ إِنِّي ظَلَمْتُ نَفْسِي فَاغْفِرْ لِي",
     transliteration: "Rabbi inni zalamtu nafsi faghfir li",
     translation: "My Lord, I have wronged myself, so forgive me.",
@@ -45,6 +50,7 @@ export const DUAS: Dua[] = [
   {
     id: 5,
     category: "Patience",
+    title: "Dua for Patience & Perseverance",
     text: "رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا وَتَوَفَّنَا مُسْلِمِينَ",
     transliteration: "Rabbana afrigh 'alayna sabran wa tawaffana muslimeen",
     translation: "Our Lord, pour upon us patience and let us die as Muslims.",
@@ -53,6 +59,7 @@ export const DUAS: Dua[] = [
   {
     id: 6,
     category: "Guidance",
+    title: "Dua for Steadfast Guidance",
     text: "رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا",
     transliteration: "Rabbana la tuzigh quloobana ba'da idh hadaytana",
     translation: "Our Lord, let not our hearts deviate after You have guided us.",
@@ -61,6 +68,7 @@ export const DUAS: Dua[] = [
   {
     id: 7,
     category: "Rizq",
+    title: "Dua for Beneficial Rizq",
     text: "اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا وَرِزْقًا طَيِّبًا وَعَمَلًا مُتَقَبَّلًا",
     transliteration:
       "Allahumma inni as'aluka 'ilman nafi'an, wa rizqan tayyiban, wa 'amalan mutaqabbalan",
@@ -71,6 +79,7 @@ export const DUAS: Dua[] = [
   {
     id: 8,
     category: "Ease",
+    title: "Dua for Ease in Difficulties",
     text: "اللَّهُمَّ لَا سَهْلَ إِلَّا مَا جَعَلْتَهُ سَهْلًا",
     transliteration: "Allahumma la sahla illa ma ja'altahu sahla",
     translation: "O Allah, there is no ease except in that which You have made easy.",
@@ -79,6 +88,7 @@ export const DUAS: Dua[] = [
   {
     id: 9,
     category: "Health",
+    title: "Dua for Health & Wellbeing",
     text: "اللَّهُمَّ عَافِنِي فِي بَدَنِي اللَّهُمَّ عَافِنِي فِي سَمْعِي اللَّهُمَّ عَافِنِي فِي بَصَرِي",
     transliteration: "Allahumma 'afini fi badani, fi sam'i, fi basari",
     translation:
@@ -88,6 +98,7 @@ export const DUAS: Dua[] = [
   {
     id: 10,
     category: "Gratitude",
+    title: "Dua for Gratitude",
     text: "رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ",
     transliteration: "Rabbi awzi'ni an ashkura ni'matakal",
     translation: "My Lord, enable me to be grateful for Your favor upon me.",
@@ -96,6 +107,7 @@ export const DUAS: Dua[] = [
   {
     id: 11,
     category: "Morning",
+    title: "Morning Supplication",
     text: "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ",
     transliteration: "Asbahna wa asbahal mulku lillah",
     translation:
@@ -105,6 +117,7 @@ export const DUAS: Dua[] = [
   {
     id: 12,
     category: "Evening",
+    title: "Evening Supplication",
     text: "أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ",
     transliteration: "Amsayna wa amsal mulku lillah",
     translation: "We have entered evening and the dominion belongs to Allah.",
@@ -113,6 +126,7 @@ export const DUAS: Dua[] = [
   {
     id: 13,
     category: "Travel",
+    title: "Dua for Safe Travel",
     text: "سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَٰذَا",
     transliteration: "Subhanalladhi sakhkhara lana hadha",
     translation: "Glory to Him who has subjected this to us.",
@@ -121,6 +135,7 @@ export const DUAS: Dua[] = [
   {
     id: 14,
     category: "Before Sleep",
+    title: "Dua Before Sleep",
     text: "بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا",
     transliteration: "Bismika Allahumma amutu wa ahya",
     translation: "In Your name, O Allah, I die and I live.",
@@ -129,6 +144,7 @@ export const DUAS: Dua[] = [
   {
     id: 15,
     category: "Anxiety",
+    title: "Dua for Relief from Anxiety",
     text: "لَا إِلَٰهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ",
     transliteration: "La ilaha illa anta subhanaka inni kuntu minaz-zalimin",
     translation:
@@ -144,4 +160,4 @@ export function getDailyDua(): Dua {
   return DUAS[Math.floor((today.getTime() - start) / 86400000) % DUAS.length];
 }
 
-export const DUA_CATEGORIES = [...new Set(DUAS.map((d) => d.category))];
+export const DUA_CATEGORIES = ["All", ...new Set(DUAS.map((d) => d.category))];
