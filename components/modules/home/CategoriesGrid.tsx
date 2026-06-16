@@ -22,19 +22,6 @@ const categories = [
     )
   },
   {
-    name: "HADITH",
-    href: "/hadith",
-    desc: "Authentic sayings of the Prophet ﷺ",
-    icon: (
-      <svg className="w-14 h-14" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M32 8L38 20L51 22L41 31L44 44L32 37L20 44L23 31L13 22L26 20L32 8Z" fill="#FDE68A" stroke="#D97706" strokeWidth="2" strokeLinejoin="round"/>
-        <circle cx="32" cy="28" r="12" fill="#064E3B"/>
-        <path d="M33 22C30.2386 22 28 24.2386 28 27C28 29.7614 30.2386 32 33 32C33.642 32 34.2555 31.8789 34.819 31.6577C33.8828 33.0238 32.2741 33.9167 30.4583 33.9167C27.4438 33.9167 25 31.4728 25 28.4583C25 25.4438 27.4438 23 30.4583 23C31.5794 23 32.6215 23.3387 33.4542 23.9056C33.1594 22.8021 33.1118 22.3739 33 22Z" fill="#FCD34D"/>
-        <path d="M36 29L37.5 26.5L40 28L38.5 30.5L36 29Z" fill="#FCD34D"/>
-      </svg>
-    )
-  },
-  {
     name: "DUAS & AZKAR",
     href: "/duas",
     desc: "Supplications for every moment",
@@ -109,14 +96,14 @@ export default function CategoriesGrid() {
         </Link>
       </div>
 
-      <div className="flex overflow-x-auto pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 gap-4 xl:grid xl:grid-cols-6 xl:gap-5 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+      <div className="flex overflow-x-auto pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 gap-4 xl:grid xl:grid-cols-5 xl:gap-5 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
         {categories.map((cat) => (
           <Link 
             key={cat.name} 
             href={cat.href} 
-            className="flex-shrink-0 w-[270px] xl:w-auto flex items-center gap-4 p-4 rounded-[1.25rem] bg-white border border-emerald-900/5 shadow-sm hover:border-emerald-900/10 hover:-translate-y-0.5 transition-all duration-300 group"
+            className="shrink-0 w-[270px] xl:w-auto flex items-center gap-4 p-4 rounded-[1.25rem] bg-white border border-emerald-900/5 shadow-sm hover:border-emerald-900/10 hover:-translate-y-0.5 transition-all duration-300 group"
           >
-            <div className="flex-shrink-0 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+            <div className="shrink-0 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
               {cat.icon}
             </div>
             <div className="flex flex-col justify-center">

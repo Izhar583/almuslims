@@ -34,7 +34,7 @@ export default function DuaCard() {
   };
 
   return (
-    <div className="h-full flex flex-col p-6 sm:p-8 bg-white rounded-[1.5rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#EBE3D5] font-body relative overflow-hidden group">
+    <div className="h-full flex flex-col p-6 sm:p-8 bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#EBE3D5] font-body relative overflow-hidden group">
       
       {/* ── Header ── */}
       <div className="flex items-start justify-between mb-6 relative z-10">
@@ -88,7 +88,7 @@ export default function DuaCard() {
             {dua.reference}
           </p>
           <p className="text-[11px] italic text-[#1F2926]/40 text-center leading-relaxed">
-            "{dua.transliteration}"
+             {dua.transliteration}
           </p>
           <div className="h-px w-12 bg-[#EBE3D5] mx-auto" />
           <p className="text-sm text-[#1F2926]/70 text-center leading-relaxed font-medium">

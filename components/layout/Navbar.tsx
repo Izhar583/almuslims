@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState } from "react";
@@ -25,7 +26,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-white shadow-sm border-b border-gray-100 transition-colors">
+    <nav className="w-full bg-white shadow-sm border-b border-gray-100 min-h-[64px]">
       <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           

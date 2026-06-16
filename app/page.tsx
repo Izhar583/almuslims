@@ -1,4 +1,3 @@
-import React from "react";
 import HeroSection from "@/components/modules/home/HeroSection";
 import StatsBar from "@/components/modules/home/StatsBar";
 import IslamicCalendar from "@/components/modules/home/IslamicCalendar";
@@ -6,8 +5,7 @@ import PrayerCard from "@/components/modules/home/PrayerCard";
 import DuaCard from "@/components/modules/home/DuaCard";
 import WordOfTheDayCard from "@/components/modules/home/WordOfTheDay";
 import CategoriesGrid from "@/components/modules/home/CategoriesGrid";
-import ArticlesPage from "./articles/page";
-
+import FeaturedArticles from "@/components/modules/home/FeaturedArticles";
 
 export default function Home() {
   return (
@@ -32,7 +30,7 @@ export default function Home() {
       <StatsBar />
       <IslamicCalendar />
       <CategoriesGrid />
-      <ArticlesPage />
+      <FeaturedArticles />
     </>
   );
 }
