@@ -115,19 +115,19 @@ export default function ContactUsPage() {
       </div>
 
       {/* Hero */}
-      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-10 overflow-hidden rounded-2xl mt-4">
+      <section className="relative max-w-7xl mx-4 sm:mx-6 lg:mx-auto h-64 sm:h-96 px-4 sm:px-6 lg:px-8 overflow-hidden rounded-2xl mt-4 mb-6">
         <div className="absolute inset-0 -z-10">
           <Image
-            src="/assets/contact-hero.png"
+            src="/assets/contact-hero.jpg"
             alt="Masjid"
             fill
-            className="object-cover object-right opacity-25"
+            className="object-cover object-bottom opacity-50"
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-r from-bg via-bg/80 to-transparent" />
         </div>
 
-        <div className="relative max-w-xl py-8">
+        <div className="relative max-w-xl h-full flex flex-col justify-center">
           <h1 className="font-heading text-4xl sm:text-5xl font-bold text-gray-900">
             Contact Us
           </h1>
@@ -337,7 +337,7 @@ export default function ContactUsPage() {
             return (
               <div
                 key={topic.title}
-                className="bg-bg-card border border-gray-100 rounded-xl p-5 text-center hover:shadow-md transition-shadow cursor-pointer"
+                className="bg-bg-card border border-gray-100 rounded-xl p-4 sm:p-5 text-center hover:shadow-md transition-shadow cursor-pointer"
               >
                 <div className="w-10 h-10 mx-auto mb-3 rounded-full bg-secondary/10 text-secondary flex items-center justify-center text-xl">
                   <Icon />
@@ -352,10 +352,9 @@ export default function ContactUsPage() {
         </div>
       </section>
 
-      {/* Location + Feedback */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Our Location */}
-        <div className="lg:col-span-2">
+      {/* Location */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+        <div>
           <h2 className="font-heading text-2xl font-bold text-gray-900 mb-1">
             Our Location
           </h2>
@@ -363,15 +362,15 @@ export default function ContactUsPage() {
             We are based in Lahore, Pakistan.
           </p>
 
-          <div className="relative w-full h-64 rounded-2xl overflow-hidden border border-gray-100">
+          <div className="relative w-full h-64 sm:h-96 rounded-2xl overflow-hidden border border-gray-100">
             <iframe
               title="AlMuslims Office Location"
               src="https://www.google.com/maps?q=Johar+Town,+Lahore,+Punjab,+Pakistan&output=embed"
               className="w-full h-full"
               loading="lazy"
             />
-            <div className="absolute bottom-4 left-4 bg-white rounded-lg shadow-md px-4 py-2 flex items-center gap-2">
-              <FaMapMarkerAlt className="text-primary" />
+            <div className="absolute bottom-4 left-4 right-4 sm:right-auto bg-white rounded-lg shadow-md px-4 py-2 flex items-center gap-2">
+              <FaMapMarkerAlt className="text-primary shrink-0" />
               <div>
                 <p className="text-sm font-semibold text-gray-900">
                   AlMuslims Office
@@ -383,9 +382,6 @@ export default function ContactUsPage() {
             </div>
           </div>
         </div>
-
-        {/* Feedback CTA */}
-
       </section>
     </main>
   );

@@ -15,9 +15,10 @@ export default function ContactCTA() {
         <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-10 text-center sm:text-left relative z-10">
           <div className="w-16 h-16 sm:w-20 sm:h-20 relative shrink-0">
             <Image 
-              src="/assets/lantern.png" 
-              alt="Lantern Icon" 
-              fill 
+              src="/assets/contact-us.png" 
+              alt="Contact Icon" 
+              width={100}
+              height={100}
               className="object-contain group-hover:scale-110 transition-transform duration-500"
             />
           </div>
