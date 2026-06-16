@@ -1,8 +1,9 @@
+
 import type { Metadata } from "next";
 import "./globals.css";
-import AnnouncementBar from "@/components/layout/AnnouncementBar"; 
-import Navbar from "@/components/layout/Navbar"; // Nayi Navbar import ki
-import Footer from "@/components/layout/Footer"; // Naya Footer import kiya
+import StickyHeader from "@/components/layout/StickyHeader";
+import Footer from "@/components/layout/Footer";
+import ContactCTA from "@/components/layout/ContactCTA";
 import GlobalSearch from "@/components/layout/GlobalSearch";
 
 export const metadata: Metadata = {
@@ -17,24 +18,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-  <body suppressHydrationWarning>
-        <header className="w-full block z-50">
-          <AnnouncementBar />
-          <Navbar /> {/* Announcement Bar ke foran baad Navbar set ho gayi! */}
-        </header>
+      <body suppressHydrationWarning className="flex flex-col min-h-screen">
+        <StickyHeader />
         
         {/* Main Content Area */}
-        <div className="flex-1 w-full block">
+        <main className="flex-1 w-full pt-[124px] md:pt-[110px]">
           {children}
-        </div>
+        </main>
         
-        {/* Footer */}
+        <ContactCTA />
         <Footer />
-
-        {/* Unified Global Search Overlay */}
         <GlobalSearch />
       </body>
     </html>
   );
 }
-

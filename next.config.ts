@@ -1,17 +1,28 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+
+import type { NextConfig } from "next";
+
+
+const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'i.ytimg.com', // YouTube thumbnails
+        hostname: 'i.ytimg.com',
       },
       {
         protocol: 'https',
-        hostname: 'images.unsplash.com', // Mock image thumbnails
+        hostname: 'images.unsplash.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'al-muslims.netlify.app',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.pravatar.cc',
+      }
     ],
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
