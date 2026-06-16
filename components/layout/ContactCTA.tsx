@@ -8,7 +8,7 @@ import { HiOutlineMail } from "react-icons/hi";
 
 export default function ContactCTA() {
   return (
-    <div className="w-full max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 mb-12 mt-12">
+    <div className="w-full max-w-10xl mx-auto px-4 sm:px-8 lg:px-12 py-4 md:py-8 lg:py-12 bg-[#FAF7F2]">
       <div className="bg-[#F8FAF9] rounded-[32px] border border-[#E8EEEB] p-8 sm:px-12 py-10 flex flex-col sm:flex-row items-center justify-between gap-8 relative overflow-hidden group shadow-sm transition-shadow hover:shadow-md">
         
         {/* Left Side: Icon & Text */}

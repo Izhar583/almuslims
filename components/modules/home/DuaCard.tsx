@@ -71,8 +71,6 @@ export default function DuaCard() {
           )}
         </button>
       </div>
-
-      {/* ── Arabic Text ── */}
       <div className="flex-1 flex flex-col justify-center relative z-10">
         <p
           dir="rtl"

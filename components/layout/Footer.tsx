@@ -61,6 +61,7 @@ export default function Footer() {
             <li><Link href="/about" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> About Us</Link></li>
             <li><Link href="/contact" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Contact Us</Link></li>
             <li><Link href="/write" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Write for Us</Link></li>
+            <li><Link href="/faq" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> FAQ</Link></li>
             <li><Link href="/privacy" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Privacy Policy</Link></li>
             <li><Link href="/terms" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Terms & Conditions</Link></li>
           </ul>

@@ -3,233 +3,268 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { 
-  FaHome, 
-  FaArrowLeft, 
-  FaBookOpen, 
-  FaBook,
-  FaClock, 
-  FaStar,
-  FaEnvelope, 
-  FaChevronRight 
-} from "react-icons/fa";
 import { motion } from "framer-motion";
+import {
+  HiOutlineHome,
+  HiOutlineArrowLeft,
+  HiOutlineBookOpen,
+  HiOutlineAcademicCap,
+  HiOutlineSparkles,
+  HiOutlineScale,
+  HiOutlineHeart,
+  HiOutlineEnvelope,
+  HiOutlineArrowRight,
+  HiOutlineQueueList,
+} from "react-icons/hi2";
+
+const navLinks = [
+  {
+    title: "Quran",
+    desc: "Read and explore the words of Allah.",
+    link: "/quran",
+    icon: <HiOutlineBookOpen className="w-5 h-5 text-primary" />,
+  },
+  {
+    title: "Duas & Azkar",
+    desc: "Supplications for every moment of life.",
+    link: "/duas",
+    icon: <HiOutlineHeart className="w-5 h-5 text-primary" />,
+  },
+  {
+    title: "Seerah",
+    desc: "Discover the life of our beloved Prophet ﷺ.",
+    link: "/seerah",
+    icon: <HiOutlineAcademicCap className="w-5 h-5 text-primary" />,
+  },
+  {
+    title: "Articles",
+    desc: "Islamic articles on a wide range of topics.",
+    link: "/articles",
+    icon: <HiOutlineQueueList className="w-5 h-5 text-primary" />,
+  },
+  {
+    title: "Aqeedah",
+    desc: "Strengthen your foundational belief in Allah.",
+    link: "/categories",
+    icon: <HiOutlineSparkles className="w-5 h-5 text-primary" />,
+  },
+  {
+    title: "Fiqh",
+    desc: "Islamic rulings for modern-day life.",
+    link: "/categories",
+    icon: <HiOutlineScale className="w-5 h-5 text-primary" />,
+  },
+];
 
 export default function NotFound() {
   const router = useRouter();
 
-  // Cards for "You might be looking for"
-  const navigationCards = [
-    {
-      title: "Quran",
-      desc: "Read and explore the words of Allah.",
-      link: "/quran",
-      icon: <FaBook className="text-[#0A3A2F]" size={20} />
-    },
-    {
-      title: "Duas & Azkar",
-      desc: "Supplications for every moment of life.",
-      link: "/duas",
-      icon: <FaStar className="text-[#0A3A2F]" size={20} />
-    },
-    {
-      title: "Seerah",
-      desc: "Discover the life of our beloved Prophet ﷺ.",
-      link: "/seerah",
-      icon: <FaBookOpen className="text-[#0A3A2F]" size={20} />
-    },
-    {
-      title: "Articles",
-      desc: "Islamic articles on a wide range of topics.",
-      link: "/articles",
-      icon: <FaBookOpen className="text-[#0A3A2F]" size={20} />
-    },
-    {
-      title: "Prayer Times",
-      desc: "Check accurate daily prayer timings.",
-      link: "/prayer-times",
-      icon: <FaClock className="text-[#0A3A2F]" size={20} />
-    },
-    {
-      title: "99 Names",
-      desc: "Discover the beautiful Names of Allah.",
-      link: "/names",
-      icon: <FaStar className="text-[#0A3A2F]" size={20} />
-    }
-  ];
-
   return (
-    <main className="min-h-screen bg-[#FAF7F2] py-12 sm:py-16 font-body text-zinc-800">
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-        
-        {/* ── TOP HERO SECTION: 404 MESSAGE & SVG ILLUSTRATION ── */}
+    <main className="min-h-screen bg-[#FAF7F2] font-body text-zinc-800">
+      <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-12 py-16 sm:py-24 space-y-24">
+
+        {/* ── HERO: 404 + SVG Illustration ── */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          {/* Left Side: 404 Text */}
-          <div className="lg:col-span-5 space-y-6 text-center lg:text-left">
-            <h1 className="font-heading text-7xl sm:text-8xl lg:text-9xl font-bold text-primary leading-none">
-              404
-            </h1>
-            <div className="space-y-2">
-              <h2 className="font-heading text-2xl sm:text-3xl font-bold text-primary">
+
+          {/* Left: Text */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7 }}
+            className="lg:col-span-5 space-y-8 text-center lg:text-left"
+          >
+            {/* Big 404 */}
+            <div>
+              <h1 className="font-heading leading-none font-black text-[#0A3A2F]"
+                style={{ fontSize: "clamp(6rem, 18vw, 10rem)" }}
+              >
+                404
+              </h1>
+              <h2 className="font-heading text-2xl sm:text-4xl font-bold text-primary mt-2">
                 Page Not Found
               </h2>
-              <div className="w-16 h-1 bg-secondary mx-auto lg:mx-0" />
+              <div className="w-20 h-1.5 bg-secondary mt-4 mx-auto lg:mx-0 rounded-full" />
             </div>
-            
-            <p className="text-sm sm:text-base text-zinc-500 leading-relaxed max-w-md mx-auto lg:mx-0">
-              The page you're looking for doesn't exist or has been moved. Let's get you back on the right path.
+
+            <p className="text-base text-zinc-500 leading-relaxed max-w-sm mx-auto lg:mx-0">
+              The page you&apos;re looking for doesn&apos;t exist or has been moved.
+              <br />
+              <span className="font-semibold text-primary/70">Let&apos;s get you back on the right path.</span>
             </p>
-            
-            {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link
                 href="/"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-primary text-white font-bold text-sm rounded-xl hover:bg-primaryHover transition-all shadow cursor-pointer"
+                className="inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-[#0A3A2F] text-white font-bold text-sm rounded-2xl hover:bg-[#0d4a3b] transition-all shadow-xl shadow-primary/20 active:scale-95"
               >
-                <FaHome /> Go to Homepage
+                <HiOutlineHome className="w-5 h-5" /> Go to Homepage
               </Link>
               <button
                 onClick={() => router.back()}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white border border-[#EBE3D5] text-[#1F2926] font-bold text-sm rounded-xl hover:bg-zinc-50 transition-all shadow cursor-pointer"
+                className="inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-white border border-gray-200 text-gray-700 font-bold text-sm rounded-2xl hover:bg-gray-50 transition-all shadow-sm active:scale-95"
               >
-                <FaArrowLeft /> Go Back
+                <HiOutlineArrowLeft className="w-5 h-5" /> Go Back
               </button>
             </div>
-          </div>
-          
-          {/* Right Side: Mosque & Signpost Illustration */}
-          <div className="lg:col-span-7 flex justify-center items-center">
-            <div className="relative w-full max-w-[500px] aspect-square">
-              <svg viewBox="0 0 500 500" className="w-full h-full drop-shadow-2xl" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* Arch Background Frame */}
-                <path d="M50 250C50 139.543 139.543 50 250 50C360.457 50 450 139.543 450 250V450H50V250Z" fill="url(#arch-gradient)" />
-                <path d="M50 250C50 139.543 139.543 50 250 50C360.457 50 450 139.543 450 250V450H50V250Z" stroke="#FAF7F2" strokeWidth="6" />
-                
-                {/* Stars and Crescent Moon */}
-                <circle cx="340" cy="110" r="1.5" fill="white" opacity="0.6"/>
-                <circle cx="160" cy="140" r="2" fill="white" opacity="0.8"/>
-                <circle cx="200" cy="90" r="1" fill="white" opacity="0.4"/>
-                <path d="M320 80C320 66.1929 308.807 55 295 55C292.083 55 289.283 55.5001 286.683 56.4168C296.483 60.9168 303.333 70.5833 303.333 81.9167C303.333 93.2501 296.483 102.917 286.683 107.417C289.283 108.333 292.083 108.833 295 108.833C308.807 108.833 320 97.6404 320 83.8333V80Z" fill="#FAF7F2" opacity="0.9"/>
-                
-                {/* Mosque Minarets */}
-                <path d="M110 400V200H120V400H110ZM115 180L118 195H112L115 180Z" fill="#FAF7F2" opacity="0.4"/>
-                <path d="M380 400V220H390V400H380ZM385 200L388 215H382L385 200Z" fill="#FAF7F2" opacity="0.4"/>
-                
-                {/* Green Mosque Dome (Masjid an-Nabawi style) */}
-                <path d="M170 400V300C170 240 210 210 250 210C290 210 330 240 330 300V400H170Z" fill="#0A3A2F" />
-                <path d="M250 170L253 195H247L250 170Z" fill="#D48C46" />
-                <circle cx="250" cy="205" r="4" fill="#D48C46" />
-                <path d="M210 300C210 270 230 250 250 250C270 250 290 270 290 300" stroke="#D48C46" strokeWidth="2" strokeDasharray="3 3"/>
-                
-                {/* Walking Path */}
-                <path d="M210 400L240 340H260L290 400H210Z" fill="#FAF7F2" opacity="0.3" />
-                
-                {/* Wooden Signpost (Main post) */}
-                <rect x="340" y="250" width="12" height="180" rx="2" fill="#8B5A2B" />
-                <path d="M334 430H358" stroke="#8B5A2B" strokeWidth="4" strokeLinecap="round"/>
-                
-                {/* Sign 1: Quran (pointing left) */}
-                <g filter="url(#shadow)">
-                  <path d="M346 270H250L240 285L250 300H346V270Z" fill="#D48C46" />
-                  <text x="295" y="289" fill="white" fontSize="11" fontWeight="bold" fontFamily="sans-serif" textAnchor="middle">QURAN</text>
-                  <circle cx="258" cy="285" r="1.5" fill="white"/>
-                </g>
+          </motion.div>
 
-                {/* Sign 2: Articles (pointing right) */}
-                <g filter="url(#shadow)">
-                  <path d="M334 315H420L430 330L420 345H334V315Z" fill="#D48C46" />
-                  <text x="377" y="334" fill="white" fontSize="11" fontWeight="bold" fontFamily="sans-serif" textAnchor="middle">ARTICLES</text>
-                  <circle cx="412" cy="330" r="1.5" fill="white"/>
-                </g>
-
-                {/* Sign 3: Duas & Azkar (pointing left) */}
-                <g filter="url(#shadow)">
-                  <path d="M346 360H230L220 375L230 390H346V360Z" fill="#0A3A2F" />
-                  <text x="285" y="379" fill="white" fontSize="9" fontWeight="bold" fontFamily="sans-serif" textAnchor="middle">DUAS & AZKAR</text>
-                  <circle cx="238" cy="375" r="1.5" fill="white"/>
-                </g>
-
-                {/* Definitions */}
+          {/* Right: SVG Scene */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.15 }}
+            className="lg:col-span-7 flex justify-center items-center"
+          >
+            <div className="relative w-full max-w-[520px] mx-auto">
+              <svg
+                viewBox="0 0 520 480"
+                className="w-full h-auto drop-shadow-2xl"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <defs>
-                  <linearGradient id="arch-gradient" x1="250" y1="50" x2="250" y2="450" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stopColor="#ECFDF5" />
-                    <stop offset="100%" stopColor="#D1FAE5" />
-                  </linearGradient>
-                  <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-                    <feDropShadow dx="1" dy="1" stdDeviation="1.5" floodOpacity="0.2"/>
+                  <radialGradient id="bgGrad" cx="50%" cy="40%" r="55%">
+                    <stop offset="0%" stopColor="#d1fae5" />
+                    <stop offset="100%" stopColor="#a7f3d0" stopOpacity="0.3" />
+                  </radialGradient>
+                  <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="130%">
+                    <feDropShadow dx="0" dy="4" stdDeviation="5" floodOpacity="0.12" />
+                  </filter>
+                  <filter id="domeShadow">
+                    <feDropShadow dx="0" dy="6" stdDeviation="8" floodOpacity="0.2" />
                   </filter>
                 </defs>
+
+                {/* Arch Background */}
+                <path
+                  d="M50 260C50 144 144 50 260 50C376 50 470 144 470 260V460H50V260Z"
+                  fill="url(#bgGrad)"
+                />
+                <path
+                  d="M50 260C50 144 144 50 260 50C376 50 470 144 470 260V460H50V260Z"
+                  stroke="#FAF7F2"
+                  strokeWidth="8"
+                />
+
+                {/* Stars */}
+                <circle cx="120" cy="110" r="2" fill="white" opacity="0.7" />
+                <circle cx="200" cy="80" r="1.5" fill="white" opacity="0.5" />
+                <circle cx="360" cy="100" r="2.5" fill="white" opacity="0.7" />
+                <circle cx="420" cy="150" r="1.5" fill="white" opacity="0.4" />
+                <circle cx="100" cy="180" r="1" fill="white" opacity="0.5" />
+
+                {/* Crescent Moon */}
+                <path
+                  d="M350 75C350 60 339 48 325 48C322 48 319 48.5 316.5 49.5C325 53.5 331 62 331 72.5C331 83 325 91.5 316.5 95.5C319 96.5 322 97 325 97C339 97 350 85 350 75Z"
+                  fill="white"
+                  opacity="0.9"
+                />
+
+                {/* Distant Minarets */}
+                <rect x="90" y="220" width="14" height="200" rx="3" fill="#FAF7F2" opacity="0.4" />
+                <polygon points="97,210 90,220 104,220" fill="#FAF7F2" opacity="0.4" />
+                <rect x="420" y="240" width="14" height="200" rx="3" fill="#FAF7F2" opacity="0.4" />
+                <polygon points="427,230 420,240 434,240" fill="#FAF7F2" opacity="0.4" />
+
+                {/* Main Mosque Dome */}
+                <g filter="url(#domeShadow)">
+                  <path
+                    d="M175 460V310C175 248 215 215 260 215C305 215 345 248 345 310V460H175Z"
+                    fill="#0A3A2F"
+                  />
+                  {/* Arched windows on mosque */}
+                  <path d="M215 380C215 368 222 360 230 360C238 360 245 368 245 380V420H215V380Z" fill="#D48C46" opacity="0.25" />
+                  <path d="M275 380C275 368 282 360 290 360C298 360 305 368 305 380V420H275V380Z" fill="#D48C46" opacity="0.25" />
+                  {/* Finial + globe */}
+                  <line x1="260" y1="175" x2="260" y2="215" stroke="#D48C46" strokeWidth="3" />
+                  <circle cx="260" cy="175" r="6" fill="#D48C46" />
+                  {/* Dome details */}
+                  <path d="M215 310C215 280 235 260 260 260C285 260 305 280 305 310" stroke="#D48C46" strokeWidth="1.5" strokeDasharray="4 3" opacity="0.5" />
+                </g>
+
+                {/* Ground path */}
+                <ellipse cx="260" cy="455" rx="100" ry="8" fill="#0A3A2F" opacity="0.07" />
+
+                {/* Foliage */}
+                <ellipse cx="148" cy="430" rx="22" ry="30" fill="#10623F" opacity="0.5" />
+                <ellipse cx="135" cy="430" rx="16" ry="24" fill="#0A3A2F" opacity="0.35" />
+                <ellipse cx="380" cy="430" rx="20" ry="28" fill="#10623F" opacity="0.5" />
+                <ellipse cx="393" cy="432" rx="14" ry="22" fill="#0A3A2F" opacity="0.35" />
+
+                {/* Wooden Sign Post */}
+                <rect x="388" y="265" width="14" height="175" rx="3" fill="#92632A" />
+                <rect x="390" y="267" width="4" height="175" rx="2" fill="#A0722A" opacity="0.3" />
+                {/* Roots */}
+                <path d="M388 440 Q380 455 370 460" stroke="#92632A" strokeWidth="3.5" strokeLinecap="round" />
+                <path d="M402 440 Q410 455 420 458" stroke="#92632A" strokeWidth="3.5" strokeLinecap="round" />
+
+                {/* Sign 1 — Quran (left arrow) */}
+                <g filter="url(#cardShadow)">
+                  <path d="M395 280H295L280 295L295 310H395V280Z" fill="#D48C46" rx="4" />
+                  <text x="336" y="299" fill="white" fontSize="11" fontWeight="800" fontFamily="sans-serif" textAnchor="middle" letterSpacing="1">QURAN</text>
+                  <polygon points="289,295 280,295 289,288" fill="white" opacity="0.3" />
+                </g>
+
+                {/* Sign 2 — Articles (right arrow) */}
+                <g filter="url(#cardShadow)">
+                  <path d="M395 326H485L500 341L485 356H395V326Z" fill="#D48C46" />
+                  <text x="446" y="344" fill="white" fontSize="11" fontWeight="800" fontFamily="sans-serif" textAnchor="middle" letterSpacing="1">ARTICLES</text>
+                  <polygon points="491,341 500,341 491,348" fill="white" opacity="0.3" />
+                </g>
+
+                {/* Sign 3 — Ask a Scholar (right arrow) */}
+                <g filter="url(#cardShadow)">
+                  <path d="M395 372H488L503 387L488 402H395V372Z" fill="#0A3A2F" />
+                  <text x="446" y="390" fill="white" fontSize="9.5" fontWeight="800" fontFamily="sans-serif" textAnchor="middle" letterSpacing="0.5">ASK A SCHOLAR</text>
+                  <polygon points="494,387 503,387 494,394" fill="white" opacity="0.2" />
+                </g>
               </svg>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* ── SUGGESTIONS GRID ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.35, duration: 0.6 }}
+          className="space-y-10"
+        >
+          <div className="text-center space-y-3">
+            <h3 className="font-heading text-2xl sm:text-3xl font-bold text-primary">
+              You might be looking for
+            </h3>
+            <div className="flex items-center justify-center gap-3">
+              <div className="w-12 h-0.5 bg-secondary/50 rounded-full" />
+              <HiOutlineBookOpen className="w-5 h-5 text-secondary" />
+              <div className="w-12 h-0.5 bg-secondary/50 rounded-full" />
             </div>
           </div>
 
-        </div>
-
-        {/* ── MIDDLE SECTION: SUGGESTIONS GRID ── */}
-        <div className="space-y-8">
-          <div className="text-center space-y-2">
-            <h3 className="font-heading text-xl sm:text-2xl font-bold text-primary flex items-center justify-center gap-2">
-              You might be looking for
-            </h3>
-            <div className="w-16 h-0.5 bg-secondary mx-auto" />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {navigationCards.map((card, idx) => (
-              <Link 
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {navLinks.map((card, idx) => (
+              <Link
                 key={idx}
                 href={card.link}
-                className="bg-white border border-[#EBE3D5] rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300 flex items-start gap-4 group"
+                className="group bg-white border border-gray-100 rounded-3xl p-7 shadow-sm hover:shadow-lg hover:border-primary/15 hover:-translate-y-1 transition-all duration-300 flex flex-col gap-5"
               >
-                <div className="w-10 h-10 rounded-xl bg-[#0A3A2F]/5 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
+                <div className="w-12 h-12 rounded-2xl bg-primary/5 flex items-center justify-center group-hover:bg-primary/10 group-hover:scale-110 transition-all duration-300">
                   {card.icon}
                 </div>
-                <div className="space-y-1 flex-1">
-                  <h4 className="font-bold text-sm text-primary group-hover:text-secondary transition-colors uppercase tracking-wide">
+                <div className="flex-1 space-y-1.5">
+                  <h4 className="font-bold text-sm text-primary uppercase tracking-widest group-hover:text-secondary transition-colors">
                     {card.title}
                   </h4>
-                  <p className="text-xs text-zinc-500 leading-normal font-medium">
-                    {card.desc}
-                  </p>
-                  <div className="pt-2 flex items-center gap-1 text-[10px] font-bold text-primary group-hover:text-secondary transition-colors">
-                    Navigate <FaChevronRight size={8} className="group-hover:translate-x-0.5 transition-transform" />
-                  </div>
+                  <p className="text-[13px] text-zinc-500 leading-relaxed">{card.desc}</p>
+                </div>
+                <div className="flex items-center gap-1.5 text-[11px] font-black uppercase tracking-widest text-primary group-hover:text-secondary transition-colors">
+                  Navigate <HiOutlineArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </div>
               </Link>
             ))}
           </div>
-        </div>
-
-        {/* ── BOTTOM BANNER: CONTACT US ── */}
-        <div className="bg-[#FAF7F2] border border-[#EBE3D5] rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
-          <div className="flex items-center gap-4 text-center sm:text-left flex-col sm:flex-row">
-            {/* SVG Lamp icon */}
-            <div className="w-12 h-12 text-[#0A3A2F] shrink-0">
-              <svg viewBox="0 0 100 100" fill="none" className="w-full h-full" stroke="currentColor">
-                <path d="M50 15V30M35 50C35 35 65 35 65 50C65 60 55 65 55 75H45C45 65 35 60 35 50Z" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M42 75V85H58V75H42Z" fill="currentColor"/>
-                <path d="M47 85L38 95H62L53 85" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-            <div className="space-y-1">
-              <h4 className="font-heading text-base font-bold text-primary">
-                Still can't find what you're looking for?
-              </h4>
-              <p className="text-xs text-zinc-500 font-medium leading-relaxed">
-                Our support team is here to assist you with any questions or issues.
-              </p>
-            </div>
-          </div>
-          
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 px-6 py-3.5 bg-primary text-white font-bold text-xs rounded-xl hover:bg-primaryHover transition-all shadow shrink-0 cursor-pointer"
-          >
-            <FaEnvelope /> Contact Us
-          </Link>
-        </div>
-
+        </motion.div>
       </div>
     </main>
   );
