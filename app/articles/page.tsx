@@ -29,19 +29,19 @@ const relatedArticles = [
     id: 1,
     title: "The Power of Sincerity in Worship",
     readTime: "6 min read",
-    image: "/articles/sincerity.jpg",
+    image: "https://images.unsplash.com/photo-1609599006353-e629b1d306b8?q=80&w=600&auto=format&fit=crop",
   },
   {
     id: 2,
     title: "How to Strengthen Your Iman",
     readTime: "7 min read",
-    image: "/articles/iman.jpg",
+    image: "https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=600&auto=format&fit=crop",
   },
   {
     id: 3,
     title: "Gratitude: The Key to Inner Peace",
     readTime: "8 min read",
-    image: "/articles/gratitude.jpg",
+    image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=600&auto=format&fit=crop",
   },
 ];
 
@@ -59,7 +59,7 @@ const youMayAlsoLike = [
     categoryColor: "text-amber-600",
     title: "The Beauty of Tawakkul (Complete Trust in Allah)",
     readTime: "7 min read",
-    image: "/articles/tawakkul.jpg",
+    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=600&auto=format&fit=crop",
   },
   {
     id: 2,
@@ -67,7 +67,7 @@ const youMayAlsoLike = [
     categoryColor: "text-emerald-600",
     title: "Lessons from Surah Al-Ikhlas That Change Lives",
     readTime: "6 min read",
-    image: "/articles/ikhlas.jpg",
+    image: "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?q=80&w=600&auto=format&fit=crop",
   },
   {
     id: 3,
@@ -75,7 +75,7 @@ const youMayAlsoLike = [
     categoryColor: "text-blue-600",
     title: "5 Daily Habits That Bring You Closer to Allah",
     readTime: "5 min read",
-    image: "/articles/habits.jpg",
+    image: "https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?q=80&w=600&auto=format&fit=crop",
   },
 ];
 
@@ -161,7 +161,7 @@ export default function BlogPage() {
             <div className="flex items-center gap-3">
               <div className="relative w-10 h-10 rounded-full bg-gray-200 overflow-hidden shrink-0">
                 <Image
-                  src="/public/images/articl"
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop"
                   alt="Shaykh Muhammad Ali"
                   fill
                   className="object-cover"
@@ -188,7 +188,7 @@ export default function BlogPage() {
           {/* Right: Image */}
           <div className="relative h-56 lg:h-auto">
             <Image
-              src="/articles/purpose-hero.jpg"
+              src="/assets/articles/purpose-hero.webp"
               alt="Person in front of Masjid"
               fill
               className="object-cover"
@@ -205,7 +205,7 @@ export default function BlogPage() {
             {/* Full-width article image */}
             <div className="relative w-full h-64 rounded-2xl overflow-hidden bg-gray-100">
               <Image
-                src="/articles/quran-lantern.jpg"
+                src="https://images.unsplash.com/photo-1585036156171-384164a8c675?q=80&w=1200&auto=format&fit=crop"
                 alt="Quran with lantern"
                 fill
                 className="object-cover"
@@ -333,7 +333,7 @@ export default function BlogPage() {
             <div className="bg-white border border-gray-100 rounded-2xl p-6 flex flex-col sm:flex-row gap-5 items-start">
               <div className="relative w-16 h-16 rounded-full bg-gray-200 overflow-hidden shrink-0">
                 <Image
-                  src="/authors/shaykh.jpg"
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop"
                   alt="Shaykh Muhammad Ali"
                   fill
                   className="object-cover"
@@ -437,11 +437,10 @@ export default function BlogPage() {
                           .getElementById(item.id)
                           ?.scrollIntoView({ behavior: "smooth" });
                       }}
-                      className={`text-sm text-left w-full transition-colors ${
-                        activeSection === item.id
+                      className={`text-sm text-left w-full transition-colors ${activeSection === item.id
                           ? "text-primary font-semibold border-l-2 border-primary pl-3"
                           : "text-gray-500 hover:text-primary pl-3"
-                      }`}
+                        }`}
                     >
                       {item.label}
                     </button>
@@ -459,22 +458,24 @@ export default function BlogPage() {
             </div>
 
             {/* Daily Reminder */}
-            <div className="relative bg-primary rounded-2xl p-5 text-white overflow-hidden">
-              <div className="absolute -bottom-4 -right-2 w-24 h-24 opacity-20">
+            <div className="relative bg-[#0A3A2F] rounded-2xl p-5 text-white overflow-hidden shadow-sm">
+              <div className="absolute inset-0 z-0">
                 <Image
-                  src="/lantern.png"
-                  alt=""
+                  src="https://images.unsplash.com/photo-1576489922094-2cfe8979a25a?q=80&w=400&auto=format&fit=crop"
+                  alt="Daily Reminder background"
                   fill
-                  className="object-contain"
+                  className="object-cover opacity-20 filter brightness-50"
                 />
               </div>
-              <p className="text-[10px] font-bold tracking-widest text-white/50 uppercase mb-3">
-                Daily Reminder
-              </p>
-              <blockquote className="font-heading text-base font-bold leading-snug mb-2">
-                "So remember Me; I will remember you."
-              </blockquote>
-              <p className="text-xs text-white/50">Qur'an 2:152</p>
+              <div className="relative z-10">
+                <p className="text-[10px] font-bold tracking-widest text-[#D48C46] uppercase mb-3">
+                  Daily Reminder
+                </p>
+                <blockquote className="font-heading text-base font-bold leading-snug mb-2">
+                  "So remember Me; I will remember you."
+                </blockquote>
+                <p className="text-xs text-white/70">Qur'an 2:152</p>
+              </div>
             </div>
 
             {/* Related Articles */}

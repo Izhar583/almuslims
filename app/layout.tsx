@@ -16,9 +16,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="antialiased bg-background text-zinc-800 min-h-screen flex flex-col m-0 p-0">
-        {/* Top Header Group */}
+    <html lang="en" suppressHydrationWarning>
+  <body suppressHydrationWarning>
         <header className="w-full block z-50">
           <AnnouncementBar />
           <Navbar /> {/* Announcement Bar ke foran baad Navbar set ho gayi! */}
@@ -38,4 +37,4 @@ export default function RootLayout({
     </html>
   );
 }
-
+
