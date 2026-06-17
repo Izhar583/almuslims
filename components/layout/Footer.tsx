@@ -19,7 +19,7 @@ export default function Footer() {
         </svg>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 relative z-10">
+      <div className="max-w-350 mx-auto px-6 sm:px-8 lg:px-12 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 relative z-10">
         
         {/* Column 1: Logo, Description & Socials */}
         <div className="space-y-6 lg:pr-4">
@@ -30,7 +30,7 @@ export default function Footer() {
                 alt="AlMuslims Logo" 
                 width={100} 
                 height={100} 
-                className="h-[80px] w-auto object-contain"
+                className="h-20 w-auto object-contain"
               />
             </div>
             <div className="flex flex-col mt-2">
@@ -61,9 +61,6 @@ export default function Footer() {
             <li><Link href="/about" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> About Us</Link></li>
             <li><Link href="/contact" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Contact Us</Link></li>
             <li><Link href="/write" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Write for Us</Link></li>
-            <li><Link href="/faq" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> FAQ</Link></li>
-            <li><Link href="/privacy" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Privacy Policy</Link></li>
-            <li><Link href="/terms" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Terms & Conditions</Link></li>
           </ul>
         </div>
 
@@ -83,12 +80,9 @@ export default function Footer() {
         <div>
           <h4 className="text-[13px] font-bold text-secondary uppercase tracking-widest mb-6">Resources</h4>
           <ul className="space-y-5 text-[14px] text-white/80">
-            <li><Link href="/prayer-times" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Prayer Times</Link></li>
-            <li><Link href="/qibla" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Qibla Finder</Link></li>
-            <li><Link href="/calendar" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Islamic Calendar</Link></li>
-            <li><Link href="/zakat" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Zakat Calculator</Link></li>
-            <li><Link href="/hajj" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Hajj & Umrah Guide</Link></li>
-            <li><Link href="/halal" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Halal & Haram</Link></li>
+           <li><Link href="/faq" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> FAQ</Link></li>
+            <li><Link href="/privacy" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Privacy Policy</Link></li>
+            <li><Link href="/terms" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Terms & Conditions</Link></li>
           </ul>
         </div>
 
@@ -115,7 +109,7 @@ export default function Footer() {
 
       {/* Copyright Bar */}
       <div className="w-full bg-[#04281E] py-5 border-t border-white/5 relative z-10">
-        <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 text-[13px] text-white/50 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="max-w-350 mx-auto px-6 sm:px-8 lg:px-12 text-[13px] text-white/50 flex flex-col md:flex-row justify-between items-center gap-4">
           <p>© {new Date().getFullYear()} AlMuslims.com - All rights reserved.</p>
           <div className="flex gap-4">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
