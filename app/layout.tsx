@@ -9,6 +9,10 @@ import GlobalSearch from "@/components/layout/GlobalSearch";
 export const metadata: Metadata = {
   title: "AlMuslims",
   description: "Your Professional Islamic Portal",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function RootLayout({

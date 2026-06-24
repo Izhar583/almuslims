@@ -36,13 +36,11 @@ export default function DuaCard() {
   return (
     <div className="h-full flex flex-col p-6 sm:p-8 bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#EBE3D5] font-body relative overflow-hidden group">
       
-      {/* ── Header ── */}
       <div className="flex items-start justify-between mb-6 relative z-10">
         <div>
-          <p className="text-[10px] font-bold text-[#1F2926]/50 tracking-[0.2em] uppercase mb-2">
+          <p className="text-[12px] font-bold text-[#1F2926]/ tracking-[0.2em] uppercase mb-2">
             Dua of the Day
           </p>
-          {/* Category Badge - Clean & Simple */}
           <div className="inline-flex items-center">
             <span className="bg-[#D48C46]/10 text-[#D48C46] px-3 py-1 rounded-full text-[9px] font-bold tracking-widest uppercase">
               {dua.category}
@@ -80,12 +78,11 @@ export default function DuaCard() {
           {dua.text}
         </p>
 
-        {/* Translation Box */}
         <div className="bg-[#FAF7F2] p-5 rounded-2xl border border-[#EBE3D5] space-y-3">
-          <p className="text-[10px] font-bold text-[#D48C46] tracking-[0.15em] uppercase text-center">
+          <p className="text-[12px] font-bold text-[#D48C46] tracking-[0.15em] uppercase text-center">
             {dua.reference}
           </p>
-          <p className="text-[11px] italic text-[#1F2926]/40 text-center leading-relaxed">
+          <p className="text-[12px] italic text-[#1F2926]/90 text-center leading-relaxed">
              {dua.transliteration}
           </p>
           <div className="h-px w-12 bg-[#EBE3D5] mx-auto" />
@@ -95,7 +92,6 @@ export default function DuaCard() {
         </div>
       </div>
 
-      {/* ── Footer ── */}
       <a
         href="/duas"
         className="relative z-10 mt-6 w-full py-3.5 bg-white border border-[#EBE3D5] text-[#1F2926] font-bold text-[11px] tracking-widest uppercase rounded-full hover:bg-[#0A3A2F] hover:text-white hover:border-[#0A3A2F] transition-all duration-300 text-center block shadow-sm"

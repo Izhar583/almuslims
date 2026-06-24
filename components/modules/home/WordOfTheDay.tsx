@@ -62,13 +62,13 @@ export default function WordOfTheDayCard() {
         style={{ background: "linear-gradient(90deg, transparent, #C8A96E, transparent)" }} />
 
       {/* Watermark */}
-      <div className="absolute bottom-12 right-4 text-[80px] font-serif text-[#042A1E]/[0.03] pointer-events-none select-none leading-none">
+      <div className="absolute bottom-16 right-4 text-[80px] font-serif text-[#042A1E]/[0.03] pointer-events-none select-none leading-none">
         ٩٩
       </div>
 
       {/* Header */}
       <div className="text-center mb-5 relative z-10">
-        <p className="text-[10px] font-bold text-[#042A1E]/40 tracking-[0.2em] uppercase mb-1">Word of the Day</p>
+        <p className="text-[10px] font-bold text-[#042A1E] tracking-[0.2em] uppercase mb-1">Word of the Day</p>
         <p className="text-[9px] text-[#C8A96E] font-semibold tracking-wide">{dateStr}</p>
       </div>
 
@@ -85,12 +85,12 @@ export default function WordOfTheDayCard() {
         </div>
 
         {/* English name */}
-        <p className="text-xs font-black text-[#042A1E]/50 tracking-[0.25em] uppercase mb-1 mt-4">
+        <p className="text-md font-black text-[#042A1E]/50 tracking-[0.25em] uppercase mb-2 mt-4">
           {wordData.en}
         </p>
 
         {/* Meaning badge */}
-        <span className="inline-block text-[9px] font-bold text-[#C8A96E] border border-[#C8A96E]/30 px-3 py-1 rounded-full bg-[#C8A96E]/5 tracking-wider mb-4">
+        <span className="inline-block text-[12px] font-bold text-[#C8A96E] border border-[#C8A96E]/30 px-3 py-1 rounded-full bg-[#C8A96E]/5 tracking-wider mb-4">
           {wordData.meaning}
         </span>
 
@@ -98,7 +98,7 @@ export default function WordOfTheDayCard() {
         <div className="w-10 h-px bg-[#042A1E]/10 mb-4" />
 
         {/* Definition */}
-        <p className="text-xs text-[#042A1E]/55 leading-relaxed px-1 line-clamp-3">
+        <p className="text-md text-[#042A1E]/55 leading-relaxed px-1 line-clamp-3">
           {wordData.def}
         </p>
       </div>
