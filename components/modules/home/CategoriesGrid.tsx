@@ -89,10 +89,10 @@ export default function CategoriesGrid() {
         </h2>
         <Link 
           href="/categories" 
-          className="text-gray-500 hover:text-emerald-700 text-sm font-medium flex items-center gap-2 group transition-colors"
+          className="px-5 py-2.5 bg-white border border-[#EBE3D5] text-[#0A3A2F] hover:bg-[#0A3A2F] hover:text-white hover:border-[#0A3A2F] font-bold text-[10px] tracking-widest uppercase rounded-full shadow-sm flex items-center gap-2 group transition-all duration-300"
         >
           View all categories
-          <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+          <span className="group-hover:translate-x-1 transition-transform duration-300 text-xs">→</span>
         </Link>
       </div>
 

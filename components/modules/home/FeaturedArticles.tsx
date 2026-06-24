@@ -47,13 +47,13 @@ export default function FeaturedArticles() {
           </h2>
           <div className="h-1 w-12 bg-secondary mt-2 rounded-full" />
         </div>
-        <Link
-          href="/articles"
-          className="text-sm text-gray-500 hover:text-secondary font-medium flex items-center gap-2 group transition-colors"
-        >
-          View all articles 
-          <HiArrowRight className="group-hover:translate-x-1 transition-transform" />
-        </Link>
+        <Link 
+                  href="/articles" 
+                  className="px-5 py-2.5 bg-white border border-[#EBE3D5] text-[#0A3A2F] hover:bg-[#0A3A2F] hover:text-white hover:border-[#0A3A2F] font-bold text-[10px] tracking-widest uppercase rounded-full shadow-sm flex items-center gap-2 group transition-all duration-300"
+                >
+                  View all articles
+                  <span className="group-hover:translate-x-1 transition-transform duration-300 text-xs">→</span>
+                </Link>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         {/* Featured Card (Left - 40%) */}

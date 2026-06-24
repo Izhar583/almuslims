@@ -45,12 +45,12 @@ export default function Footer() {
           <p className="text-sm text-white/70 leading-relaxed font-light">
             Your trusted source for authentic Islamic knowledge. Learn, reflect, and grow — for the sake of Allah.
           </p>
-          <div className="flex items-center gap-4 pt-2">
+          {/* <div className="flex items-center gap-4 pt-2">
             <a href="#" className="w-8 h-8 rounded-full flex items-center justify-center bg-white/5 hover:bg-[#1877F2] text-white transition-all"><FaFacebookF size={14} /></a>
             <a href="#" className="w-8 h-8 rounded-full flex items-center justify-center bg-white/5 hover:bg-[#1DA1F2] text-white transition-all"><FaTwitter size={14} /></a>
             <a href="#" className="w-8 h-8 rounded-full flex items-center justify-center bg-white/5 hover:bg-[#E4405F] text-white transition-all"><FaInstagram size={14} /></a>
             <a href="#" className="w-8 h-8 rounded-full flex items-center justify-center bg-white/5 hover:bg-[#FF0000] text-white transition-all"><FaYoutube size={14} /></a>
-          </div>
+          </div> */}
         </div>
 
         {/* Column 2: Quick Links */}
@@ -60,7 +60,6 @@ export default function Footer() {
             <li><Link href="/" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Home</Link></li>
             <li><Link href="/about" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> About Us</Link></li>
             <li><Link href="/contact" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Contact Us</Link></li>
-            <li><Link href="/write" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Write for Us</Link></li>
           </ul>
         </div>
 
@@ -109,13 +108,8 @@ export default function Footer() {
 
       {/* Copyright Bar */}
       <div className="w-full bg-[#04281E] py-5 border-t border-white/5 relative z-10">
-        <div className="max-w-350 mx-auto px-6 sm:px-8 lg:px-12 text-[13px] text-white/50 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="max-w-350 mx-auto px-6 sm:px-8 lg:px-12 text-[13px] text-white/50 flex flex-col md:flex-row text-center justify-center items-center gap-4">
           <p>© {new Date().getFullYear()} AlMuslims.com - All rights reserved.</p>
-          <div className="flex gap-4">
-            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <span className="opacity-30">|</span>
-            <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
-          </div>
         </div>
       </div>
 
