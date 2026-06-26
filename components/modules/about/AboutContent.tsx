@@ -170,10 +170,10 @@ export default function AboutContent() {
                   Read Quran
                 </Link>
                 <Link 
-                  href="/categories" 
+                  href="/blog" 
                   className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl transition-all border border-white/20"
                 >
-                  Explore Categories
+                  Explore Blog
                 </Link>
               </div>
             </div>

@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 
 
 const nextConfig: NextConfig = {
+  trailingSlash: true,
   images: {
     remotePatterns: [
       {
@@ -21,6 +22,7 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'i.pravatar.cc',
       }
+
     ],
   },
 };

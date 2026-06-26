@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useState, useMemo, useRef, useEffect, Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   HiOutlineBookOpen, 
@@ -18,6 +19,7 @@ import {
   HiOutlineQueueList,
   HiOutlineMap
 } from "react-icons/hi2";
+import { articles, Article } from "@/data/articles";
 
 // ─── Static Data ─────────────────────────────────────────────────────────────
 
@@ -30,117 +32,55 @@ const categories = [
   { id: "duas", label: "Duas", icon: <HiOutlineHeart className="w-6 h-6" /> },
 ];
 
-const latestArticles = [
-  {
-    id: 1,
-    categoryId: "quran",
-    categoryLabel: "QURAN",
-    title: "Lessons from Surah Al-Kahf for Our Daily Lives",
-    excerpt: "Discover timeless lessons from the Quran that guide our daily decisions.",
-    author: "Shaykh Ahmed Saeed",
-    authorImg: "/authors/ahmed.jpg",
-    date: "2025-05-19",
-    displayDate: "May 19, 2025",
-    readTime: "6 min read",
-    image: "/articles/surah-kahf.jpg",
-    level: "Beginner"
-  },
-  {
-    id: 2,
-    categoryId: "seerah",
-    categoryLabel: "SEERAH",
-    title: "The Migration to Madinah: A Turning Point",
-    excerpt: "The event that changed the course of Islamic history forever.",
-    author: "Shaykh Farhan Malik",
-    authorImg: "/authors/farhan.jpg",
-    date: "2025-05-17",
-    displayDate: "May 17, 2025",
-    readTime: "9 min read",
-    image: "/articles/migration.jpg",
-    level: "Intermediate"
-  },
-  {
-    id: 3,
-    categoryId: "fiqh",
-    categoryLabel: "FIQH",
-    title: "Islamic Rulings on Modern Financial Issues",
-    excerpt: "Learn how Islam guides our financial transactions today.",
-    author: "Shaykh Assim Al-Hakeem",
-    authorImg: "/authors/assim.jpg",
-    date: "2025-05-16",
-    displayDate: "May 16, 2025",
-    readTime: "8 min read",
-    image: "/articles/finance.jpg",
-    level: "Advanced"
-  },
-  {
-    id: 4,
-    categoryId: "duas",
-    categoryLabel: "DUAS",
-    title: "Powerful Duas for Every Situation",
-    excerpt: "Collection of authentic duas for everyday challenges.",
-    author: "Ustadhah Aisha Khalid",
-    authorImg: "/authors/aisha.jpg",
-    date: "2025-05-15",
-    displayDate: "May 15, 2025",
-    readTime: "5 min read",
-    image: "/articles/duas.jpg",
-    level: "Beginner"
-  },
-  {
-    id: 5,
-    categoryId: "aqeedah",
-    categoryLabel: "AQEEDAH",
-    title: "Understanding Tawheed the Right Way",
-    excerpt: "Strengthen your belief in the Oneness of Allah with clarity.",
-    author: "Shaykh Abu Bakr Zoud",
-    authorImg: "/authors/abubakr.jpg",
-    date: "2025-05-14",
-    displayDate: "May 14, 2025",
-    readTime: "6 min read",
-    image: "/articles/tawheed.jpg",
-    level: "Intermediate"
-  },
-];
-
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
-function ArticleCard({ article }: { article: (typeof latestArticles)[number] }) {
+function ArticleCard({ article }: { article: Article }) {
   return (
-    <motion.div 
-      layout
-      className="bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group"
-    >
-      <div className="relative h-56 w-full bg-gray-100 text-[0px]">
-        <Image src={article.image} alt={article.title} fill unoptimized className="object-cover group-hover:scale-105 transition-transform duration-700" />
-        <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent" />
-        <span className="absolute top-4 left-4 bg-primary/90 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-lg">
-          {article.categoryLabel}
-        </span>
-        <button className="absolute top-4 right-4 w-9 h-9 bg-white/95 backdrop-blur-md rounded-full flex items-center justify-center text-gray-400 hover:text-primary shadow-sm hover:scale-110 transition-all">
-          <HiOutlineBookmark className="w-5 h-5" />
-        </button>
-      </div>
-
-      <div className="p-6 flex flex-col h-[calc(100%-14rem)]">
-        <h3 className="font-heading font-bold text-gray-900 text-lg leading-tight mb-3 line-clamp-2 group-hover:text-primary transition-colors italic">
-          {article.title}
-        </h3>
-        <p className="text-gray-500 text-sm line-clamp-2 mb-6 leading-relaxed font-light">
-          {article.excerpt}
-        </p>
-
-        <div className="mt-auto flex items-center justify-between pt-5 border-t border-gray-50">
-          <div className="flex items-center gap-3">
-            <div className="relative w-8 h-8 rounded-full bg-gray-200 overflow-hidden text-[0px] ring-2 ring-gray-50">
-              <Image src={article.authorImg} alt={article.author} fill unoptimized className="object-cover" />
-            </div>
-            <span className="text-[12px] font-bold text-gray-800">{article.author}</span>
-          </div>
-          <span className="text-[11px] text-gray-400 font-medium">{article.displayDate}</span>
+    <Link href={`/blog/${article.slug}`} className="block h-full group">
+      <motion.div 
+        layout
+        className="bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col h-full"
+      >
+        <div className="relative h-56 w-full bg-gray-100 overflow-hidden text-[0px]">
+          <Image 
+            src={article.image} 
+            alt={article.title} 
+            fill 
+            className="object-cover group-hover:scale-105 transition-transform duration-700" 
+            sizes="(max-w-768px) 100vw, 33vw"
+          />
+          <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent" />
+          <span className="absolute top-4 left-4 bg-primary/90 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-lg uppercase tracking-wider">
+            {article.category}
+          </span>
+          <button className="absolute top-4 right-4 w-9 h-9 bg-white/95 backdrop-blur-md rounded-full flex items-center justify-center text-gray-400 hover:text-primary shadow-sm hover:scale-110 transition-all">
+            <HiOutlineBookmark className="w-5 h-5" />
+          </button>
         </div>
-      </div>
-    </motion.div>
+
+        <div className="p-6 flex flex-col flex-1">
+          <span className="text-[9px] font-black text-secondary tracking-widest uppercase mb-2">
+            {article.level}
+          </span>
+          <h3 className="font-heading font-bold text-gray-900 text-lg leading-tight mb-3 line-clamp-2 group-hover:text-primary transition-colors italic">
+            {article.title}
+          </h3>
+          <p className="text-gray-500 text-sm line-clamp-2 mb-6 leading-relaxed font-light">
+            {article.excerpt}
+          </p>
+
+          <div className="mt-auto flex items-center justify-between pt-5 border-t border-gray-50">
+            <div className="flex items-center gap-3">
+              <div className="relative w-8 h-8 rounded-full bg-gray-200 overflow-hidden text-[0px] ring-2 ring-gray-50">
+                <Image src={article.authorImg} alt={article.author} fill className="object-cover" />
+              </div>
+              <span className="text-[12px] font-bold text-gray-800">{article.author}</span>
+            </div>
+            <span className="text-[11px] text-gray-400 font-medium">{article.displayDate}</span>
+          </div>
+        </div>
+      </motion.div>
+    </Link>
   );
 }
 
@@ -161,7 +101,6 @@ function CustomDropdown({
   const ref = useRef<HTMLDivElement>(null);
   const selected = options.find((o) => o.value === value) ?? options[0];
 
-  // Close on outside click
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
@@ -172,7 +111,6 @@ function CustomDropdown({
 
   return (
     <div ref={ref} className="relative">
-      {/* Trigger */}
       <button
         onClick={() => setOpen((o) => !o)}
         className={`flex items-center gap-3 bg-white border rounded-full py-4 px-6 text-[13px] font-bold cursor-pointer hover:shadow-md transition-all min-w-[160px] ${
@@ -187,7 +125,6 @@ function CustomDropdown({
         <span className="flex-1 text-left">{selected.label}</span>
       </button>
 
-      {/* Dropdown Panel */}
       {open && (
         <motion.div
           initial={{ opacity: 0, y: -6, scale: 0.97 }}
@@ -224,9 +161,12 @@ function CustomDropdown({
   );
 }
 
-// ─── Main Page ────────────────────────────────────────────────────────────────
+// ─── Inner Page Content ──────────────────────────────────────────────────────
 
-export default function CategoriesPage() {
+function BlogPageContent() {
+  const searchParams = useSearchParams();
+  const catParam = searchParams.get("category") || "all";
+  
   const [activeCategory, setActiveCategory] = useState("all");
   const [search, setSearch] = useState("");
   const [level, setLevel] = useState("all");
@@ -234,18 +174,26 @@ export default function CategoriesPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const ARTICLES_PER_PAGE = 6;
 
+  useEffect(() => {
+    if (catParam) {
+      setActiveCategory(catParam);
+      setCurrentPage(1);
+    }
+  }, [catParam]);
+
   const categoryCounts = useMemo(() => {
-    const counts: Record<string, number> = { all: latestArticles.length };
-    latestArticles.forEach(article => {
+    const counts: Record<string, number> = { all: articles.length };
+    articles.forEach(article => {
       counts[article.categoryId] = (counts[article.categoryId] || 0) + 1;
     });
     return counts;
   }, []);
 
   const filteredArticles = useMemo(() => {
-    let result = latestArticles.filter((article) => {
+    let result = articles.filter((article) => {
       const matchCategory = activeCategory === "all" || article.categoryId === activeCategory;
-      const matchSearch = article.title.toLowerCase().includes(search.toLowerCase());
+      const matchSearch = article.title.toLowerCase().includes(search.toLowerCase()) || 
+                          article.excerpt.toLowerCase().includes(search.toLowerCase());
       const matchLevel = level === "all" || article.level.toLowerCase() === level.toLowerCase();
       return matchCategory && matchSearch && matchLevel;
     });
@@ -272,11 +220,15 @@ export default function CategoriesPage() {
     window.scrollTo({ top: 400, behavior: "smooth" });
   };
 
+  // Find the latest featured article for the hero billboard
+  const featuredInsight = useMemo(() => {
+    return articles.find(a => a.categoryId === "quran") || articles[0];
+  }, []);
+
   return (
     <main className="bg-[#FAF7F2] min-h-screen font-body">
       {/* ─── Immersive Hero Section ─── */}
       <section className="relative w-full pt-16 pb-24 overflow-hidden">
-         {/* Decorative Background Elements */}
          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3 pointer-events-none" />
 
@@ -290,7 +242,7 @@ export default function CategoriesPage() {
                   >
                      <Link href="/" className="hover:text-primary transition-colors">Home</Link>
                      <span className="w-1 h-1 rounded-full bg-gray-300" />
-                     <span className="text-primary">Categories</span>
+                     <span className="text-primary">Blog</span>
                   </motion.nav>
 
                   <motion.h1 
@@ -320,13 +272,13 @@ export default function CategoriesPage() {
                     className="flex flex-wrap items-center justify-center lg:justify-start gap-8"
                   >
                      <div className="flex flex-col">
-                        <span className="text-4xl font-heading font-bold text-primary">500+</span>
+                        <span className="text-4xl font-heading font-bold text-primary">{articles.length}</span>
                         <span className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">Articles</span>
                      </div>
                      <div className="w-[1px] h-10 bg-gray-200 hidden sm:block" />
                      <div className="flex flex-col">
-                        <span className="text-4xl font-heading font-bold text-primary">12+</span>
-                        <span className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">Scholars</span>
+                        <span className="text-4xl font-heading font-bold text-primary">6+</span>
+                        <span className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">Categories</span>
                      </div>
                      <div className="w-[1px] h-10 bg-gray-200 hidden sm:block" />
                      <div className="flex flex-col">
@@ -343,7 +295,6 @@ export default function CategoriesPage() {
                   className="flex-1 relative"
                >
                   <div className="relative w-full aspect-square max-w-[500px] mx-auto">
-                     {/* Floating Decorative Card */}
                      <div className="absolute -top-10 -left-10 bg-white p-6 rounded-3xl shadow-2xl z-20 hidden xl:block animate-bounce-slow">
                         <div className="flex items-center gap-4">
                            <div className="w-12 h-12 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary">
@@ -351,18 +302,18 @@ export default function CategoriesPage() {
                            </div>
                            <div>
                               <p className="text-sm font-bold text-gray-900">Weekly Update</p>
-                              <p className="text-[10px] text-gray-400">12 New Articles Added</p>
+                              <p className="text-[10px] text-gray-400">New Articles Added</p>
                            </div>
                         </div>
                      </div>
 
                      <div className="relative w-full h-full rounded-[4rem] overflow-hidden shadow-2xl border-[12px] border-white ring-1 ring-gray-100">
                         <Image 
-                           src="/contact-hero.jpg" 
+                           src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=800" 
                            alt="Islamic Journey" 
                            fill 
-                           unoptimized 
                            className="object-cover"
+                           sizes="(max-w-1024px) 100vw, 40vw"
                         />
                         <div className="absolute inset-0 bg-linear-to-tr from-primary/40 via-transparent to-transparent pointer-events-none" />
                      </div>
@@ -374,7 +325,7 @@ export default function CategoriesPage() {
 
       {/* ─── Category Selection ─── */}
       <section className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 -mt-10 mb-24 relative z-20">
-         <div className="bg-white/80 backdrop-blur-2xl rounded-[3rem] p-4 shadow-xl border border-white flex items-center gap-3 overflow-x-auto scrollbar-hide py-3">
+         <div className="bg-white/80 backdrop-blur-2xl rounded-[3rem] p-4 shadow-xl border border-white flex items-center gap-3 overflow-x-auto scrollbar-none py-3">
             {categories.map((cat) => (
                <button
                   key={cat.id}
@@ -462,54 +413,56 @@ export default function CategoriesPage() {
          {/* Main Listing Content */}
          <div className="lg:col-span-8 lg:order-1 order-2 space-y-20">
             {/* Featured Insight Section */}
-            <div>
-               <div className="flex items-center gap-4 mb-10">
-                  <div className="w-12 h-[2px] bg-secondary opacity-50" />
-                  <h2 className="font-heading text-3xl font-bold text-gray-900 tracking-tight">Today&apos;s Featured Insight</h2>
-               </div>
+            {featuredInsight && (
+              <div>
+                 <div className="flex items-center gap-4 mb-10">
+                    <div className="w-12 h-[2px] bg-secondary opacity-50" />
+                    <h2 className="font-heading text-3xl font-bold text-gray-900 tracking-tight">Today&apos;s Featured Insight</h2>
+                 </div>
 
-               <motion.div 
-                 whileHover={{ y: -5 }}
-                 className="bg-white rounded-[4rem] border border-gray-50 overflow-hidden grid grid-cols-1 md:grid-cols-12 shadow-2xl hover:shadow-primary/10 transition-all duration-700 group"
-               >
-                  <div className="md:col-span-12 relative h-96 xl:h-[450px]">
-                     <Image 
-                        src="/articles/featured.jpg" 
-                        alt="Featured Journey" 
-                        fill 
-                        unoptimized 
-                        className="object-cover group-hover:scale-105 transition-transform duration-[2000ms]" 
-                     />
-                     <div className="absolute inset-0 bg-linear-to-t from-gray-900 via-gray-900/40 to-transparent" />
-                     
-                     <div className="absolute bottom-0 left-0 p-12 w-full">
-                        <div className="flex items-center gap-3 mb-6">
-                           <span className="bg-secondary text-white text-[10px] font-black px-4 py-2 rounded-full uppercase tracking-widest">Featured</span>
-                           <span className="bg-white/20 backdrop-blur-md text-white text-[10px] font-bold px-4 py-2 rounded-full uppercase tracking-widest">8 Min Read</span>
-                        </div>
-                        
-                        <h3 className="font-heading text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight max-w-2xl italic">
-                           The Purpose of Life in the Light of the <span className="text-secondary">Holy Quran</span>
-                        </h3>
+                 <motion.div 
+                   whileHover={{ y: -5 }}
+                   className="bg-white rounded-[4rem] border border-gray-55 overflow-hidden grid grid-cols-1 md:grid-cols-12 shadow-2xl hover:shadow-primary/10 transition-all duration-700 group relative"
+                 >
+                    <div className="md:col-span-12 relative h-96 xl:h-[450px]">
+                       <Image 
+                          src={featuredInsight.image} 
+                          alt={featuredInsight.title} 
+                          fill 
+                          className="object-cover group-hover:scale-105 transition-transform duration-[2000ms]" 
+                          sizes="(max-w-1200px) 100vw, 60vw"
+                       />
+                       <div className="absolute inset-0 bg-linear-to-t from-gray-900 via-gray-900/40 to-transparent" />
+                       
+                       <div className="absolute bottom-0 left-0 p-8 sm:p-12 w-full">
+                          <div className="flex items-center gap-3 mb-6">
+                             <span className="bg-secondary text-white text-[10px] font-black px-4 py-2 rounded-full uppercase tracking-widest">Featured</span>
+                             <span className="bg-white/20 backdrop-blur-md text-white text-[10px] font-bold px-4 py-2 rounded-full uppercase tracking-widest">{featuredInsight.readTime}</span>
+                          </div>
+                          
+                          <h3 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight max-w-2xl italic">
+                             {featuredInsight.title}
+                          </h3>
 
-                        <div className="flex items-center gap-6">
-                           <div className="flex items-center gap-3">
-                              <div className="w-12 h-12 rounded-full border-2 border-white/20 overflow-hidden">
-                                 <Image src="/authors/shaykh.jpg" alt="Author" width={48} height={48} className="object-cover" />
-                              </div>
-                              <div>
-                                 <p className="text-white font-bold text-sm">Shaykh Muhammad Ali</p>
-                                 <p className="text-white/50 text-[11px] font-medium uppercase tracking-widest">May 20, 2025</p>
-                              </div>
-                           </div>
-                           <button className="ml-auto bg-white text-primary px-8 py-4 rounded-full font-black text-[13px] uppercase tracking-widest hover:bg-secondary hover:text-white transition-all">
-                              Read Full Article
-                           </button>
-                        </div>
-                     </div>
-                  </div>
-               </motion.div>
-            </div>
+                          <div className="flex flex-wrap items-center gap-6">
+                             <div className="flex items-center gap-3">
+                                <div className="w-12 h-12 rounded-full border-2 border-white/20 overflow-hidden bg-gray-100">
+                                   <Image src={featuredInsight.authorImg} alt={featuredInsight.author} width={48} height={48} className="object-cover" />
+                                </div>
+                                <div>
+                                   <p className="text-white font-bold text-sm">{featuredInsight.author}</p>
+                                   <p className="text-white/50 text-[11px] font-medium uppercase tracking-widest">{featuredInsight.displayDate}</p>
+                                </div>
+                             </div>
+                             <Link href={`/blog/${featuredInsight.slug}`} className="ml-auto bg-white text-primary px-8 py-4 rounded-full font-black text-[13px] uppercase tracking-widest hover:bg-secondary hover:text-white transition-all">
+                                Read Full Article
+                             </Link>
+                          </div>
+                       </div>
+                    </div>
+                 </motion.div>
+              </div>
+            )}
 
             {/* Main Article Feed */}
             <div>
@@ -547,7 +500,7 @@ export default function CategoriesPage() {
                     <HiOutlineArrowRight className="w-5 h-5 rotate-180" />
                  </button>
                  
-                 <div className="flex items-center gap-2 bg-white p-2 rounded-full border border-gray-50 shadow-sm">
+                 <div className="flex items-center gap-2 bg-white p-2 rounded-full border border-gray-55 shadow-sm">
                     {[...Array(totalPages)].map((_, i) => (
                        <button 
                           key={i}
@@ -587,15 +540,11 @@ export default function CategoriesPage() {
                   <p className="text-[10px] text-secondary font-black uppercase tracking-widest">Surah Al-Baqarah 2:152</p>
                </div>
                
-               {/* Background Glow */}
                <div className="absolute top-0 right-0 w-full h-full bg-linear-to-br from-white/10 to-transparent pointer-events-none" />
-               <div className="absolute -bottom-10 -right-10 w-40 h-40 opacity-10 pointer-events-none group-hover:scale-125 transition-transform duration-[3000ms]">
-                   <Image src="/assets/quran-open.png" alt="" fill className="object-contain" />
-               </div>
             </div>
 
             {/* Beginner's Path Section */}
-            <div className="bg-white rounded-[3.5rem] p-12 border border-gray-50 shadow-2xl relative overflow-hidden group">
+            <div className="bg-white rounded-[3.5rem] p-12 border border-gray-55 shadow-2xl relative overflow-hidden group">
                <div className="relative z-10">
                   <h4 className="font-heading text-2xl font-bold text-gray-900 mb-4 tracking-tight">New to Faith?</h4>
                   <p className="text-gray-500 leading-relaxed mb-10 font-light">
@@ -614,11 +563,6 @@ export default function CategoriesPage() {
                   <button className="w-full bg-[#FAF7F2] border-2 border-primary text-primary py-5 rounded-[2rem] font-black text-[13px] uppercase tracking-widest hover:bg-primary hover:text-white transition-all flex items-center justify-center gap-3 active:scale-95 shadow-lg shadow-primary/5">
                      Start Learning <HiOutlineArrowRight className="w-4 h-4" />
                   </button>
-               </div>
-               
-               {/* Background Decorative */}
-               <div className="absolute -bottom-12 -right-12 w-48 h-48 opacity-[0.03] pointer-events-none group-hover:rotate-12 transition-transform duration-[3000ms]">
-                  <Image src="/assets/kaaba.png" alt="" fill className="object-contain" />
                </div>
             </div>
 
@@ -643,5 +587,13 @@ export default function CategoriesPage() {
          </aside>
       </section>
     </main>
+  );
+}
+
+export default function BlogPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#FAF7F2] flex items-center justify-center text-zinc-400 font-body">Loading Blog...</div>}>
+      <BlogPageContent />
+    </Suspense>
   );
 }

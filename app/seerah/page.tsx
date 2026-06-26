@@ -135,7 +135,7 @@ export default function SeerahPage() {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header */}
         <div className="text-center mb-20">
           <p className="text-secondary text-sm font-mono tracking-[0.2em] uppercase mb-3 flex items-center justify-center gap-1.5">
@@ -153,28 +153,27 @@ export default function SeerahPage() {
         <div className="relative">
           {/* Vertical Line */}
           <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-primary/20 dark:bg-secondary/20 transform md:-translate-x-1/2" />
-          
+
           {seerahTimeline.map((event, index) => {
             const isLeft = index % 2 === 0;
             const isExpanded = expandedId === event.id;
 
             return (
-              <div 
-                key={event.id} 
-                className={`relative mb-16 last:mb-0 w-full md:w-1/2 pl-10 md:pl-0 ${
-                  isLeft ? "md:ml-0 md:mr-auto md:pr-10" : "md:ml-auto md:pl-10"
-                }`}
+              <div
+                key={event.id}
+                className={`relative mb-16 last:mb-0 w-full md:w-1/2 pl-10 md:pl-0 ${isLeft ? "md:ml-0 md:mr-auto md:pr-10" : "md:ml-auto md:pl-10"
+                  }`}
               >
                 {/* Timeline Circle Bullet */}
-                <div 
+                <div
                   className={`absolute top-2 w-5 h-5 rounded-full border-4 border-white dark:border-card shadow-md z-10 transition-all cursor-pointer hover:scale-110 duration-200
                     left-4 -translate-x-1/2
-                    ${isLeft 
-                      ? "md:left-auto md:right-0 md:translate-x-1/2" 
+                    ${isLeft
+                      ? "md:left-auto md:right-0 md:translate-x-1/2"
                       : "md:right-auto md:left-0 md:-translate-x-1/2"
                     }
-                    ${event.phase === "Meccan" 
-                      ? "bg-primary" 
+                    ${event.phase === "Meccan"
+                      ? "bg-primary"
                       : "bg-secondary"
                     }
                   `}
@@ -182,10 +181,9 @@ export default function SeerahPage() {
                 />
 
                 {/* Timeline Card */}
-                <div 
-                  className={`relative ${
-                    isLeft ? "md:text-right" : "md:text-left"
-                  }`}
+                <div
+                  className={`relative ${isLeft ? "md:text-right" : "md:text-left"
+                    }`}
                 >
                   <motion.div
                     initial={{ opacity: 0, x: isLeft ? -30 : 30 }}
@@ -195,14 +193,12 @@ export default function SeerahPage() {
                     className="bg-white dark:bg-card border border-zinc-200/50 dark:border-zinc-800/80 rounded-2xl p-6 shadow-md transition-all text-left"
                   >
                     {/* Phase Badge */}
-                    <div className={`flex flex-wrap items-center gap-2 mb-3 text-xs font-mono font-bold ${
-                      isLeft ? "md:justify-end" : "md:justify-start"
-                    }`}>
-                      <span className={`px-2.5 py-1 rounded-full ${
-                        event.phase === "Meccan"
+                    <div className={`flex flex-wrap items-center gap-2 mb-3 text-xs font-mono font-bold ${isLeft ? "md:justify-end" : "md:justify-start"
+                      }`}>
+                      <span className={`px-2.5 py-1 rounded-full ${event.phase === "Meccan"
                           ? "bg-primary/10 text-primary dark:bg-primary/20"
                           : "bg-secondary/10 text-secondary dark:bg-secondary/20"
-                      }`}>
+                        }`}>
                         {event.phase} Phase
                       </span>
                       <span className="text-zinc-400">
@@ -211,23 +207,20 @@ export default function SeerahPage() {
                     </div>
 
                     {/* Years */}
-                    <p className={`text-xs font-mono font-bold text-secondary tracking-wider mb-1 ${
-                      isLeft ? "md:text-right" : "md:text-left"
-                    }`}>
+                    <p className={`text-xs font-mono font-bold text-secondary tracking-wider mb-1 ${isLeft ? "md:text-right" : "md:text-left"
+                      }`}>
                       {event.yearCE} ({event.yearAH})
                     </p>
 
                     {/* Title */}
-                    <h3 className={`font-heading text-xl font-bold text-primary dark:text-zinc-100 mb-3 ${
-                      isLeft ? "md:text-right" : "md:text-left"
-                    }`}>
+                    <h2 className={`font-heading text-xl font-bold text-primary dark:text-zinc-100 mb-3 ${isLeft ? "md:text-right" : "md:text-left"
+                      }`}>
                       {event.title}
-                    </h3>
+                    </h2>
 
                     {/* Excerpt Summary */}
-                    <p className={`text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-4 font-body ${
-                      isLeft ? "md:text-right" : "md:text-left"
-                    }`}>
+                    <p className={`text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-4 font-body ${isLeft ? "md:text-right" : "md:text-left"
+                      }`}>
                       {event.summary}
                     </p>
 
@@ -260,7 +253,7 @@ export default function SeerahPage() {
                           className="overflow-hidden text-left"
                         >
                           <div className="mt-4 pt-4 border-t border-zinc-100 dark:border-zinc-800/60 space-y-4 text-xs sm:text-sm font-body">
-                            
+
                             {/* Rich Detail */}
                             <div>
                               <h4 className="font-bold text-zinc-800 dark:text-zinc-200 mb-1.5 flex items-center gap-1.5">

@@ -37,7 +37,9 @@ export default function WordOfTheDayCard() {
 
   // Client-only to avoid SSR hydration mismatch
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setWordData(getDailyName());
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setDateStr(new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }));
   }, []);
 

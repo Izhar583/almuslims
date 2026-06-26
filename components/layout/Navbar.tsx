@@ -11,10 +11,9 @@ const navLinks = [
   { label: "Home", href: "/" },
   { label: "Quran", href: "/quran" },
   { label: "Duas", href: "/duas" },
-  { label: "Articles", href: "/articles" },
+  { label: "Blog", href: "/blog" },
   { label: "Seerah", href: "/seerah" },
-  { label: "About", href: "/about" },
-  { label: "Categories", href: "/categories"}
+  { label: "About", href: "/about" }
 ];
 
 export default function Navbar() {

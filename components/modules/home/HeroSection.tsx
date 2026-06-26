@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image"; // Next.js Optimized Image component
+import Link from "next/link";
 import { motion } from "framer-motion"; // Animation library
 
 export default function HeroSection() {
@@ -30,19 +31,19 @@ export default function HeroSection() {
           {/* CTA Buttons Group */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
             {/* Filled Green Button */}
-            <a 
+            <Link 
               href="/about" 
               className="px-8 py-3.5 bg-primary text-white font-body font-semibold rounded-md shadow-md hover:bg-primaryHover transition-all text-center"
             >
               Explore Resources
-            </a>
+            </Link>
             {/* White with Orange/Secondary Border Button */}
-            <a 
+            <Link 
               href="/quran" 
               className="px-8 py-3.5 bg-white text-secondary border-2 border-secondary font-body font-semibold rounded-md hover:bg-secondary/5 transition-all text-center"
             >
               Read Quran
-            </a>
+            </Link>
           </div>
         </motion.div>
 

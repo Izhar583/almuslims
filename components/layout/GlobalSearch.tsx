@@ -122,7 +122,7 @@ export default function GlobalSearch() {
         matches.push({
           title: art.title,
           category: "Articles",
-          link: `/articles/${art.slug}`,
+          link: `/blog/${art.slug}`,
           description: art.excerpt,
         });
       }

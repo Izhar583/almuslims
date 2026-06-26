@@ -53,8 +53,8 @@ const categories = [
     )
   },
   {
-    name: "ARTICLES",
-    href: "/articles",
+    name: "BLOG",
+    href: "/blog",
     desc: "Insightful reads on Islamic topics",
     icon: (
       <svg className="w-14 h-14" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -83,15 +83,15 @@ const categories = [
 export default function CategoriesGrid() {
   return (
     <section className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-16 relative z-20">
-      <div className="flex justify-between items-center mb-6 px-1">
-        <h2 className="text-emerald-950 text-lg md:text-xl font-serif font-semibold uppercase tracking-widest">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0 mb-6 px-1">
+        <h2 className="text-emerald-950 text-2xl md:text-[32px] font-serif font-semibold uppercase tracking-widest">
           Explore By Category
         </h2>
         <Link 
-          href="/categories" 
+          href="#" 
           className="px-5 py-2.5 bg-white border border-[#EBE3D5] text-[#0A3A2F] hover:bg-[#0A3A2F] hover:text-white hover:border-[#0A3A2F] font-bold text-[10px] tracking-widest uppercase rounded-full shadow-sm flex items-center gap-2 group transition-all duration-300"
         >
-          View all categories
+          View All
           <span className="group-hover:translate-x-1 transition-transform duration-300 text-xs">→</span>
         </Link>
       </div>

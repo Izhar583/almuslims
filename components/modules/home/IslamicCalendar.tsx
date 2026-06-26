@@ -12,7 +12,9 @@ export default function IslamicCalendar() {
   // Initialize dates only on client to avoid SSR/hydration mismatch
   useEffect(() => {
     const now = startOfDay(new Date());
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setToday(now);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setCurrentDate(new Date());
   }, []);
 
@@ -60,8 +62,8 @@ export default function IslamicCalendar() {
   const firstDay = new Date(currentYear, currentMonth - 1, 1).getDay(); // 0=Sun, 6=Sat
   const daysInMonth = new Date(currentYear, currentMonth, 0).getDate();
 
-  const prefixEmptySlots = Array.from({ length: firstDay }).map((_, i) => null);
-  const monthDays = Array.from({ length: daysInMonth }).map((_, i) => i + 1);
+  const prefixEmptySlots = Array.from({ length: firstDay }).map(() => null);
+  const monthDays = Array.from({ length: daysInMonth }).map((_, index) => index + 1);
   const calendarGrid = [...prefixEmptySlots, ...monthDays];
 
   const handlePrevMonth = () => setCurrentDate(new Date(currentYear, currentMonth - 2, 1));
