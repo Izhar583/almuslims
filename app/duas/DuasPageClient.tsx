@@ -392,13 +392,13 @@ export default function DuasPageClient() {
                       </div>
                       <p className="text-[12px] font-bold text-primary/70 uppercase tracking-[0.2em] mb-2">{dua.title}</p>
                       <span className="font-arabic text-3xl text-gray-900 leading-normal mb-8 min-h-[90px] flex items-center" dir="rtl">{dua.arabic}</span>
-                      <div className="space-y-3 mb-10 flex-1">
+                      <span className="space-y-3 mb-10 flex-1">
                         <p className="text-xs font-bold text-gray-900">{dua.transliteration}</p>
                         <p className="text-md text-gray-900 leading-relaxed italic">&quot;{dua.translation}&quot;</p>
                         <div className="pt-4">
                           <span className="text-[12px] font-bold text-gray-400 px-3 py-1 bg-gray-50 rounded-full">{dua.reference}</span>
                         </div>
-                      </div>
+                      </span>
                       <div className="flex items-center gap-8 pt-8 border-t border-gray-50 w-full justify-center">
                         <button className="text-gray-400 hover:text-primary transition-all"><HiOutlineVolumeUp className="text-2xl" /></button>
 
