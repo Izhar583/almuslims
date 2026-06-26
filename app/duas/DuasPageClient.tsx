@@ -3,14 +3,58 @@
 
 import React, { useState, useMemo, useRef, useEffect } from "react";
 import Image from "next/image";
-import { 
-  HiSearch, HiBookmark, HiHeart, HiVolumeUp, 
+import {
+  HiSearch, HiBookmark, HiHeart, HiVolumeUp,
   HiChevronRight, HiChevronDown,
   HiOutlineBookmark, HiOutlineHeart, HiOutlineVolumeUp
 } from "react-icons/hi";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  PiHandsPraying,
+  PiClock,
+  PiSun,
+  PiMoonStars,
+  PiBed,
+  PiMosque,
+  PiHeart
+} from "react-icons/pi";
+import { FaKaaba } from "react-icons/fa6";
 
-// ─── Data Types ──────────────────────────────────────────────────────────────
+const categoryStyles: Record<string, { inactiveBg: string; inactiveText: string }> = {
+  all: { inactiveBg: "bg-emerald-50/70", inactiveText: "text-[#0A3A2F]" },
+  daily: { inactiveBg: "bg-amber-50/70", inactiveText: "text-amber-600" },
+  morning: { inactiveBg: "bg-orange-50/70", inactiveText: "text-orange-500" },
+  evening: { inactiveBg: "bg-indigo-50/70", inactiveText: "text-indigo-500" },
+  sleep: { inactiveBg: "bg-blue-50/70", inactiveText: "text-blue-600" },
+  prayer: { inactiveBg: "bg-teal-50/70", inactiveText: "text-teal-600" },
+  hajj: { inactiveBg: "bg-yellow-50/70", inactiveText: "text-[#D48C46]" },
+  wellbeing: { inactiveBg: "bg-rose-50/70", inactiveText: "text-rose-500" },
+};
+
+const getCategoryIcon = (id: string, className = "w-5 h-5") => {
+  switch (id) {
+    case "all":
+      return <PiHandsPraying className={className} />;
+    case "daily":
+      return <PiClock className={className} />;
+    case "morning":
+      return <PiSun className={className} />;
+    case "evening":
+      return <PiMoonStars className={className} />;
+    case "sleep":
+      return <PiBed className={className} />;
+    case "prayer":
+      return <PiMosque className={className} />;
+    case "hajj":
+      return <FaKaaba className={className} />;
+    case "wellbeing":
+      return <PiHeart className={className} />;
+    default:
+      return <PiHandsPraying className={className} />;
+  }
+};
+
+
 
 interface Dua {
   id: number;
@@ -24,14 +68,14 @@ interface Dua {
 
 
 const categories = [
-  { id: "all", label: "All Duas", icon: "🤲" },
-  { id: "daily", label: "Daily Duas", icon: "⏰" },
-  { id: "morning", label: "Morning Duas", icon: "☀️" },
-  { id: "evening", label: "Evening Duas", icon: "🌙" },
-  { id: "sleep", label: "Before Sleep", icon: "😴" },
-  { id: "prayer", label: "After Salah", icon: "🕌" },
-  { id: "hajj", label: "Hajj & Umrah", icon: "🕋" },
-  { id: "wellbeing", label: "Wellbeing", icon: "🧘" },
+  { id: "all", label: "All Duas" },
+  { id: "daily", label: "Daily Duas" },
+  { id: "morning", label: "Morning Duas" },
+  { id: "evening", label: "Evening Duas" },
+  { id: "sleep", label: "Before Sleep" },
+  { id: "prayer", label: "After Salah" },
+  { id: "hajj", label: "Hajj & Umrah" },
+  { id: "wellbeing", label: "Wellbeing" },
 ];
 
 const allDuas: Dua[] = [
@@ -171,7 +215,7 @@ export default function DuasPageClient() {
   const [sortBy, setSortBy] = useState("Most Popular");
   const [isSortOpen, setIsSortOpen] = useState(false);
   const sortRef = useRef<HTMLDivElement>(null);
-  
+
   const [bookmarked, setBookmarked] = useState<number[]>([]);
   const [liked, setLiked] = useState<number[]>([]);
 
@@ -190,9 +234,9 @@ export default function DuasPageClient() {
   const filteredDuas = useMemo(() => {
     return allDuas.filter((dua) => {
       const matchCategory = activeCategory === "all" || dua.category === activeCategory;
-      const matchSearch = dua.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          dua.arabic.includes(searchQuery) ||
-                          dua.translation.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchSearch = dua.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        dua.arabic.includes(searchQuery) ||
+        dua.translation.toLowerCase().includes(searchQuery.toLowerCase());
       return matchCategory && matchSearch;
     });
   }, [activeCategory, searchQuery]);
@@ -216,8 +260,8 @@ export default function DuasPageClient() {
 
         {/* Hero Section */}
         <section className="relative rounded-3xl overflow-hidden bg-[#0A3A2F] mb-10 h-[250px] sm:h-[350px]">
-          <Image 
-            src="https://images.unsplash.com/photo-1674508304566-f67ee711750a?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+          <Image
+            src="https://images.unsplash.com/photo-1674508304566-f67ee711750a?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Dua Collection"
             fill
             className="object-cover opacity-20"
@@ -232,47 +276,55 @@ export default function DuasPageClient() {
           </div>
         </section>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-          
+        <div className="grid grid-cols-12 gap-6 lg:gap-10">
+
           {/* Sidebar */}
-          <aside className="lg:col-span-3 space-y-8 sticky top-24 h-fit">
+          <aside className="col-span-12 lg:col-span-3 lg:sticky lg:top-24 h-fit">
             <div className="bg-white rounded-[32px] border border-gray-100 p-6 shadow-sm">
               <p className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-6 px-4">Categories</p>
-              <div className="space-y-1">
-                {categories.map((cat) => (
-                  <button
-                    key={cat.id}
-                    onClick={() => setActiveCategory(cat.id)}
-                    className={`w-full flex items-center justify-between px-5 py-3.5 rounded-2xl transition-all duration-300 ${
-                      activeCategory === cat.id 
-                        ? "bg-[#0A3A2F] text-white shadow-xl shadow-primary/20" 
-                        : "text-gray-600 hover:bg-gray-50"
-                    }`}
-                  >
-                    <div className="flex items-center gap-4">
-                      <span className="text-xl">{cat.icon}</span>
-                      <span className="text-sm font-bold">{cat.label}</span>
-                    </div>
-                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                      activeCategory === cat.id ? "bg-white/20 text-white" : "bg-gray-100 text-gray-400"
-                    }`}>
-                      {getCount(cat.id)}
-                    </span>
-                  </button>
-                ))}
+              <div className="space-y-1.5">
+                {categories.map((cat) => {
+                  const isActive = activeCategory === cat.id;
+                  const styles = categoryStyles[cat.id] || categoryStyles.all;
+                  return (
+                    <button
+                      key={cat.id}
+                      onClick={() => setActiveCategory(cat.id)}
+                      className={`w-full flex items-center justify-between px-4 py-2.5 rounded-2xl transition-all duration-300 ${isActive
+                        ? "bg-[#0A3A2F] text-white shadow-xl shadow-primary/20 scale-[1.02]"
+                        : "text-gray-600 hover:bg-gray-50/80 hover:translate-x-1"
+                        }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300 ${isActive
+                          ? "bg-white/15 text-[#D48C46] shadow-inner"
+                          : `${styles.inactiveBg} ${styles.inactiveText}`
+                          }`}>
+                          {getCategoryIcon(cat.id, "w-5 h-5")}
+                        </div>
+                        <span className="text-sm font-bold">{cat.label}</span>
+                      </div>
+                      <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full ${isActive ? "bg-white/20 text-white" : "bg-gray-100 text-gray-400"
+                        }`}>
+                        {getCount(cat.id)}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </aside>
 
           {/* Main Content */}
-          <main className="lg:col-span-9 space-y-8">
-            
+          <main className="col-span-12 lg:col-span-9 space-y-8">
+
+
             {/* Search & Sort Bar (Premium Redesign) */}
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <div className="relative flex-1 w-full group">
                 <HiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 text-xl group-focus-within:text-primary transition-colors" />
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   placeholder="Search by title, meaning or keyword..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
@@ -282,7 +334,7 @@ export default function DuasPageClient() {
 
               {/* Custom Premium Dropdown */}
               <div className="relative w-full sm:w-60" ref={sortRef}>
-                <button 
+                <button
                   onClick={() => setIsSortOpen(!isSortOpen)}
                   className="w-full px-6 py-4 bg-white rounded-3xl border border-gray-100 shadow-sm flex items-center justify-between text-sm font-bold text-gray-900 hover:border-primary transition-all"
                 >
@@ -292,7 +344,7 @@ export default function DuasPageClient() {
 
                 <AnimatePresence>
                   {isSortOpen && (
-                    <motion.div 
+                    <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
@@ -305,9 +357,8 @@ export default function DuasPageClient() {
                             setSortBy(option);
                             setIsSortOpen(false);
                           }}
-                          className={`w-full px-6 py-4 text-left text-sm font-semibold transition-colors flex items-center justify-between ${
-                            sortBy === option ? "bg-primary/5 text-primary" : "text-gray-600 hover:bg-gray-50"
-                          }`}
+                          className={`w-full px-6 py-4 text-left text-sm font-semibold transition-colors flex items-center justify-between ${sortBy === option ? "bg-primary/5 text-primary" : "text-gray-600 hover:bg-gray-50"
+                            }`}
                         >
                           {option}
                           {sortBy === option && <div className="w-1.5 h-1.5 rounded-full bg-primary" />}
@@ -327,36 +378,31 @@ export default function DuasPageClient() {
                   const isLiked = liked.includes(dua.id);
 
                   return (
-                    <motion.div 
+                    <motion.div
                       layout
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
-                      key={dua.id} 
+                      key={dua.id}
                       className="bg-white rounded-[40px] border border-gray-100 p-10 shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col items-center text-center group relative overflow-hidden"
                     >
                       <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-bl-full -mr-12 -mt-12 group-hover:scale-150 transition-transform duration-700" />
-                      <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-2xl mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-500">
-                        📿
+                      <div className="w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center mb-8 text-[#0A3A2F] group-hover:bg-[#0A3A2F] group-hover:text-[#D48C46] transition-all duration-500 shadow-sm border border-primary/5">
+                        {getCategoryIcon(dua.category, "w-6 h-6 transition-transform duration-500 group-hover:scale-110")}
                       </div>
-                      <p className="text-[10px] font-bold text-primary/40 uppercase tracking-[0.2em] mb-2">{dua.title}</p>
-                      <h3 className="font-arabic text-3xl text-gray-900 leading-normal mb-8 min-h-[90px] flex items-center" dir="rtl">{dua.arabic}</h3>
+                      <p className="text-[12px] font-bold text-primary/70 uppercase tracking-[0.2em] mb-2">{dua.title}</p>
+                      <span className="font-arabic text-3xl text-gray-900 leading-normal mb-8 min-h-[90px] flex items-center" dir="rtl">{dua.arabic}</span>
                       <div className="space-y-3 mb-10 flex-1">
                         <p className="text-xs font-bold text-gray-900">{dua.transliteration}</p>
-                        <p className="text-sm text-gray-500 leading-relaxed italic">&quot;{dua.translation}&quot;</p>
+                        <p className="text-md text-gray-900 leading-relaxed italic">&quot;{dua.translation}&quot;</p>
                         <div className="pt-4">
-                           <span className="text-[10px] font-bold text-gray-300 px-3 py-1 bg-gray-50 rounded-full">{dua.reference}</span>
+                          <span className="text-[12px] font-bold text-gray-400 px-3 py-1 bg-gray-50 rounded-full">{dua.reference}</span>
                         </div>
                       </div>
                       <div className="flex items-center gap-8 pt-8 border-t border-gray-50 w-full justify-center">
                         <button className="text-gray-400 hover:text-primary transition-all"><HiOutlineVolumeUp className="text-2xl" /></button>
-                        <button 
-                          onClick={() => toggleBookmark(dua.id)}
-                          className={`transition-all ${isBookmarked ? "text-amber-500" : "text-gray-400 hover:text-amber-500"}`}
-                        >
-                          {isBookmarked ? <HiBookmark className="text-2xl" /> : <HiOutlineBookmark className="text-2xl" />}
-                        </button>
-                        <button 
+
+                        <button
                           onClick={() => toggleLike(dua.id)}
                           className={`transition-all ${isLiked ? "text-rose-500" : "text-gray-400 hover:text-rose-500"}`}
                         >
