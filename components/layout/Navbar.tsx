@@ -29,7 +29,6 @@ export default function Navbar() {
       <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           
-          {/* Left Side: Logo */}
           <div className="shrink-0">
             <Link href="/" className="flex items-center gap-3 group transition-all">
               <Image 
@@ -86,7 +85,7 @@ export default function Navbar() {
           <div className="xl:hidden flex items-center gap-2">
             <button 
               onClick={handleSearchClick}
-              className="text-zinc-600 p-2 cursor-pointer"
+              className="text-zinc-600 cursor-pointer"
               aria-label="Search site"
             >
               <FaSearch size={16} />

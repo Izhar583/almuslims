@@ -14,11 +14,9 @@ export default function StickyHeader() {
       const currentY = window.scrollY;
       const diff = lastScrollY.current - currentY;
 
-      // Show if scrolling up by more than 10px OR near the very top (within first 80px)
       if (currentY < 80 || diff > 10) {
         setVisible(true);
       } 
-      // Hide if scrolling down by more than 10px AND not near top
       else if (diff < -10 && currentY > 80) {
         setVisible(false);
       }

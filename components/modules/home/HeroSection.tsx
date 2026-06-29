@@ -52,7 +52,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative w-full aspect-[4/3] sm:aspect-[16/11] lg:aspect-auto lg:h-[480px] rounded-2xl overflow-hidden shadow-2xl border border-primary/10 flex items-center justify-center bg-primary/5"
+          className="relative w-full aspect-[4/3] sm:aspect-[16/11] hidden md:block lg:aspect-auto lg:h-[480px] rounded-2xl overflow-hidden shadow-2xl border border-primary/10 flex items-center justify-center bg-primary/5"
         >
           <Image 
             src="/assets/kaaba.png" 
