@@ -19,20 +19,43 @@ interface Edition {
   ayahs: Ayah[];
 }
 
+interface SurahMeta {
+  number: number;
+  englishName: string;
+}
+
+// Helper: convert englishName to URL slug
+function toSlug(name: string) {
+  return name.toLowerCase().replace(/\s+/g, '-');
+}
+
 export default function SurahDetail({ params }: { params: Promise<{ surah: string }> }) {
-  const { surah: surahId } = use(params);
+  const { surah: surahSlug } = use(params);
   const [data, setData] = useState<Edition[] | null>(null);
+  const [allSurahs, setAllSurahs] = useState<SurahMeta[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [viewMode, setViewMode] = useState<'reading' | 'translation'>('translation');
 
   useEffect(() => {
-    if (!surahId) return;
     const fetchData = async () => {
       try {
         setLoading(true);
         setError(null);
-        const url = `https://api.alquran.cloud/v1/surah/${surahId}/editions/quran-uthmani,en.asad,ur.jalandhry`;
+
+        // Step 1: Get all surahs list to find number from name slug
+        const listRes = await fetch('https://api.alquran.cloud/v1/surah');
+        if (!listRes.ok) throw new Error(`API error: ${listRes.status}`);
+        const listJson = await listRes.json();
+        const surahs: SurahMeta[] = listJson.data;
+        setAllSurahs(surahs);
+
+        // Step 2: Find surah by matching slug
+        const matched = surahs.find(s => toSlug(s.englishName) === surahSlug);
+        if (!matched) throw new Error(`Surah "${surahSlug}" not found`);
+
+        // Step 3: Fetch surah detail by number
+        const url = `https://api.alquran.cloud/v1/surah/${matched.number}/editions/quran-uthmani,en.asad,ur.jalandhry`;
         const res = await fetch(url);
         if (!res.ok) throw new Error(`API error: ${res.status}`);
         const json = await res.json();
@@ -45,7 +68,7 @@ export default function SurahDetail({ params }: { params: Promise<{ surah: strin
       }
     };
     fetchData();
-  }, [surahId]);
+  }, [surahSlug]);
 
   if (loading) {
     return (
@@ -65,7 +88,12 @@ export default function SurahDetail({ params }: { params: Promise<{ surah: strin
   }
 
   const [arabic, english, urdu] = data;
-  const currentNum = parseInt(surahId);
+  const currentNum = arabic.ayahs[0]?.number
+    ? allSurahs.find(s => toSlug(s.englishName) === surahSlug)?.number ?? 1
+    : 1;
+
+  const prevSurah = allSurahs.find(s => s.number === currentNum - 1);
+  const nextSurah = allSurahs.find(s => s.number === currentNum + 1);
 
   return (
     <div className="min-h-screen bg-[#FDFCF9] pb-20">
@@ -125,7 +153,7 @@ export default function SurahDetail({ params }: { params: Promise<{ surah: strin
         {viewMode === 'reading' && (
           <div className="bg-white rounded-[40px] border border-gray-100 p-8 sm:p-16 shadow-lg shadow-primary/5 hover:shadow-primary/10 transition-shadow">
             {/* Bismillah */}
-            {surahId !== '9' && (
+            {currentNum !== 9 && (
               <div className="text-center mb-16">
                 <p className="font-arabic text-4xl sm:text-5xl text-primary leading-normal italic">
                   بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
@@ -135,10 +163,10 @@ export default function SurahDetail({ params }: { params: Promise<{ surah: strin
             
             <div className="relative">
               <p className="font-arabic text-4xl sm:text-5xl lg:text-6xl text-right leading-[2.5] lg:leading-[3] text-gray-900 break-words" dir="rtl">
-                {arabic.ayahs.map((ayah, i) => {
+                {arabic.ayahs.map((ayah) => {
                   let text = ayah.text;
                   if (currentNum !== 1 && currentNum !== 9 && ayah.numberInSurah === 1) {
-                    text = text.replace("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ ", "");
+                    text = text.replace("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ ", "");
                   }
                   return (
                     <span key={ayah.number} className="inline group cursor-pointer hover:bg-primary/5 rounded-lg transition-colors p-1">
@@ -158,7 +186,7 @@ export default function SurahDetail({ params }: { params: Promise<{ surah: strin
         {viewMode === 'translation' && (
           <div className="space-y-6">
              {/* Bismillah */}
-             {surahId !== '9' && (
+             {currentNum !== 9 && (
               <div className="text-center mb-10 py-6">
                 <p className="font-arabic text-4xl text-gray-900">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
               </div>
@@ -167,7 +195,7 @@ export default function SurahDetail({ params }: { params: Promise<{ surah: strin
             {arabic.ayahs.map((ayah, index) => {
               let ayahText = ayah.text;
               if (currentNum !== 1 && currentNum !== 9 && ayah.numberInSurah === 1) {
-                ayahText = ayahText.replace("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ ", "");
+                ayahText = ayahText.replace("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ ", "");
               }
 
               return (
@@ -196,15 +224,15 @@ export default function SurahDetail({ params }: { params: Promise<{ surah: strin
 
         {/* Navigation Buttons */}
         <div className="mt-20 flex items-center justify-between border-t border-gray-100 pt-10">
-          {currentNum > 1 ? (
-            <Link href={`/quran/${currentNum - 1}`} className="flex items-center gap-2 text-gray-500 hover:text-primary transition-colors font-semibold group">
+          {prevSurah ? (
+            <Link href={`/quran/${toSlug(prevSurah.englishName)}`} className="flex items-center gap-2 text-gray-500 hover:text-primary transition-colors font-semibold group">
               <HiChevronLeft className="text-xl group-hover:-translate-x-1 transition-transform" />
               Previous Surah
             </Link>
           ) : <div />}
 
-          {currentNum < 114 && (
-            <Link href={`/quran/${currentNum + 1}`} className="flex items-center gap-2 text-gray-500 hover:text-primary transition-colors font-semibold group">
+          {nextSurah && (
+            <Link href={`/quran/${toSlug(nextSurah.englishName)}`} className="flex items-center gap-2 text-gray-500 hover:text-primary transition-colors font-semibold group">
               Next Surah
               <HiChevronRight className="text-xl group-hover:translate-x-1 transition-transform" />
             </Link>

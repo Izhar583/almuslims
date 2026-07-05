@@ -101,7 +101,7 @@ export default function QuranPage() {
         {/* Grid List */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {sortedSurahs.map((surah) => (
-            <Link href={`/quran/${surah.number}`} key={surah.number}>
+            <Link href={`/quran/${surah.englishName.toLowerCase().replace(/\s+/g, '-')}`} key={surah.number}>
               <div className="group relative bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-primary/20 transition-all duration-300 overflow-hidden">
                 {/* Background Decor */}
                 <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-bl-full -mr-10 -mt-10 transition-all group-hover:scale-150 group-hover:bg-primary/10"></div>
