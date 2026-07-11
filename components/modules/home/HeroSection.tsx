@@ -39,7 +39,7 @@ export default function HeroSection() {
             </Link>
             {/* White with Orange/Secondary Border Button */}
             <Link 
-              href="/quran" 
+              href="/holy-quran" 
               className="px-8 py-3.5 bg-white text-secondary border-2 border-secondary font-body font-semibold rounded-md hover:bg-secondary/5 transition-all text-center"
             >
               Read Quran

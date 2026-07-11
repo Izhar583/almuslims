@@ -1,9 +1,9 @@
-
 'use client';
 
 import { use, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { HiArrowLeft, HiChevronLeft, HiChevronRight, HiCollection, HiBookOpen } from "react-icons/hi";
+import { getSurahSlug, getSurahNumberFromSlug } from '@/lib/quran';
 
 interface Ayah {
   number: number;
@@ -24,11 +24,6 @@ interface SurahMeta {
   englishName: string;
 }
 
-// Helper: convert englishName to URL slug
-function toSlug(name: string) {
-  return name.toLowerCase().replace(/\s+/g, '-');
-}
-
 export default function SurahDetail({ params }: { params: Promise<{ surah: string }> }) {
   const { surah: surahSlug } = use(params);
   const [data, setData] = useState<Edition[] | null>(null);
@@ -43,19 +38,19 @@ export default function SurahDetail({ params }: { params: Promise<{ surah: strin
         setLoading(true);
         setError(null);
 
-        // Step 1: Get all surahs list to find number from name slug
+        // Step 1: Get all surahs list
         const listRes = await fetch('https://api.alquran.cloud/v1/surah');
         if (!listRes.ok) throw new Error(`API error: ${listRes.status}`);
         const listJson = await listRes.json();
         const surahs: SurahMeta[] = listJson.data;
         setAllSurahs(surahs);
 
-        // Step 2: Find surah by matching slug
-        const matched = surahs.find(s => toSlug(s.englishName) === surahSlug);
-        if (!matched) throw new Error(`Surah "${surahSlug}" not found`);
+        // Step 2: Find surah number by matching slug
+        const surahNumber = getSurahNumberFromSlug(surahSlug);
+        if (!surahNumber) throw new Error(`Surah "${surahSlug}" not found`);
 
         // Step 3: Fetch surah detail by number
-        const url = `https://api.alquran.cloud/v1/surah/${matched.number}/editions/quran-uthmani,en.asad`;
+        const url = `https://api.alquran.cloud/v1/surah/${surahNumber}/editions/quran-uthmani,en.asad`;
         const res = await fetch(url);
         if (!res.ok) throw new Error(`API error: ${res.status}`);
         const json = await res.json();
@@ -85,18 +80,16 @@ export default function SurahDetail({ params }: { params: Promise<{ surah: strin
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-[#FDFCF9] p-6 text-center">
         <p className="text-red-500 font-bold mb-4">Error: {error || 'Surah not found'}</p>
-        <Link href="/quran" className="px-6 py-2 bg-primary text-white rounded-xl shadow-lg">Back to Quran</Link>
+        <Link href="/holy-quran" className="px-6 py-2 bg-primary text-white rounded-xl shadow-lg">Back to Quran</Link>
       </div>
     );
   }
 
-  const [arabic, english, urdu] = data;
-  const currentNum = arabic.ayahs[0]?.number
-    ? allSurahs.find(s => toSlug(s.englishName) === surahSlug)?.number ?? 1
-    : 1;
+  const [arabic, english] = data;
+  const currentNum = getSurahNumberFromSlug(surahSlug);
 
-  const prevSurah = allSurahs.find(s => s.number === currentNum - 1);
-  const nextSurah = allSurahs.find(s => s.number === currentNum + 1);
+  const prevSurah = currentNum > 1 ? allSurahs.find(s => s.number === currentNum - 1) : null;
+  const nextSurah = currentNum < 114 ? allSurahs.find(s => s.number === currentNum + 1) : null;
 
   return (
     <div className="min-h-screen bg-[#FDFCF9] pb-20">
@@ -107,7 +100,7 @@ export default function SurahDetail({ params }: { params: Promise<{ surah: strin
         
         <div className="max-w-5xl mx-auto px-4 relative z-10">
           <div className="flex items-center justify-between mb-8">
-            <Link href="/quran" className="inline-flex items-center gap-2 text-gray-400 hover:text-primary transition-colors text-sm group">
+            <Link href="/holy-quran" className="inline-flex items-center gap-2 text-gray-400 hover:text-primary transition-colors text-sm group">
               <HiArrowLeft className="group-hover:-translate-x-1 transition-transform" />
               All Surahs
             </Link>
@@ -212,7 +205,6 @@ export default function SurahDetail({ params }: { params: Promise<{ surah: strin
                   <div className="pt-6 border-t border-gray-50">
                     <div className="border-l-2 border-primary/20 pl-6">
                       <p className="text-gray-700 text-sm sm:text-base leading-relaxed">{english?.ayahs[index]?.text}</p>
-
                     </div>
                   </div>
                 </div>
@@ -224,14 +216,14 @@ export default function SurahDetail({ params }: { params: Promise<{ surah: strin
         {/* Navigation Buttons */}
         <div className="mt-20 flex items-center justify-between border-t border-gray-100 pt-10">
           {prevSurah ? (
-            <Link href={`/quran/${toSlug(prevSurah.englishName)}`} className="flex items-center gap-2 text-gray-500 hover:text-primary transition-colors font-semibold group">
+            <Link href={`/holy-quran/${getSurahSlug(prevSurah.number)}`} className="flex items-center gap-2 text-gray-500 hover:text-primary transition-colors font-semibold group">
               <HiChevronLeft className="text-xl group-hover:-translate-x-1 transition-transform" />
               Previous Surah
             </Link>
           ) : <div />}
 
           {nextSurah && (
-            <Link href={`/quran/${toSlug(nextSurah.englishName)}`} className="flex items-center gap-2 text-gray-500 hover:text-primary transition-colors font-semibold group">
+            <Link href={`/holy-quran/${getSurahSlug(nextSurah.number)}`} className="flex items-center gap-2 text-gray-500 hover:text-primary transition-colors font-semibold group">
               Next Surah
               <HiChevronRight className="text-xl group-hover:translate-x-1 transition-transform" />
             </Link>

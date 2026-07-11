@@ -35,7 +35,7 @@ export default function FeaturedArticles() {
         {featuredArticle && (
           <Link
             href={`/blog/${featuredArticle.slug}`}
-            className="lg:col-span-2 group flex flex-col rounded-[32px] overflow-hidden bg-white border border-gray-100 hover:shadow-2xl transition-all duration-500"
+            className="lg:col-span-2 group flex flex-col rounded-[32px] overflow-hidden bg-white border border-gray-100 transition-all duration-500"
           >
             <div className="relative w-full h-[300px] lg:h-[400px] bg-gray-100 overflow-hidden">
               <Image
@@ -70,7 +70,7 @@ export default function FeaturedArticles() {
             <Link
               key={article.id}
               href={`/blog/${article.slug}`}
-              className="group flex flex-col sm:flex-row gap-6 bg-white rounded-[32px] border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-500 p-4"
+              className="group flex flex-col sm:flex-row gap-6 bg-white rounded-[32px] border border-gray-100 overflow-hidden transition-all duration-500 p-4"
             >
               <div className="relative w-full sm:w-56 h-48 sm:h-auto shrink-0 bg-gray-100 rounded-[24px] overflow-hidden">
                 <Image

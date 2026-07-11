@@ -61,7 +61,7 @@ export default function Footer() {
         <div>
           <span className="text-[13px] font-bold text-secondary uppercase tracking-widest mb-6">Categories</span>
           <ul className="space-y-5 text-[14px] text-white/80">
-            <li><Link href="/quran" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Quran</Link></li>
+            <li><Link href="/holy-quran" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Quran</Link></li>
             <li><Link href="/dua-collection" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Duas & Azkar</Link></li>
             <li><Link href="/seerah" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Seerah</Link></li>
             <li><Link href="/blog" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Islamic Blog</Link></li>

@@ -6,6 +6,7 @@ import { fiqhCategories } from "@/data/hadith-collections";
 import { articles } from "@/data/articles";
 import { FaSearch, FaTimes, FaBook, FaParagraph, FaHistory, FaStar } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import { getSurahSlug } from "@/lib/quran";
 
 interface SearchResultItem {
   title: string;
@@ -88,7 +89,7 @@ export default function GlobalSearch() {
         matches.push({
           title: surah.name,
           category: "Quran",
-          link: `/quran`,
+          link: `/holy-quran/${getSurahSlug(surah.no)}`,
           description: surah.desc,
         });
       }

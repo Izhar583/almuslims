@@ -21,7 +21,7 @@ const navLinks = [
   {
     title: "Quran",
     desc: "Read and explore the words of Allah.",
-    link: "/quran",
+    link: "/holy-quran",
     icon: <HiOutlineBookOpen className="w-5 h-5 text-primary" />,
   },
   {

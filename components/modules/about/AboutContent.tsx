@@ -164,7 +164,7 @@ export default function AboutContent() {
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Link 
-                  href="/quran" 
+                  href="/holy-quran" 
                   className="px-8 py-4 bg-secondary hover:bg-secondary/90 text-white font-bold rounded-xl transition-all"
                 >
                   Read Quran
