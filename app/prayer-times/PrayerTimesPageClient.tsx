@@ -112,11 +112,7 @@ export default function PrayerTimesPageClient() {
           Prayer Timetable
         </h1>
         <p className="text-gray-500 text-sm">
-          Accurate prayer times via{" "}
-          <a href="https://aladhan.com" className="text-primary underline" target="_blank" rel="noopener noreferrer">
-            AlAdhan API
-          </a>{" "}
-          — {location}
+          Accurate prayer times — {location}
         </p>
       </div>
 

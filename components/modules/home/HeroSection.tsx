@@ -7,7 +7,7 @@ import { motion } from "framer-motion"; // Animation library
 
 export default function HeroSection() {
   return (
-    <section className="relative w-full min-h-[80vh] flex items-center bg-background px-4 sm:px-6 lg:px-8 py-12 md:py-20 overflow-hidden">
+    <section className="relative w-full md:min-h-[80vh] flex items-center bg-background px-4 sm:px-6 lg:px-8 pt-6 pb-2 md:py-20 overflow-hidden">
       
       {/* Main Two-column Responsive Grid */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full z-10">

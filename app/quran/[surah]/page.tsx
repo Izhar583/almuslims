@@ -55,7 +55,7 @@ export default function SurahDetail({ params }: { params: Promise<{ surah: strin
         if (!matched) throw new Error(`Surah "${surahSlug}" not found`);
 
         // Step 3: Fetch surah detail by number
-        const url = `https://api.alquran.cloud/v1/surah/${matched.number}/editions/quran-uthmani,en.asad,ur.jalandhry`;
+        const url = `https://api.alquran.cloud/v1/surah/${matched.number}/editions/quran-uthmani,en.asad`;
         const res = await fetch(url);
         if (!res.ok) throw new Error(`API error: ${res.status}`);
         const json = await res.json();
@@ -69,6 +69,9 @@ export default function SurahDetail({ params }: { params: Promise<{ surah: strin
     };
     fetchData();
   }, [surahSlug]);
+
+  const revelationLabel = (type: string) =>
+    type === "Meccan" ? "Makki" : type === "Medinan" ? "Madani" : type;
 
   if (loading) {
     return (
@@ -139,9 +142,9 @@ export default function SurahDetail({ params }: { params: Promise<{ surah: strin
             <div className="flex items-center gap-2 text-gray-500 text-sm font-medium">
               <span>{arabic.englishNameTranslation}</span>
               <span className="w-1 h-1 rounded-full bg-gray-300"></span>
-              <span>{arabic.numberOfAyahs} Ayahs</span>
+              <span>{arabic.numberOfAyahs} Ayats</span>
               <span className="w-1 h-1 rounded-full bg-gray-300"></span>
-              <span className="uppercase tracking-wider">{arabic.revelationType}</span>
+              <span className="uppercase tracking-wider">{revelationLabel(arabic.revelationType)}</span>
             </div>
           </div>
         </div>
@@ -206,14 +209,10 @@ export default function SurahDetail({ params }: { params: Promise<{ surah: strin
                     </div>
                   </div>
                   <p className="font-arabic text-3xl sm:text-4xl text-right leading-[2.2] text-gray-900 mb-8" dir="rtl">{ayahText}</p>
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-8 border-t border-gray-50">
+                  <div className="pt-6 border-t border-gray-50">
                     <div className="border-l-2 border-primary/20 pl-6">
                       <p className="text-gray-700 text-sm sm:text-base leading-relaxed">{english?.ayahs[index]?.text}</p>
-                      <p className="text-[10px] font-bold text-primary/40 uppercase mt-2 tracking-widest">ENGLISH • ASAD</p>
-                    </div>
-                    <div className="text-right border-r-2 border-secondary/20 pr-6" dir="rtl">
-                      <p className="font-urdu text-lg sm:text-xl text-gray-600 leading-relaxed">{urdu?.ayahs[index]?.text}</p>
-                      <p className="text-[10px] font-bold text-secondary/40 uppercase mt-2 tracking-widest">اردو • جالندھری</p>
+
                     </div>
                   </div>
                 </div>

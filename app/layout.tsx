@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import StickyHeader from "@/components/layout/StickyHeader";
 import Footer from "@/components/layout/Footer";
-import ContactCTA from "@/components/layout/ContactCTA";
+// import ContactCTA from "@/components/layout/ContactCTA";
 import GlobalSearch from "@/components/layout/GlobalSearch";
 
 export const metadata: Metadata = {
@@ -30,7 +30,6 @@ export default function RootLayout({
           {children}
         </main>
         
-        <ContactCTA />
         <Footer />
         <GlobalSearch />
       </body>

@@ -84,20 +84,9 @@ export default function ArticleDetail({ params }: PageProps) {
             </p>
 
             {/* Meta Info */}
-            <div className="flex flex-wrap items-center gap-8 py-8 border-y border-gray-100 mb-12">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-100 relative">
-                  <Image src={article.authorImg} alt={article.author} fill className="object-cover" />
-                </div>
-                <div>
-                  <p className="text-sm font-bold text-gray-900">{article.author} ✅</p>
-                  <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Islamic Scholar</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-6 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                <span className="flex items-center gap-2"><HiCalendar className="text-lg text-primary/40" /> {article.displayDate}</span>
-                <span className="flex items-center gap-2"><HiClock className="text-lg text-primary/40" /> {article.readTime}</span>
-              </div>
+            <div className="flex items-center gap-6 text-[10px] font-bold text-gray-400 uppercase tracking-widest py-8 border-y border-gray-100 mb-12">
+              <span className="flex items-center gap-2"><HiCalendar className="text-lg text-primary/40" /> {article.displayDate}</span>
+              <span className="flex items-center gap-2"><HiClock className="text-lg text-primary/40" /> {article.readTime}</span>
             </div>
 
             {/* Content Body */}
@@ -111,23 +100,7 @@ export default function ArticleDetail({ params }: PageProps) {
                 dangerouslySetInnerHTML={{ __html: article.content }}
               />
 
-              <div className="flex items-center gap-4 py-10 border-t border-gray-100 mt-12">
-                <p className="text-sm font-bold text-gray-400 uppercase tracking-widest">Share this article</p>
-                <div className="flex gap-3">
-                  <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== "undefined" ? window.location.href : "")}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50 transition-all">
-                    <FaFacebookF />
-                  </a>
-                  <a href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(typeof window !== "undefined" ? window.location.href : "")}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50 transition-all">
-                    <FaTwitter />
-                  </a>
-                  <a href={`https://api.whatsapp.com/send?text=${encodeURIComponent(typeof window !== "undefined" ? window.location.href : "")}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50 transition-all">
-                    <FaWhatsapp />
-                  </a>
-                  <button onClick={handleCopyLink} className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50 transition-all">
-                    <HiLink />
-                  </button>
-                </div>
-              </div>
+
             </div>
 
             {/* Author Bio Card */}
@@ -136,16 +109,10 @@ export default function ArticleDetail({ params }: PageProps) {
                 <Image src={article.authorImg} alt={article.author} fill className="object-cover" />
               </div>
               <div className="text-center sm:text-left flex-1">
-                <div className="flex items-center justify-center sm:justify-between mb-4">
-                  <h3 className="text-2xl font-bold text-gray-900">{article.author} ✅</h3>
-                  <button className="hidden sm:block text-[10px] font-bold text-primary uppercase tracking-widest px-4 py-2 border border-primary/20 rounded-full hover:bg-primary hover:text-white transition-all">Follow</button>
-                </div>
-                <p className="text-gray-600 leading-relaxed mb-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">{article.author} ✅</h3>
+                <p className="text-gray-600 leading-relaxed">
                   Dedicated writer and speaker focusing on Quranic exegesis, theological fundamentals, and spiritual purification. Striving to make traditional knowledge accessible to all.
                 </p>
-                <div className="flex items-center justify-center sm:justify-start gap-4 text-gray-400">
-                  <FaFacebookF /> <FaTwitter /> <FaWhatsapp /> <HiLink />
-                </div>
               </div>
             </div>
 
@@ -181,49 +148,11 @@ export default function ArticleDetail({ params }: PageProps) {
               </div>
             </div>
 
-            {/* Related Articles */}
-            <div>
-              <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-6">Related Articles</h4>
-              <div className="space-y-6">
-                {finalRelatedArticles.map((item) => (
-                  <Link key={item.id} href={`/blog/${item.slug}`} className="flex gap-4 group">
-                    <div className="w-20 h-20 rounded-2xl overflow-hidden bg-gray-100 shrink-0 relative">
-                      <Image src={item.image} alt={item.title} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
-                    </div>
-                    <div className="flex flex-col justify-center">
-                      <h5 className="text-[14px] font-bold text-gray-900 group-hover:text-primary transition-colors leading-snug line-clamp-2">{item.title}</h5>
-                      <p className="text-[10px] text-gray-400 font-bold uppercase mt-2 tracking-widest">{item.readTime}</p>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-              <Link href="/blog" className="inline-flex items-center gap-2 text-[10px] font-bold text-primary uppercase tracking-widest mt-8 group">
-                View all articles <HiChevronRight className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
+
           </aside>
         </div>
 
-        {/* You May Also Like */}
-        <div className="mt-32 pt-20 border-t border-gray-100">
-          <div className="flex items-center justify-between mb-12">
-            <h2 className="text-3xl font-bold text-gray-900">You May Also Like</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {youMayAlsoLike.map((item) => (
-              <Link key={item.id} href={`/blog/${item.slug}`} className="flex flex-col group">
-                <div className="relative w-full aspect-video rounded-[32px] overflow-hidden bg-gray-100 mb-6">
-                  <Image src={item.image} alt={item.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
-                </div>
-                <span className="text-[10px] font-bold text-secondary tracking-widest uppercase mb-3">{item.category}</span>
-                <h4 className="text-xl font-bold text-gray-900 group-hover:text-primary transition-colors leading-tight mb-4">{item.title}</h4>
-                <div className="flex items-center gap-2 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                  <HiClock className="text-lg text-primary/40" /> {item.readTime}
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
+
 
       </div>
     </div>

@@ -106,7 +106,7 @@ export default function WordOfTheDayCard() {
       </div>
 
       {/* Footer */}
-      <a href="/names"
+      <a href="/names-of-allah"
         className="relative z-10 mt-6 w-full py-3.5 text-center text-sm font-semibold text-[#042A1E]/70 rounded-full transition-all duration-300 block hover:text-white"
         style={{ border: "1px solid rgba(4,42,30,0.12)" }}
         onMouseEnter={e => (e.currentTarget.style.background = "#042A1E")}

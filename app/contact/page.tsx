@@ -1,20 +1,9 @@
-
 "use client";
 
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {
-  FaEnvelope,
-  FaHeadset,
-  FaPhoneAlt,
-  FaMapMarkerAlt,
-  FaFacebook,
-  FaInstagram,
-  FaYoutube,
-  FaTelegram,
-  FaTwitter,
-} from "react-icons/fa";
+import { FaTelegram } from "react-icons/fa";
 import {
   HiOutlineQuestionMarkCircle,
   HiOutlineDocumentText,
@@ -70,34 +59,39 @@ export default function ContactUsPage() {
   const [form, setForm] = useState({
     name: "",
     email: "",
+    phone: "",
     subject: "",
     message: "",
   });
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
-    "idle"
-  );
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    if (name === "name") {
+      // Only allow letters and spaces
+      setForm((prev) => ({ ...prev, [name]: value.replace(/[^a-zA-Z\s]/g, "") }));
+    } else if (name === "phone") {
+      // Only allow digits
+      setForm((prev) => ({ ...prev, [name]: value.replace(/[^0-9]/g, "") }));
+    } else {
+      setForm((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
-
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-
       if (!res.ok) throw new Error("Failed to send");
-
       setStatus("success");
-      setForm({ name: "", email: "", subject: "", message: "" });
+      setForm({ name: "", email: "", phone: "", subject: "", message: "" });
     } catch {
       setStatus("error");
     }
@@ -138,7 +132,7 @@ export default function ContactUsPage() {
         </div>
       </section>
 
-      {/* Form + Get in Touch */}
+      {/* Form + Sidebar */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-3 gap-8 pb-16">
         {/* Send Us a Message */}
         <div className="lg:col-span-2 bg-bg-card border border-gray-100 rounded-2xl p-6 sm:p-8 shadow-sm">
@@ -147,6 +141,7 @@ export default function ContactUsPage() {
           </h2>
 
           <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Name */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Your Name <span className="text-secondary">*</span>
@@ -157,11 +152,12 @@ export default function ContactUsPage() {
                 required
                 value={form.name}
                 onChange={handleChange}
-                placeholder="Enter your full name"
+                placeholder="Enter your full name (letters only)"
                 className="w-full rounded-lg border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
               />
             </div>
 
+            {/* Email */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Email Address <span className="text-secondary">*</span>
@@ -177,6 +173,24 @@ export default function ContactUsPage() {
               />
             </div>
 
+            {/* Phone */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Mobile Phone <span className="text-secondary">*</span>
+              </label>
+              <input
+                type="text"
+                name="phone"
+                required
+                value={form.phone}
+                onChange={handleChange}
+                placeholder="Enter your phone number (digits only)"
+                maxLength={15}
+                className="w-full rounded-lg border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+              />
+            </div>
+
+            {/* Subject */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Subject <span className="text-secondary">*</span>
@@ -197,6 +211,7 @@ export default function ContactUsPage() {
               </select>
             </div>
 
+            {/* Message */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Message <span className="text-secondary">*</span>
@@ -238,87 +253,37 @@ export default function ContactUsPage() {
           </form>
         </div>
 
-        {/* Get in Touch */}
-        <div className="space-y-6">
-          <div className="bg-bg-card border border-gray-100 rounded-2xl p-6 shadow-sm">
-            <h3 className="font-heading text-xl font-bold text-gray-900 mb-1">
-              Get in Touch
-            </h3>
-            <p className="text-sm text-gray-500 mb-6">
-              Reach out to us through any of the following channels.
-            </p>
+        {/* Sidebar */}
+        <div className="space-y-6 h-fit lg:sticky lg:top-24">
 
-            <ul className="space-y-5">
-              <li className="flex items-start gap-3">
-                <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-primary/10 text-primary shrink-0">
-                  <FaEnvelope />
-                </span>
-                <div>
-                  <p className="font-semibold text-gray-900 text-sm">Email Us</p>
-                  <p className="text-sm text-gray-500">info@almuslims.com</p>
-                </div>
-              </li>
-
-              <li className="flex items-start gap-3">
-                <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-primary/10 text-primary shrink-0">
-                  <FaHeadset />
-                </span>
-                <div>
-                  <p className="font-semibold text-gray-900 text-sm">Support</p>
-                  <p className="text-sm text-gray-500">support@almuslims.com</p>
-                </div>
-              </li>
-
-              <li className="flex items-start gap-3">
-                <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-primary/10 text-primary shrink-0">
-                  <FaPhoneAlt />
-                </span>
-                <div>
-                  <p className="font-semibold text-gray-900 text-sm">Call Us</p>
-                  <p className="text-sm text-gray-500">+92 300 1234567</p>
-                  <p className="text-xs text-gray-400">
-                    Mon – Fri, 9:00 AM – 6:00 PM (PKT)
-                  </p>
-                </div>
-              </li>
-
-              <li className="flex items-start gap-3">
-                <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-primary/10 text-primary shrink-0">
-                  <FaMapMarkerAlt />
-                </span>
-                <div>
-                  <p className="font-semibold text-gray-900 text-sm">Our Office</p>
-                  <p className="text-sm text-gray-500">
-                    123 Islamic Knowledge Road, Johar Town, Lahore, Punjab,
-                    Pakistan
-                  </p>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          {/* Connect With Us */}
-          <div className="bg-bg-card border border-gray-100 rounded-2xl p-6 shadow-sm">
-            <h3 className="font-heading text-lg font-bold text-gray-900 mb-1">
-              Connect With Us
-            </h3>
-            <p className="text-sm text-gray-500 mb-4">
-              Follow us on social media for the latest updates and reminders.
-            </p>
-            <div className="flex gap-3">
-              {[FaFacebook, FaInstagram, FaYoutube, FaTelegram, FaTwitter].map(
-                (Icon, i) => (
-                  <a
-                    key={i}
-                    href="#"
-                    className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white hover:bg-primary-hover transition-colors"
-                  >
-                    <Icon className="text-base" />
-                  </a>
-                )
-              )}
+          {/* Daily Reminder */}
+          <div className="relative rounded-3xl overflow-hidden aspect-video bg-[#0A3A2F] flex items-center justify-center p-8 text-center">
+            <div
+              className="absolute inset-0 bg-cover bg-center opacity-20"
+              style={{ backgroundImage: "url('https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=800')" }}
+            />
+            <div className="relative z-10 text-white font-body">
+              <p className="text-[10px] font-bold text-white/60 tracking-widest uppercase mb-4">Daily Reminder</p>
+              <p className="font-arabic text-xl mb-4" dir="rtl">فَاذْكُرُونِي أَذْكُرْكُمْ</p>
+              <p className="text-sm font-medium italic mb-2">&quot;So remember Me; I will remember you.&quot;</p>
+              <p className="text-[10px] text-white/40 uppercase tracking-widest">— Quran 2:152</p>
             </div>
           </div>
+
+          {/* Contact Info */}
+          <div className="bg-white rounded-3xl border border-gray-100 p-8 shadow-sm">
+            <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-6">Get in Touch</h4>
+            <p className="text-sm text-gray-600 mb-4">
+              Reach out to us directly via email and we&apos;ll get back to you as soon as possible.
+            </p>
+            <a
+              href="mailto:officialalmuslims@gmail.com"
+              className="text-sm font-semibold text-primary hover:underline break-all"
+            >
+              officialalmuslims@gmail.com
+            </a>
+          </div>
+
         </div>
       </section>
 
@@ -349,38 +314,6 @@ export default function ContactUsPage() {
               </div>
             );
           })}
-        </div>
-      </section>
-
-      {/* Location */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-        <div>
-          <h2 className="font-heading text-2xl font-bold text-gray-900 mb-1">
-            Our Location
-          </h2>
-          <p className="text-sm text-gray-500 mb-4">
-            We are based in Lahore, Pakistan.
-          </p>
-
-          <div className="relative w-full h-64 sm:h-96 rounded-2xl overflow-hidden border border-gray-100">
-            <iframe
-              title="AlMuslims Office Location"
-              src="https://www.google.com/maps?q=Johar+Town,+Lahore,+Punjab,+Pakistan&output=embed"
-              className="w-full h-full"
-              loading="lazy"
-            />
-            <div className="absolute bottom-4 left-4 right-4 sm:right-auto bg-white rounded-lg shadow-md px-4 py-2 flex items-center gap-2">
-              <FaMapMarkerAlt className="text-primary shrink-0" />
-              <div>
-                <p className="text-sm font-semibold text-gray-900">
-                  AlMuslims Office
-                </p>
-                <p className="text-xs text-gray-500">
-                  Johar Town, Lahore, Punjab, Pakistan
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
     </main>

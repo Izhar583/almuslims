@@ -10,7 +10,7 @@ import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Quran", href: "/quran" },
-  { label: "Duas", href: "/duas" },
+  { label: "Duas", href: "/dua-collection" },
   { label: "Blog", href: "/blog" },
   { label: "Seerah", href: "/seerah" },
   { label: "About", href: "/about" }

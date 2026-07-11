@@ -27,7 +27,7 @@ const navLinks = [
   {
     title: "Duas & Azkar",
     desc: "Supplications for every moment of life.",
-    link: "/duas",
+    link: "/dua-collection",
     icon: <HiOutlineHeart className="w-5 h-5 text-primary" />,
   },
   {

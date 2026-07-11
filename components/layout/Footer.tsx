@@ -24,13 +24,13 @@ export default function Footer() {
         {/* Column 1: Logo, Description & Socials */}
         <div className="space-y-6 lg:pr-4">
           <Link href="/" className="flex flex-col items-start gap-2 group w-fit">
-            <div className="bg-white/95 p-2 rounded-xl shadow-sm transition-transform duration-300 group-hover:scale-105">
+            <div className=" shadow-sm transition-transform duration-300 group-hover:scale-105">
               <Image 
-                src="/logo.png" 
+                src="/AlMuslims-footer-logo.jpeg" 
                 alt="AlMuslims Logo" 
                 width={100} 
                 height={100} 
-                className="h-20 w-auto object-contain"
+                className="h-40 w-auto object-contain"
               />
             </div>
             <div className="flex flex-col mt-2">
@@ -45,17 +45,11 @@ export default function Footer() {
           <p className="text-sm text-white/70 leading-relaxed font-light">
             Your trusted source for authentic Islamic knowledge. Learn, reflect, and grow — for the sake of Allah.
           </p>
-          {/* <div className="flex items-center gap-4 pt-2">
-            <a href="#" className="w-8 h-8 rounded-full flex items-center justify-center bg-white/5 hover:bg-[#1877F2] text-white transition-all"><FaFacebookF size={14} /></a>
-            <a href="#" className="w-8 h-8 rounded-full flex items-center justify-center bg-white/5 hover:bg-[#1DA1F2] text-white transition-all"><FaTwitter size={14} /></a>
-            <a href="#" className="w-8 h-8 rounded-full flex items-center justify-center bg-white/5 hover:bg-[#E4405F] text-white transition-all"><FaInstagram size={14} /></a>
-            <a href="#" className="w-8 h-8 rounded-full flex items-center justify-center bg-white/5 hover:bg-[#FF0000] text-white transition-all"><FaYoutube size={14} /></a>
-          </div> */}
         </div>
 
         {/* Column 2: Quick Links */}
         <div>
-          <h4 className="text-[13px] font-bold text-secondary uppercase tracking-widest mb-6">Quick Links</h4>
+          <span className="text-[13px] font-bold text-secondary uppercase tracking-widest mb-6">Quick Links</span>
           <ul className="space-y-5 text-[14px] text-white/80">
             <li><Link href="/" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Home</Link></li>
             <li><Link href="/about" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> About Us</Link></li>
@@ -65,19 +59,19 @@ export default function Footer() {
 
         {/* Column 3: Categories */}
         <div>
-          <h4 className="text-[13px] font-bold text-secondary uppercase tracking-widest mb-6">Categories</h4>
+          <span className="text-[13px] font-bold text-secondary uppercase tracking-widest mb-6">Categories</span>
           <ul className="space-y-5 text-[14px] text-white/80">
             <li><Link href="/quran" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Quran</Link></li>
-            <li><Link href="/duas" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Duas & Azkar</Link></li>
+            <li><Link href="/dua-collection" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Duas & Azkar</Link></li>
             <li><Link href="/seerah" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Seerah</Link></li>
             <li><Link href="/blog" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Islamic Blog</Link></li>
-            <li><Link href="/names" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> 99 Names of Allah</Link></li>
+            <li><Link href="/names-of-allah" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> 99 Names of Allah</Link></li>
           </ul>
         </div>
 
         {/* Column 4: Resources */}
         <div>
-          <h4 className="text-[13px] font-bold text-secondary uppercase tracking-widest mb-6">Resources</h4>
+          <span className="text-[13px] font-bold text-secondary uppercase tracking-widest mb-6">Resources</span>
           <ul className="space-y-5 text-[14px] text-white/80">
            <li><Link href="/faq" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> FAQ</Link></li>
             <li><Link href="/privacy" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Privacy Policy</Link></li>
@@ -87,11 +81,11 @@ export default function Footer() {
 
         {/* Column 5: Get In Touch */}
         <div>
-          <h4 className="text-[13px] font-bold text-secondary uppercase tracking-widest mb-6">Get In Touch</h4>
+          <span className="text-[13px] font-bold text-secondary uppercase tracking-widest mb-6">Get In Touch</span>
           <div className="space-y-5 text-[14px] text-white/80">
             <div className="flex items-start gap-4">
               <FaEnvelope className="text-secondary mt-1" size={14} />
-              <p>info@almuslims.com</p>
+              <p>officialalmuslims@gmail.com</p>
             </div>
             <div className="flex items-start gap-4">
               <FaPhoneAlt className="text-secondary mt-1" size={14} />

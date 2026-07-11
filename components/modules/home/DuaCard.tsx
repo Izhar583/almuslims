@@ -93,7 +93,7 @@ export default function DuaCard() {
       </div>
 
       <a
-        href="/duas"
+        href="/dua-collection"
         className="relative z-10 mt-6 w-full py-3.5 bg-white border border-[#EBE3D5] text-[#1F2926] font-bold text-[11px] tracking-widest uppercase rounded-full hover:bg-[#0A3A2F] hover:text-white hover:border-[#0A3A2F] transition-all duration-300 text-center block shadow-sm"
       >
         View All Duas

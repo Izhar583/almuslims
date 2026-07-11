@@ -26,10 +26,10 @@ const popularSurahs = [
 
 // Popular Duas Database for search matching
 const popularDuas = [
-  { name: "Rabbana Duas", desc: "40 Quranic prayers beginning with Rabbana", link: "/duas" },
-  { name: "Dua after Salat", desc: "Daily morning and evening remembrance prayers", link: "/duas" },
-  { name: "Istikhara Dua", desc: "Prayer for seeking guidance in decisions", link: "/duas" },
-  { name: "Dua Kumayl", desc: "Supplication of Kumayl ibn Ziyad (highly regarded Shia prayer)", link: "/duas" }
+  { name: "Rabbana Duas", desc: "40 Quranic prayers beginning with Rabbana", link: "/dua-collection" },
+  { name: "Dua after Salat", desc: "Daily morning and evening remembrance prayers", link: "/dua-collection" },
+  { name: "Istikhara Dua", desc: "Prayer for seeking guidance in decisions", link: "/dua-collection" },
+  { name: "Dua Kumayl", desc: "Supplication of Kumayl ibn Ziyad (highly regarded Shia prayer)", link: "/dua-collection" }
 ];
 
 // Seerah Milestones Database

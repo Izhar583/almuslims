@@ -23,7 +23,7 @@ const categories = [
   },
   {
     name: "DUAS & AZKAR",
-    href: "/duas",
+    href: "/dua-collection",
     desc: "Supplications for every moment",
     icon: (
       <svg className="w-14 h-14" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -68,7 +68,7 @@ const categories = [
   },
   {
     name: "99 NAMES",
-    href: "/names",
+    href: "/names-of-allah",
     desc: "Discover the beautiful Names of Allah",
     icon: (
       <svg className="w-14 h-14" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
