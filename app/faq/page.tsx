@@ -241,29 +241,21 @@ export default function FAQPage() {
           </div>
         </div>
 
-        {/* Sidebar Column */}
-        <div className="lg:col-span-4 space-y-8">
-          <div className="bg-[#0A3A2F] rounded-[3rem] p-10 text-center text-white relative overflow-hidden group">
-            <div className="relative z-10">
-              <h3 className="font-heading text-2xl font-bold mb-4">
-                Still Need Help?
-              </h3>
-              <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-500">
-                <HiOutlineAcademicCap className="w-8 h-8 text-secondary" />
-              </div>
-              <p className="text-white/60 text-xs leading-relaxed mb-8 px-4">
-                Our scholars are here to help you with any Islamic question.
-                Typically responds within 24-48 hours.
-              </p>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-black text-[11px] uppercase tracking-widest rounded-2xl hover:bg-secondary hover:text-white transition-all shadow-xl"
-              >
-                <HiOutlineChatBubbleLeftRight className="w-4 h-4" /> Ask a
-                Scholar
-              </Link>
+        {/* Sidebar */}
+        <div className="lg:col-span-4 space-y-6 h-fit lg:sticky lg:top-24">
+
+          {/* Daily Reminder */}
+          <div className="relative rounded-3xl overflow-hidden min-h-[280px] bg-[#0A3A2F] flex items-center justify-center p-8 text-center">
+            <div
+              className="absolute inset-0 bg-cover bg-center opacity-20"
+              style={{ backgroundImage: "url('https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=800')" }}
+            />
+            <div className="relative z-10 text-white font-body">
+              <p className="text-[10px] font-bold text-white/60 tracking-widest uppercase mb-4">Daily Reminder</p>
+              <p className="font-arabic text-xl mb-4" dir="rtl">فَاذْكُرُونِي أَذْكُرْكُمْ</p>
+              <p className="text-sm font-medium italic mb-2">&quot;So remember Me; I will remember you.&quot;</p>
+              <p className="text-[10px] text-white/40 uppercase tracking-widest">— Quran 2:152</p>
             </div>
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
           </div>
         </div>
       </section>
