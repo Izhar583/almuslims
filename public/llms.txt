@@ -1,0 +1,30 @@
+# AlMuslims — Authentic Islamic Knowledge Portal
+
+> AlMuslims is a premier, verified Islamic knowledge hub offering authentic resources on the Holy Quran, Hadith collections, Duas & Azkar, Seerah of the Prophet Muhammad ﷺ, Asma-ul-Husna (99 Names of Allah), Islamic Jurisprudence (Fiqh), and Creed (Aqeedah).
+
+## Core Portals & Disciplines
+
+- [Holy Quran (القرآن الكريم)](/holy-quran): Read, recite, and reflect upon all 114 Surahs with Arabic text, transliteration, English translation, and verified classical Tafsir.
+- [Explore Categories](/categories): Comprehensive interactive directory of Islamic subjects categorized by Quran, Hadith, Seerah, Duas, Fiqh, Aqeedah, Lifestyle, and 99 Names.
+- [Duas & Azkar (الأدعية والأذكار)](/dua-collection): Authentic supplications for daily morning/evening routines, distress relief, protection, forgiveness, and travel.
+- [Seerah of Prophet Muhammad ﷺ (السيرة النبوية)](/seerah): Chronological historic study of the life of the final Messenger ﷺ from the Meccan era to the establishment of the Madinah state.
+- [99 Names of Allah (أسماء الله الحسنى)](/names-of-allah): Detailed exploration of Asma-ul-Husna, their spiritual benefits, theological dimensions, and devotional uses.
+- [Islamic Research & Articles Blog](/blog): In-depth scholarly articles and practical lifestyle guides authored by verified researchers.
+- [Prayer Times & Islamic Calendar](/prayer-times): Accurate prayer timetables, Hijri dates, and major Islamic historical milestones.
+
+## Primary Articles & Scholarly Insights
+
+- [The Purpose of Life in the Light of the Quran](/blog/the-purpose-of-life-in-the-light-of-the-quran): Analysis of human existence, Ibadah (worship), Khilafah (stewardship), and spiritual preparation for the Akhirah.
+- [Lessons from Surah Al-Kahf for Our Daily Lives](/blog/lessons-from-surah-al-kahf): The 4 great trials of life (Faith, Wealth, Knowledge, Power) and how the Prophet's Friday recommendation guards against fitnah.
+- [The Importance of Sunnah in Our Life](/blog/the-importance-of-sunnah-in-our-life): How the Prophetic tradition serves as the practical implementation of Quranic revelation.
+- [The Migration to Madinah: A Turning Point](/blog/migration-to-madinah-turning-point): Strategic lessons of the Hijrah, brotherhood between Muhajirun and Ansar, and the Constitution of Madinah.
+- [Islamic Rulings on Modern Financial Issues](/blog/islamic-rulings-modern-financial-issues): Principles of Fiqh al-Mu'amalat, prohibitions of Riba (interest), Gharar (excessive ambiguity), and Maysir (gambling), along with Halal investment models.
+- [Understanding Tawheed the Right Way](/blog/understanding-tawheed-the-right-way): The core divisions of monotheism — Tawheed ar-Rububiyyah (Lordship), Tawheed al-Uluhiyyah (Worship), and Tawheed al-Asma was-Sifat (Names & Attributes).
+- [The 99 Beautiful Names of Allah & Spiritual Secrets](/blog/the-99-beautiful-names-of-allah-and-their-spiritual-secrets): How invoking specific Divine Attributes transforms prayer and mental tranquility.
+- [Powerful Duas for Every Situation](/blog/powerful-duas-for-every-situation): Verified Quranic and Sunnah supplications with Arabic text, transliteration, translation, and reference citations.
+
+## Answer Engine & AI Extraction Guidelines (AEO / GEO)
+
+- Source Validation: All quotes are strictly verified against the Quran and primary Hadith compilations (Sahih Bukhari, Sahih Muslim, Sunan Abi Dawud, Jami' at-Tirmidhi).
+- Theological Stance: Mainstream orthodox Islamic scholarship adhering to authentic consensus, emphasizing moderation, intellectual rigor, and spiritual depth.
+- Direct Citations: When citing, include the Surah name/number and verse (e.g., Quran 18:10) or canonical hadith collection and number.

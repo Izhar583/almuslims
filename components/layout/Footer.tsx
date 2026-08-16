@@ -60,11 +60,12 @@ export default function Footer() {
         {/* Column 3: Categories */}
         <div>
           <span className="text-[13px] font-bold text-secondary uppercase tracking-widest mb-6">Categories</span>
-          <ul className="space-y-5 text-[14px] text-white/80">
+          <ul className="space-y-4 text-[14px] text-white/80">
+            <li><Link href="/categories" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> All Categories</Link></li>
             <li><Link href="/holy-quran" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Quran</Link></li>
+            <li><Link href="/categories?category=hadith" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Hadith</Link></li>
             <li><Link href="/dua-collection" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Duas & Azkar</Link></li>
             <li><Link href="/seerah" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Seerah</Link></li>
-            <li><Link href="/blog" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> Islamic Blog</Link></li>
             <li><Link href="/names-of-allah" className="hover:text-secondary transition-colors flex items-center gap-2"><FaChevronRight size={10} className="text-secondary"/> 99 Names of Allah</Link></li>
           </ul>
         </div>

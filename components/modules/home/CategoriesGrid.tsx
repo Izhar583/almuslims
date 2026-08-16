@@ -88,7 +88,7 @@ export default function CategoriesGrid() {
           Explore By Category
         </h2>
         <Link 
-          href="#" 
+          href="/categories" 
           className="px-5 py-2.5 bg-white border border-[#EBE3D5] text-[#0A3A2F] hover:bg-[#0A3A2F] hover:text-white hover:border-[#0A3A2F] font-bold text-[10px] tracking-widest uppercase rounded-full shadow-sm flex items-center gap-2 group transition-all duration-300"
         >
           View All

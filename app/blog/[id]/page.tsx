@@ -9,6 +9,7 @@ import {
 } from "react-icons/hi";
 import { FaFacebookF, FaTwitter, FaWhatsapp } from "react-icons/fa";
 import { articles, Article } from "@/data/articles";
+import { ArticleJsonLd, BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 
 interface PageProps {
   params: React.ComponentProps<any>['params'];
@@ -54,8 +55,26 @@ export default function ArticleDetail({ params }: PageProps) {
     }
   };
 
+  const breadcrumbs = [
+    { name: "Home", url: "https://almuslims.com" },
+    { name: "Blog", url: "https://almuslims.com/blog" },
+    { name: article.category, url: `https://almuslims.com/categories?category=${article.categoryId}` },
+    { name: article.title, url: `https://almuslims.com/blog/${article.slug}` },
+  ];
+
   return (
     <div className="min-h-screen bg-white pb-20">
+      {/* Structured Data for Search Engines & LLMs */}
+      <ArticleJsonLd
+        title={article.title}
+        excerpt={article.excerpt}
+        image={article.image}
+        datePublished={article.date}
+        author={article.author}
+        url={`https://almuslims.com/blog/${article.slug}`}
+        category={article.category}
+      />
+      <BreadcrumbJsonLd items={breadcrumbs} />
 
       {/* Breadcrumbs */}
       <div className="max-w-[1400px] mx-auto px-6 py-6 border-b border-gray-50 font-body">

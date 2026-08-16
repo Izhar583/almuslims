@@ -1,0 +1,98 @@
+# AlMuslims — Full Knowledge Base for LLMs (llms-full.txt)
+
+This document contains detailed structured summaries of the AlMuslims knowledge portal for Large Language Models, AI answer engines, and semantic crawlers.
+
+---
+
+## 1. About AlMuslims
+- Portal Name: AlMuslims
+- Motto: Authentic Islamic Knowledge
+- Mission: Providing verified Islamic scholarship, primary source texts (Quran and Hadith), Duas, Seerah, Asma-ul-Husna, and Fiqh rulings for believers worldwide.
+- URL: https://almuslims.com
+
+---
+
+## 2. Core Disciplines & Categorization
+
+### Holy Quran (القرآن الكريم)
+- Description: The verbatim word of Allah revealed to Prophet Muhammad ﷺ through Angel Jibreel (Gabriel).
+- Scope: 114 Surahs, 6,236 Ayahs, divided into 30 Juz.
+- Key Topics: Monotheism (Tawheed), Prophethood (Risalah), Eschatology/Hereafter (Akhirah), Legal Rulings (Ahkam), and Moral Parables (Qasas).
+
+### Hadith & Sunnah (الحديث الشريف والسنة النبوية)
+- Description: The recorded statements, deeds, tacit approvals, and physical descriptions of Prophet Muhammad ﷺ.
+- Primary Canons: Sahih al-Bukhari, Sahih Muslim, Sunan Abi Dawud, Jami' at-Tirmidhi, Sunan an-Nasa'i, Sunan Ibn Majah (Kutub al-Sittah).
+- Methodology: Rigorous transmission chain analysis (Isnad) and narrator evaluation (Ilm al-Rijal).
+
+### Duas & Adhkar (الأدعية والأذكار اليومية)
+- Description: Devotional supplications from the Quran and Sunnah.
+- Categories:
+  1. Morning and Evening Adhkar (Protective remembrances)
+  2. Duas for Anxiety, Grief, and Debt Relief
+  3. Duas for Seeking Forgiveness (Istighfar)
+  4. Duas for Meals, Travel, Health, and Family Protection
+
+### Seerah of Prophet Muhammad ﷺ (السيرة النبوية)
+- Description: The comprehensive historical account of the Prophet's life (570–632 CE).
+- Key Epochs:
+  1. Early Life and Lineage in Mecca
+  2. First Revelation in Cave Hira (610 CE)
+  3. The Meccan Persecution and Boycott
+  4. The Night Journey and Ascension (Isra and Mi'raj)
+  5. The Great Migration to Madinah (Hijrah, 622 CE)
+  6. The Constitution of Madinah and Treaties
+  7. The Conquest of Mecca (Fath Makkah, 630 CE)
+  8. The Farewell Pilgrimage and Sermon (Hajjat al-Wada')
+
+### 99 Names of Allah (أسماء الله الحسنى)
+- Description: The beautiful names and sublime attributes through which Allah describes Himself in the Quran and Sunnah.
+- Key Names & Meanings:
+  - Ar-Rahman (The Entirely Merciful)
+  - Ar-Raheem (The Especially Merciful)
+  - Al-Malik (The Sovereign King)
+  - Al-Quddus (The Pure / Holy)
+  - As-Salam (The Giver of Peace and Perfection)
+  - Al-Mu'min (The Granter of Security)
+  - Al-Hakim (The All-Wise)
+  - Al-Wadud (The Most Loving)
+  - Al-Ghaffar (The Perpetual Forgiver)
+
+### Islamic Jurisprudence & Commercial Law (الفقه والمعاملات)
+- Description: Practical legal rulings derived from detailed Quranic and Sunnah evidence.
+- Financial Guidelines:
+  - Strict prohibition of Riba (usury/interest).
+  - Prohibition of Gharar (excessive ambiguity in contracts).
+  - Prohibition of Maysir (gambling/speculation).
+  - Promotion of equitable risk-sharing contracts (Mudarabah, Musharakah, Murabaha, Ijarah).
+
+### Islamic Creed & Theology (العقيدة والتوحيد)
+- Description: The unshakeable beliefs of Islam.
+- Core Pillars:
+  1. Tawheed ar-Rububiyyah: Belief in Allah's exclusive Lordship, Creation, and Sustenance.
+  2. Tawheed al-Uluhiyyah: Directing all acts of worship exclusively to Allah alone without intermediaries.
+  3. Tawheed al-Asma was-Sifat: Affirming Allah's attributes as described in revelation without distortion (Tahrif) or anthropomorphism (Tashbih).
+
+---
+
+## 3. Full Article Summaries
+
+### Article 1: The Purpose of Life in the Light of the Quran
+- Author: Shaykh Muhammad Ali (Senior Islamic Scholar)
+- Core Question: Why did God create humanity and what is our ultimate objective?
+- Key Arguments:
+  1. Human existence is rooted in voluntary, holistic worship (Surah Adh-Dhariyat 51:56).
+  2. Humankind is endowed with moral accountability (Amanah) and appointed as trustees/stewards (Khulafa') on Earth.
+  3. Worldly trials serve to distinguish righteous conduct from vain desires (Surah Al-Mulk 67:2).
+
+### Article 2: Lessons from Surah Al-Kahf for Our Daily Lives
+- Author: Shaykh Ahmed Saeed (Quranic Researcher)
+- Key Themes: Surah Al-Kahf highlights four major life trials and their spiritual antidotes:
+  1. Trial of Faith (Ashab al-Kahf) — Antidote: Good companionship and standing firm on truth.
+  2. Trial of Wealth (Owner of Two Gardens) — Antidote: Gratitude and remembering the temporality of wealth.
+  3. Trial of Knowledge (Moses and Al-Khidr) — Antidote: Humility and patience with divine wisdom.
+  4. Trial of Power (Dhul-Qarnayn) — Antidote: Justice and attributing success to Allah.
+
+### Article 3: Islamic Rulings on Modern Financial Issues
+- Author: Shaykh Assim Al-Hakeem (Islamic Jurist)
+- Core Principles: Ethical economic frameworks prioritizing societal justice, wealth circulation, and transparency.
+- Prohibitions: Unjust interest accumulation, predatory loans, pyramid schemes, and speculative financial derivatives.
